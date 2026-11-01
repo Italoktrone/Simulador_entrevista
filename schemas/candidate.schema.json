@@ -1,0 +1,255 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Perfil de candidato ficticio",
+  "description": "Formato inicial del perfil interno. Las fechas, referencias e identificadores requieren además comprobaciones de coherencia en Python.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "profile_version", "candidate_id", "scenario_reference_date", "is_fictional",
+    "evidence_scope", "name", "target_job_id", "professional_summary",
+    "professional_status", "education", "postgraduate_studies",
+    "professional_certifications", "work_experience", "technical_knowledge",
+    "tools_used", "experience_limits", "projects", "achievements",
+    "behavioral_situations", "professional_competencies", "strengths",
+    "improvement_areas", "work_motivation", "personality"
+  ],
+  "properties": {
+    "profile_version": {"type": "string", "const": "1.0.0"},
+    "candidate_id": {"$ref": "#/$defs/identifier", "pattern": "^cand-"},
+    "scenario_reference_date": {"$ref": "#/$defs/scenarioDate"},
+    "is_fictional": {"type": "boolean", "const": true},
+    "evidence_scope": {"$ref": "#/$defs/nonBlankText"},
+    "name": {"$ref": "#/$defs/nonBlankText"},
+    "target_job_id": {"$ref": "#/$defs/identifier", "pattern": "^puesto-"},
+    "professional_summary": {"$ref": "#/$defs/nonBlankText"},
+    "professional_status": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["situation", "last_contract_type", "reason_last_contract_ended"],
+      "properties": {
+        "situation": {"$ref": "#/$defs/nonBlankText"},
+        "last_contract_type": {"$ref": "#/$defs/nonBlankText"},
+        "reason_last_contract_ended": {"$ref": "#/$defs/nonBlankText"}
+      }
+    },
+    "education": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {"$ref": "#/$defs/educationRecord"}
+    },
+    "postgraduate_studies": {"$ref": "#/$defs/textList"},
+    "professional_certifications": {"$ref": "#/$defs/textList"},
+    "work_experience": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {"$ref": "#/$defs/workExperience"}
+    },
+    "technical_knowledge": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["area", "scope"],
+        "properties": {
+          "area": {"$ref": "#/$defs/nonBlankText"},
+          "scope": {"$ref": "#/$defs/nonBlankText"}
+        }
+      }
+    },
+    "tools_used": {"$ref": "#/$defs/nonEmptyTextList"},
+    "experience_limits": {"$ref": "#/$defs/nonEmptyTextList"},
+    "projects": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {"$ref": "#/$defs/project"}
+    },
+    "achievements": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {"$ref": "#/$defs/achievement"}
+    },
+    "behavioral_situations": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {"$ref": "#/$defs/behavioralSituation"}
+    },
+    "professional_competencies": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["name", "situation_ids"],
+        "properties": {
+          "name": {"$ref": "#/$defs/nonBlankText"},
+          "situation_ids": {"$ref": "#/$defs/situationReferences"},
+          "development_note": {"$ref": "#/$defs/nonBlankText"}
+        }
+      }
+    },
+    "strengths": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {"$ref": "#/$defs/supportedDescription"}
+    },
+    "improvement_areas": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {"$ref": "#/$defs/supportedDescription"}
+    },
+    "work_motivation": {"$ref": "#/$defs/nonBlankText"},
+    "personality": {
+      "type": "object", "additionalProperties": false,
+      "required": ["communication_traits", "interview_behavior"],
+      "properties": {
+        "communication_traits": {"$ref": "#/$defs/nonEmptyTextList"},
+        "interview_behavior": {"$ref": "#/$defs/nonEmptyTextList"}
+      }
+    }
+  },
+  "$defs": {
+    "nonBlankText": {"type": "string", "minLength": 1, "pattern": "\\S"},
+    "textList": {
+      "type": "array", "uniqueItems": true,
+      "items": {"$ref": "#/$defs/nonBlankText"}
+    },
+    "nonEmptyTextList": {"$ref": "#/$defs/textList", "minItems": 1},
+    "identifier": {
+      "type": "string", "pattern": "^[a-z]+-[a-z0-9]+(-[a-z0-9]+)*$",
+      "not": {"pattern": "\\s"}
+    },
+    "situationId": {
+      "type": "string", "pattern": "^S[1-9][0-9]*$",
+      "not": {"pattern": "\\s"}
+    },
+    "situationReferences": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {"$ref": "#/$defs/situationId"}
+    },
+    "month": {
+      "type": "string", "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])$",
+      "not": {"pattern": "\\s"},
+      "description": "Mes en formato AAAA-MM. El orden cronológico se comprobará en Python."
+    },
+    "scenarioDate": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$",
+      "not": {"pattern": "\\s"},
+      "description": "Forma AAAA-MM-DD. La existencia del día en ese mes y año se comprobará en Python."
+    },
+    "educationRecord": {
+      "type": "object", "additionalProperties": false,
+      "required": ["education_id", "institution", "degree", "start_month", "end_month", "graduation_month", "status", "final_project_id"],
+      "properties": {
+        "education_id": {"$ref": "#/$defs/identifier", "pattern": "^edu-"},
+        "institution": {"$ref": "#/$defs/nonBlankText"},
+        "degree": {"$ref": "#/$defs/nonBlankText"},
+        "start_month": {"$ref": "#/$defs/month"},
+        "end_month": {"$ref": "#/$defs/month"},
+        "graduation_month": {"$ref": "#/$defs/month"},
+        "status": {"$ref": "#/$defs/nonBlankText"},
+        "final_project_id": {"$ref": "#/$defs/identifier", "pattern": "^proj-"}
+      }
+    },
+    "workExperience": {
+      "type": "object", "additionalProperties": false,
+      "required": ["experience_id", "organization", "team_context", "authority_limits", "roles"],
+      "properties": {
+        "experience_id": {"$ref": "#/$defs/identifier", "pattern": "^exp-"},
+        "organization": {"$ref": "#/$defs/nonBlankText"},
+        "team_context": {"$ref": "#/$defs/nonBlankText"},
+        "authority_limits": {"$ref": "#/$defs/nonEmptyTextList"},
+        "roles": {
+          "type": "array", "minItems": 1, "uniqueItems": true,
+          "items": {"$ref": "#/$defs/role"}
+        }
+      }
+    },
+    "role": {
+      "type": "object", "additionalProperties": false,
+      "required": ["role_id", "title", "start_month", "end_month"],
+      "anyOf": [{"required": ["responsibilities"]}, {"required": ["schedule_periods"]}],
+      "properties": {
+        "role_id": {"$ref": "#/$defs/identifier", "pattern": "^role-"},
+        "title": {"$ref": "#/$defs/nonBlankText"},
+        "start_month": {"$ref": "#/$defs/month"},
+        "end_month": {"$ref": "#/$defs/month"},
+        "responsibilities": {"$ref": "#/$defs/nonEmptyTextList"},
+        "supervision": {"$ref": "#/$defs/nonBlankText"},
+        "schedule_periods": {
+          "type": "array", "minItems": 1, "uniqueItems": true,
+          "items": {"$ref": "#/$defs/schedulePeriod"}
+        },
+        "project_ids": {
+          "type": "array", "minItems": 1, "uniqueItems": true,
+          "items": {"$ref": "#/$defs/identifier", "pattern": "^proj-"}
+        }
+      }
+    },
+    "schedulePeriod": {
+      "type": "object", "additionalProperties": false,
+      "required": ["start_month", "end_month", "schedule", "responsibilities"],
+      "properties": {
+        "start_month": {"$ref": "#/$defs/month"},
+        "end_month": {"$ref": "#/$defs/month"},
+        "schedule": {"type": "string", "enum": ["Jornada parcial", "Jornada completa"]},
+        "responsibilities": {"$ref": "#/$defs/nonEmptyTextList"}
+      }
+    },
+    "project": {
+      "type": "object", "additionalProperties": false,
+      "required": ["project_id", "name", "kind", "description", "start_month", "end_month", "technologies_used", "personal_contributions", "contribution_limits"],
+      "properties": {
+        "project_id": {"$ref": "#/$defs/identifier", "pattern": "^proj-"},
+        "name": {"$ref": "#/$defs/nonBlankText"},
+        "kind": {"type": "string", "enum": ["Profesional", "Académico"]},
+        "description": {"$ref": "#/$defs/nonBlankText"},
+        "experience_id": {"$ref": "#/$defs/identifier", "pattern": "^exp-"},
+        "role_id": {"$ref": "#/$defs/identifier", "pattern": "^role-"},
+        "education_id": {"$ref": "#/$defs/identifier", "pattern": "^edu-"},
+        "start_month": {"$ref": "#/$defs/month"},
+        "end_month": {"$ref": "#/$defs/month"},
+        "team_size": {"type": "integer", "minimum": 1},
+        "technologies_used": {"$ref": "#/$defs/nonEmptyTextList"},
+        "features": {"$ref": "#/$defs/nonEmptyTextList"},
+        "personal_contributions": {"$ref": "#/$defs/nonEmptyTextList"},
+        "outcome": {"$ref": "#/$defs/nonBlankText"},
+        "contribution_limits": {"$ref": "#/$defs/nonEmptyTextList"}
+      },
+      "oneOf": [
+        {
+          "properties": {"kind": {"const": "Profesional"}},
+          "required": ["experience_id", "role_id", "features"],
+          "not": {"required": ["education_id"]}
+        },
+        {
+          "properties": {"kind": {"const": "Académico"}},
+          "required": ["education_id", "team_size", "outcome"],
+          "not": {"anyOf": [{"required": ["experience_id"]}, {"required": ["role_id"]}]}
+        }
+      ]
+    },
+    "achievement": {
+      "type": "object", "additionalProperties": false,
+      "required": ["achievement_id", "description", "scenario_evidence"],
+      "anyOf": [{"required": ["project_id"]}, {"required": ["situation_id"]}],
+      "properties": {
+        "achievement_id": {"$ref": "#/$defs/identifier", "pattern": "^ach-"},
+        "project_id": {"$ref": "#/$defs/identifier", "pattern": "^proj-"},
+        "situation_id": {"$ref": "#/$defs/situationId"},
+        "description": {"$ref": "#/$defs/nonBlankText"},
+        "scenario_evidence": {"$ref": "#/$defs/nonBlankText"}
+      }
+    },
+    "behavioralSituation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["situation_id", "title", "context", "actions", "outcome"],
+      "properties": {
+        "situation_id": {"$ref": "#/$defs/situationId"},
+        "title": {"$ref": "#/$defs/nonBlankText"},
+        "project_id": {"$ref": "#/$defs/identifier", "pattern": "^proj-"},
+        "context": {"$ref": "#/$defs/nonBlankText"},
+        "actions": {"$ref": "#/$defs/nonEmptyTextList"},
+        "outcome": {"$ref": "#/$defs/nonBlankText"}
+      }
+    },
+    "supportedDescription": {
+      "type": "object", "additionalProperties": false,
+      "required": ["description", "situation_ids"],
+      "properties": {
+        "description": {"$ref": "#/$defs/nonBlankText"},
+        "situation_ids": {"$ref": "#/$defs/situationReferences"}
+      }
+    }
+  }
+}

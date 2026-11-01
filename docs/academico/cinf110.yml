@@ -1,0 +1,6 @@
+codigo: CINF110
+nombre: Tópicos de Especialidad I - Agentes de IA
+periodo: '202620'
+sede: VIN
+nrc: '14304'
+grupo: '{{ group_key }}'

@@ -1,0 +1,5 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Salida del candidato virtual",
+  "$comment": "Marcador estructural pendiente. No define propiedades ni restricciones; no utilizar como validación implementada."
+}

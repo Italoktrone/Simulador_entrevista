@@ -1,0 +1,5 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Clasificación y evaluación provisional de un turno",
+  "$comment": "Marcador estructural pendiente. No define propiedades ni restricciones; no utilizar como validación implementada."
+}

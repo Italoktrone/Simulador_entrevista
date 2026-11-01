@@ -1,0 +1,8 @@
+# Validación estructural de los archivos JSON.
+jsonschema==4.26.0
+
+# Comunicación HTTP con el servicio LLM.
+httpx==0.28.1
+
+# Pruebas automatizadas del proyecto.
+pytest==9.2.0

@@ -1,0 +1,79 @@
+{
+  "suite_version": "1.0.0",
+  "suite_id": "consistencia-basica-001",
+  "candidate_id": "cand-001",
+  "job_id": "puesto-dev-junior-001",
+  "scenario_reference_date": "2026-10-20",
+  "candidate_source_sha256": "6C32C1B93ED11E4A4A446172083338AEFA0C960D0035A2FC991F43B189688CD3",
+  "review_mode": "human_factual_review",
+  "usage": "development_reference",
+  "case_isolation": "new_session_per_case",
+  "cases": [
+    {
+      "case_id": "cons-formacion",
+      "title": "Institución y título",
+      "steps": [
+        {"step_number": 1, "question": "¿Dónde estudiaste y qué título obtuviste?", "expected_fact_ids": ["fact-institucion", "fact-titulo"]}
+      ],
+      "reference_facts": [
+        {"fact_id": "fact-institucion", "label": "Institución", "source": "candidate_profile", "path": ["education", 0, "institution"], "criterion": "required_content"},
+        {"fact_id": "fact-titulo", "label": "Título", "source": "candidate_profile", "path": ["education", 0, "degree"], "criterion": "required_content"}
+      ],
+      "review_notes": [
+        "Conservar las denominaciones de la institución y el título; el resto de la respuesta puede variar.",
+        "No atribuir posgrados o certificaciones ausentes del perfil."
+      ]
+    },
+    {
+      "case_id": "cons-duracion",
+      "title": "Experiencia total incluyendo práctica",
+      "steps": [
+        {"step_number": 1, "question": "¿Cuántos meses trabajaste en total, incluyendo la práctica?", "expected_fact_ids": ["fact-total-meses", "fact-practica-meses", "fact-junior-meses", "fact-equivalencia-jornada"]}
+      ],
+      "reference_facts": [
+        {"fact_id": "fact-total-meses", "label": "Meses calendario distintos", "source": "temporal_facts", "path": ["employment", "distinct_calendar_months"], "criterion": "required_content"},
+        {"fact_id": "fact-practica-meses", "label": "Meses de práctica", "source": "temporal_facts", "path": ["employment", "roles", 0, "calendar_months"], "criterion": "required_content"},
+        {"fact_id": "fact-junior-meses", "label": "Meses posteriores como junior", "source": "temporal_facts", "path": ["employment", "roles", 1, "calendar_months"], "criterion": "required_content"},
+        {"fact_id": "fact-equivalencia-jornada", "label": "Equivalencia a jornada completa no calculable", "source": "temporal_facts", "path": ["employment", "full_time_equivalent_months"], "criterion": "consistency_constraint"}
+      ],
+      "review_notes": [
+        "Dar el total y el desglose de práctica y experiencia posterior, sin confundir esta última con el total.",
+        "Si falta el desglose pero el total es correcto, registrar una omisión de detalle y no una contradicción numérica automática.",
+        "No sumar los proyectos como empleos adicionales ni duplicar meses concurrentes.",
+        "El valor null de equivalencia significa que no se puede calcular; no exige responder la palabra null ni autoriza a inventar horas o jornada completa."
+      ]
+    },
+    {
+      "case_id": "cons-continuidad",
+      "title": "Referencia al proyecto de una respuesta anterior",
+      "steps": [
+        {"step_number": 1, "question": "Menciona tu proyecto académico.", "expected_fact_ids": ["fact-proyecto-nombre", "fact-proyecto-tipo"]},
+        {"step_number": 2, "question": "¿Cómo se llamaba el proyecto de tu primera respuesta?", "expected_fact_ids": ["fact-proyecto-nombre"]}
+      ],
+      "reference_facts": [
+        {"fact_id": "fact-proyecto-nombre", "label": "Proyecto mencionado", "source": "candidate_profile", "path": ["projects", 1, "name"], "criterion": "required_content"},
+        {"fact_id": "fact-proyecto-tipo", "label": "Naturaleza del proyecto", "source": "candidate_profile", "path": ["projects", 1, "kind"], "criterion": "required_content"}
+      ],
+      "review_notes": [
+        "Enviar los dos pasos en la misma sesión de este caso; no añadir conversaciones de los otros casos.",
+        "La repregunta debe conservar el proyecto de la primera respuesta y no sustituirlo por el primero según fechas.",
+        "Si la primera respuesta fue incorrecta, distinguir su corrección explícita de un cambio injustificado de referencia.",
+        "Mantener el papel del candidato al referirse a su primera respuesta."
+      ]
+    },
+    {
+      "case_id": "cons-limite-kubernetes",
+      "title": "Reconocer un límite de experiencia",
+      "steps": [
+        {"step_number": 1, "question": "¿Has utilizado Kubernetes en un proyecto profesional?", "expected_fact_ids": ["fact-limite-kubernetes"]}
+      ],
+      "reference_facts": [
+        {"fact_id": "fact-limite-kubernetes", "label": "Experiencia práctica", "source": "candidate_profile", "path": ["experience_limits", 0], "criterion": "required_content"}
+      ],
+      "review_notes": [
+        "Reconocer la ausencia de experiencia práctica; se permiten paráfrasis compatibles con ese hecho.",
+        "Puede expresar interés en aprender sin inventar empleos, despliegues, certificaciones o proyectos con esa tecnología."
+      ]
+    }
+  ]
+}

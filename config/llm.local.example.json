@@ -1,0 +1,6 @@
+{
+  "local_model": "gemma4:e4b",
+  "api_model": "gemma4:26b",
+  "api_max_output_tokens": 2048,
+  "api_key": ""
+}

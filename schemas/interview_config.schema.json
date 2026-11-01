@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Configuración de entrevista",
+  "description": "Preferencias de entrevista y referencias a datos del escenario. No define evaluación ni parámetros del proveedor LLM.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "config_version", "config_id", "candidate_id", "job_id",
+    "modality", "approach", "preferred_question_styles", "max_questions"
+  ],
+  "properties": {
+    "config_version": {
+      "type": "string",
+      "const": "1.0.0",
+      "description": "Versión del formato de configuración admitida."
+    },
+    "config_id": {"$ref": "#/$defs/identifier", "pattern": "^entrevista-"},
+    "candidate_id": {"$ref": "#/$defs/identifier", "pattern": "^cand-"},
+    "job_id": {"$ref": "#/$defs/identifier", "pattern": "^puesto-"},
+    "modality": {
+      "type": "string",
+      "enum": ["laboral_general", "tecnica", "por_competencias"]
+    },
+    "approach": {
+      "type": "string",
+      "enum": ["conductual", "situacional", "mixto"]
+    },
+    "preferred_question_styles": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "enum": ["abierta", "cerrada", "directiva"]},
+      "description": "Preferencias combinables; no clasifican ni puntúan preguntas."
+    },
+    "max_questions": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 20,
+      "description": "Límite que deberá aplicar el controlador de entrevista."
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-z]+-[a-z0-9]+(-[a-z0-9]+)*$",
+      "not": {"pattern": "\\s"}
+    }
+  }
+}

@@ -1,0 +1,639 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Registro cerrado de una sesión de entrevista",
+  "description": "Archivo local de diagnóstico y conversación; no evalúa preguntas ni certifica los hechos generados por el LLM. La configuración se valida además con su esquema compartido.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "session_version",
+    "session_id",
+    "candidate_id",
+    "job_id",
+    "configuration",
+    "candidate_source_sha256",
+    "source_integrity",
+    "instructions_text_sha256",
+    "requested_provider",
+    "requested_model",
+    "created_at",
+    "closed_at",
+    "status",
+    "close_reason",
+    "attempts",
+    "issues"
+  ],
+  "properties": {
+    "session_version": {
+      "enum": [
+        "1.0.0",
+        "1.1.0"
+      ]
+    },
+    "session_id": {
+      "type": "string",
+      "minLength": 36,
+      "maxLength": 36,
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "candidate_id": {
+      "$ref": "#/$defs/text"
+    },
+    "job_id": {
+      "$ref": "#/$defs/text"
+    },
+    "configuration": {
+      "type": "object"
+    },
+    "candidate_source_sha256": {
+      "$ref": "#/$defs/hash"
+    },
+    "source_integrity": {
+      "enum": [
+        "not_checked",
+        "unchanged",
+        "failed"
+      ]
+    },
+    "instructions_text_sha256": {
+      "$ref": "#/$defs/hash"
+    },
+    "requested_provider": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/text"
+        }
+      ]
+    },
+    "requested_model": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/text"
+        }
+      ]
+    },
+    "created_at": {
+      "$ref": "#/$defs/timestamp"
+    },
+    "closed_at": {
+      "$ref": "#/$defs/timestamp"
+    },
+    "status": {
+      "const": "closed"
+    },
+    "close_reason": {
+      "enum": [
+        "closed",
+        "user_exit",
+        "question_limit",
+        "end_of_input",
+        "interrupted",
+        "profile_integrity_error"
+      ]
+    },
+    "attempts": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "$ref": "#/$defs/attempt"
+      }
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/session_issue"
+      }
+    },
+    "context_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "policy_version",
+        "context_size",
+        "max_output_tokens",
+        "safety_margin",
+        "trigger_input_tokens",
+        "minimum_completed_pairs",
+        "keep_recent_pairs"
+      ],
+      "properties": {
+        "policy_version": {
+          "const": "1.0.0"
+        },
+        "context_size": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_output_tokens": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "safety_margin": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "trigger_input_tokens": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "minimum_completed_pairs": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 19
+        },
+        "keep_recent_pairs": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 18
+        }
+      }
+    },
+    "context_events": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/context_event"
+      }
+    }
+  },
+  "$defs": {
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "timestamp": {
+      "type": "string",
+      "minLength": 1,
+      "format": "date-time"
+    },
+    "hash": {
+      "type": "string",
+      "minLength": 64,
+      "maxLength": 64,
+      "pattern": "^[0-9A-F]{64}$"
+    },
+    "optional_count": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "optional_seconds": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "issue_code": {
+      "enum": [
+        "profile_integrity_error",
+        "interrupted",
+        "authentication_error",
+        "timeout",
+        "connection_error",
+        "context_limit",
+        "model_not_found",
+        "invalid_response",
+        "provider_error",
+        "llm_error",
+        "unexpected_error",
+        "summary_selection_error"
+      ]
+    },
+    "issue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "error_type",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "$ref": "#/$defs/issue_code"
+        },
+        "error_type": {
+          "$ref": "#/$defs/text"
+        },
+        "message": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "session_issue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "recorded_at",
+        "code",
+        "error_type",
+        "message"
+      ],
+      "properties": {
+        "recorded_at": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "code": {
+          "$ref": "#/$defs/issue_code"
+        },
+        "error_type": {
+          "$ref": "#/$defs/text"
+        },
+        "message": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "text",
+        "model",
+        "provider",
+        "elapsed_seconds",
+        "input_tokens",
+        "output_tokens",
+        "finish_reason",
+        "server_total_seconds",
+        "load_seconds",
+        "prompt_eval_seconds",
+        "eval_seconds",
+        "cached_input_tokens"
+      ],
+      "properties": {
+        "text": {
+          "$ref": "#/$defs/text"
+        },
+        "model": {
+          "$ref": "#/$defs/text"
+        },
+        "provider": {
+          "$ref": "#/$defs/text"
+        },
+        "elapsed_seconds": {
+          "type": "number",
+          "minimum": 0
+        },
+        "input_tokens": {
+          "$ref": "#/$defs/optional_count"
+        },
+        "output_tokens": {
+          "$ref": "#/$defs/optional_count"
+        },
+        "finish_reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "server_total_seconds": {
+          "$ref": "#/$defs/optional_seconds"
+        },
+        "load_seconds": {
+          "$ref": "#/$defs/optional_seconds"
+        },
+        "prompt_eval_seconds": {
+          "$ref": "#/$defs/optional_seconds"
+        },
+        "eval_seconds": {
+          "$ref": "#/$defs/optional_seconds"
+        },
+        "cached_input_tokens": {
+          "$ref": "#/$defs/optional_count"
+        }
+      }
+    },
+    "attempt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "question_number",
+        "question",
+        "requested_at",
+        "finished_at",
+        "status",
+        "response",
+        "issues"
+      ],
+      "properties": {
+        "question_number": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20
+        },
+        "question": {
+          "$ref": "#/$defs/text"
+        },
+        "requested_at": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "finished_at": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "status": {
+          "enum": [
+            "completed",
+            "error",
+            "incomplete",
+            "interrupted"
+          ]
+        },
+        "response": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/response"
+            }
+          ]
+        },
+        "issues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/issue"
+          }
+        }
+      }
+    },
+    "context_selections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "question_number",
+          "segment_indices"
+        ],
+        "properties": {
+          "question_number": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 20
+          },
+          "segment_indices": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        }
+      }
+    },
+    "selector_metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "model",
+        "provider",
+        "elapsed_seconds",
+        "input_tokens",
+        "output_tokens",
+        "finish_reason",
+        "server_total_seconds",
+        "load_seconds",
+        "prompt_eval_seconds",
+        "eval_seconds",
+        "cached_input_tokens"
+      ],
+      "properties": {
+        "model": {
+          "$ref": "#/$defs/text"
+        },
+        "provider": {
+          "$ref": "#/$defs/text"
+        },
+        "elapsed_seconds": {
+          "type": "number",
+          "minimum": 0
+        },
+        "input_tokens": {
+          "$ref": "#/$defs/optional_count"
+        },
+        "output_tokens": {
+          "$ref": "#/$defs/optional_count"
+        },
+        "finish_reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "server_total_seconds": {
+          "$ref": "#/$defs/optional_seconds"
+        },
+        "load_seconds": {
+          "$ref": "#/$defs/optional_seconds"
+        },
+        "prompt_eval_seconds": {
+          "$ref": "#/$defs/optional_seconds"
+        },
+        "eval_seconds": {
+          "$ref": "#/$defs/optional_seconds"
+        },
+        "cached_input_tokens": {
+          "$ref": "#/$defs/optional_count"
+        }
+      }
+    },
+    "context_preparation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "reason",
+        "measurement",
+        "full_message_bytes",
+        "proposed_message_bytes",
+        "selected_message_bytes",
+        "saved_message_bytes",
+        "source_session_id",
+        "source_history_sha256",
+        "summary_review_status",
+        "messages_sha256"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "full_history",
+            "extractive_summary"
+          ]
+        },
+        "reason": {
+          "enum": [
+            "no_omissions",
+            "no_byte_savings",
+            "smaller_message_json",
+            "selector_failed"
+          ]
+        },
+        "measurement": {
+          "const": "utf8_message_json_before_model_adaptation"
+        },
+        "full_message_bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "proposed_message_bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "selected_message_bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "saved_message_bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "source_session_id": {
+          "$ref": "#/properties/session_id"
+        },
+        "source_history_sha256": {
+          "$ref": "#/$defs/hash"
+        },
+        "summary_review_status": {
+          "const": "not_reviewed"
+        },
+        "messages_sha256": {
+          "$ref": "#/$defs/hash"
+        }
+      }
+    },
+    "context_event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "event_number",
+        "before_question_number",
+        "recorded_at",
+        "candidate_sent",
+        "trigger_reason",
+        "selector_status",
+        "preparation",
+        "summary_selections",
+        "selector_metrics",
+        "issues",
+        "preparation_elapsed_seconds"
+      ],
+      "properties": {
+        "event_number": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "before_question_number": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20
+        },
+        "recorded_at": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "candidate_sent": {
+          "type": "boolean"
+        },
+        "trigger_reason": {
+          "enum": [
+            "insufficient_history",
+            "below_threshold",
+            "already_active",
+            "previous_context_limit",
+            "reported_input_tokens"
+          ]
+        },
+        "selector_status": {
+          "enum": [
+            "not_requested",
+            "completed",
+            "failed",
+            "interrupted",
+            "aborted"
+          ]
+        },
+        "preparation": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/context_preparation"
+            }
+          ]
+        },
+        "summary_selections": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/context_selections"
+            }
+          ]
+        },
+        "selector_metrics": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/selector_metrics"
+            }
+          ]
+        },
+        "issues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/issue"
+          }
+        },
+        "preparation_elapsed_seconds": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "session_version": {
+            "const": "1.1.0"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "context_policy",
+          "context_events"
+        ]
+      },
+      "else": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "context_policy"
+              ]
+            },
+            {
+              "required": [
+                "context_events"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

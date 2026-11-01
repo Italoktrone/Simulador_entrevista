@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Descripción de un puesto ficticio",
+  "description": "Formato inicial de puestos para el simulador. Valida estructura, no la veracidad ni la coherencia semántica de los textos.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "job_version",
+    "job_id",
+    "is_fictional",
+    "title",
+    "organization",
+    "summary",
+    "responsibilities",
+    "requirements",
+    "competencies_to_explore",
+    "seniority_expectations"
+  ],
+  "properties": {
+    "job_version": {
+      "type": "string",
+      "const": "1.0.0",
+      "description": "Versión del formato de puesto admitida por este esquema."
+    },
+    "job_id": {
+      "type": "string",
+      "pattern": "^puesto-[a-z0-9]+(-[a-z0-9]+)*$",
+      "not": {"pattern": "\\s"},
+      "description": "Identificador estable que comienza con puesto-, sin espacios."
+    },
+    "is_fictional": {
+      "type": "boolean",
+      "const": true
+    },
+    "title": {"$ref": "#/$defs/nonBlankText"},
+    "organization": {"$ref": "#/$defs/nonBlankText"},
+    "summary": {"$ref": "#/$defs/nonBlankText"},
+    "responsibilities": {"$ref": "#/$defs/nonEmptyTextList"},
+    "requirements": {"$ref": "#/$defs/nonEmptyTextList"},
+    "competencies_to_explore": {"$ref": "#/$defs/nonEmptyTextList"},
+    "seniority_expectations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["experience_level", "not_required"],
+      "properties": {
+        "experience_level": {"$ref": "#/$defs/nonBlankText"},
+        "not_required": {"$ref": "#/$defs/nonEmptyTextList"}
+      }
+    }
+  },
+  "$defs": {
+    "nonBlankText": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S",
+      "description": "Texto con al menos un carácter que no sea espacio en blanco."
+    },
+    "nonEmptyTextList": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/nonBlankText"},
+      "description": "Lista no vacía de textos, sin elementos exactamente repetidos."
+    }
+  }
+}

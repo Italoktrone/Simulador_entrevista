@@ -1,0 +1,38 @@
+{
+  "job_version": "1.0.0",
+  "job_id": "puesto-dev-junior-001",
+  "is_fictional": true,
+  "title": "Desarrollador de Software Junior",
+  "organization": "Aplicaciones Nexo",
+  "summary": "El puesto busca una persona que colabore en aplicaciones web internas bajo supervisión técnica.",
+  "responsibilities": [
+    "Implementar y mantener funciones de backend con Python y Flask.",
+    "Consultar y actualizar datos en PostgreSQL.",
+    "Reproducir y corregir errores.",
+    "Escribir pruebas y documentación.",
+    "Participar en revisiones de código y aclaración de requisitos."
+  ],
+  "requirements": [
+    "Formación informática terminada o próxima a finalizar.",
+    "Bases de Python, SQL, HTTP y Git.",
+    "Comprensión inicial de APIs y pruebas automatizadas.",
+    "Capacidad para comunicar dificultades y solicitar apoyo."
+  ],
+  "competencies_to_explore": [
+    "Resolución de problemas",
+    "Comunicación",
+    "Colaboración",
+    "Organización",
+    "Aprendizaje",
+    "Responsabilidad"
+  ],
+  "seniority_expectations": {
+    "experience_level": "El puesto admite experiencia inicial y conocimientos en desarrollo.",
+    "not_required": [
+      "Dominio de servicios de nube",
+      "Kubernetes",
+      "Liderazgo de equipos",
+      "Autonomía propia de un cargo senior"
+    ]
+  }
+}

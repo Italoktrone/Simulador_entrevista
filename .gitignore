@@ -1,0 +1,14 @@
+.env
+config/llm.local.json
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+node_modules/
+dist/
+.DS_Store
+# Salidas locales; las evidencias seleccionadas se guardan en docs/entregas/.
+outputs/sessions/*
+!outputs/sessions/README.md
+outputs/results/*
+!outputs/results/README.md

@@ -1,0 +1,243 @@
+{
+  "profile_version": "1.0.0",
+  "candidate_id": "cand-001",
+  "scenario_reference_date": "2026-10-20",
+  "is_fictional": true,
+  "evidence_scope": "Los antecedentes y sus evidencias son hechos ficticios del escenario, no resultados medidos por el programa.",
+  "name": "Nicolás Vera Soto",
+  "target_job_id": "puesto-dev-junior-001",
+  "professional_summary": "Profesional recién titulado, con una práctica y aproximadamente un año y medio de experiencia posterior, inicialmente a jornada parcial. Ha colaborado en aplicaciones web con Python, Flask y PostgreSQL, bajo supervisión técnica.",
+  "professional_status": {
+    "situation": "Terminó su último contrato en septiembre de 2026 y busca una nueva oportunidad.",
+    "last_contract_type": "Plazo fijo",
+    "reason_last_contract_ended": "Terminó la etapa del proyecto para la que fue contratado."
+  },
+  "education": [
+    {
+      "education_id": "edu-001",
+      "institution": "Instituto Profesional Horizonte Digital",
+      "degree": "Ingeniería en Informática",
+      "start_month": "2022-03",
+      "end_month": "2025-12",
+      "graduation_month": "2025-12",
+      "status": "Titulado",
+      "final_project_id": "proj-002"
+    }
+  ],
+  "postgraduate_studies": [],
+  "professional_certifications": [],
+  "work_experience": [
+    {
+      "experience_id": "exp-001",
+      "organization": "Soluciones Digitales Faro",
+      "team_context": "Trabajaba con un desarrollador de mayor experiencia y una coordinadora de proyecto.",
+      "authority_limits": [
+        "No dirigía al equipo.",
+        "No decidía por sí solo la arquitectura ni los despliegues."
+      ],
+      "roles": [
+        {
+          "role_id": "role-001",
+          "title": "Practicante de desarrollo",
+          "start_month": "2025-01",
+          "end_month": "2025-03",
+          "responsibilities": [
+            "Reproducir errores.",
+            "Corregir problemas pequeños en Python.",
+            "Realizar consultas SQL.",
+            "Actualizar documentación."
+          ],
+          "supervision": "Sus cambios eran revisados por un desarrollador."
+        },
+        {
+          "role_id": "role-002",
+          "title": "Desarrollador Junior",
+          "start_month": "2025-04",
+          "end_month": "2026-09",
+          "schedule_periods": [
+            {
+              "start_month": "2025-04",
+              "end_month": "2025-12",
+              "schedule": "Jornada parcial",
+              "responsibilities": [
+                "Colaborar en un sistema interno de solicitudes de soporte mientras terminaba sus estudios."
+              ]
+            },
+            {
+              "start_month": "2026-01",
+              "end_month": "2026-09",
+              "schedule": "Jornada completa",
+              "responsibilities": [
+                "Implementar funciones de backend.",
+                "Escribir pruebas.",
+                "Corregir errores.",
+                "Atender observaciones de revisión de código."
+              ]
+            }
+          ],
+          "project_ids": ["proj-001"]
+        }
+      ]
+    }
+  ],
+  "technical_knowledge": [
+    {
+      "area": "Python",
+      "scope": "Funciones, colecciones, módulos, manejo de excepciones y clases sencillas."
+    },
+    {
+      "area": "Flask y HTTP",
+      "scope": "Rutas, solicitudes y respuestas JSON, validación de entradas y operaciones CRUD."
+    },
+    {
+      "area": "SQL y PostgreSQL",
+      "scope": "Consultas, relaciones entre tablas, JOIN y operaciones de lectura y escritura."
+    },
+    {
+      "area": "Pruebas con pytest",
+      "scope": "Pruebas unitarias y de regresión; necesita apoyo para diseñar estrategias más amplias."
+    },
+    {
+      "area": "Git y GitHub",
+      "scope": "Ramas, commits, pull requests y resolución de conflictos sencillos."
+    },
+    {
+      "area": "HTML, CSS y JavaScript",
+      "scope": "Conocimientos básicos utilizados principalmente en el proyecto académico."
+    }
+  ],
+  "tools_used": ["VS Code", "Terminal", "Entorno virtual de Python", "Postman"],
+  "experience_limits": [
+    "Sin experiencia práctica con Kubernetes.",
+    "Sin experiencia práctica con servicios de AWS o Azure.",
+    "Sin experiencia práctica con React.",
+    "Sin experiencia práctica en administración de infraestructura.",
+    "No ha configurado pipelines de integración continua.",
+    "No ha gestionado despliegues de producción."
+  ],
+  "projects": [
+    {
+      "project_id": "proj-001",
+      "name": "MesaFaro",
+      "kind": "Profesional",
+      "description": "Sistema interno de solicitudes de soporte.",
+      "experience_id": "exp-001",
+      "role_id": "role-002",
+      "start_month": "2025-04",
+      "end_month": "2026-09",
+      "technologies_used": ["Python", "Flask", "PostgreSQL", "Git", "pytest"],
+      "features": ["Registrar solicitudes", "Consultar estados", "Asignar responsables", "Filtrar resultados"],
+      "personal_contributions": ["Endpoints del módulo de solicitudes", "Validaciones", "Correcciones de consultas", "Pruebas"],
+      "contribution_limits": ["Participó en una aplicación existente.", "No construyó todo el sistema.", "No administró producción."]
+    },
+    {
+      "project_id": "proj-002",
+      "name": "Inventario Aula",
+      "kind": "Académico",
+      "description": "Proyecto de título para registrar productos, entradas, salidas y existencias.",
+      "education_id": "edu-001",
+      "start_month": "2025-08",
+      "end_month": "2025-11",
+      "team_size": 3,
+      "technologies_used": ["Python", "Flask", "PostgreSQL", "HTML", "CSS", "JavaScript básico"],
+      "personal_contributions": ["Backend de productos y movimientos", "Consultas SQL", "Parte de las pruebas"],
+      "outcome": "Aplicación presentada y aprobada como proyecto académico.",
+      "contribution_limits": ["No tuvo clientes comerciales.", "No tuvo operación real en producción."]
+    }
+  ],
+  "achievements": [
+    {
+      "achievement_id": "ach-001",
+      "project_id": "proj-001",
+      "description": "Completar las funciones asignadas del módulo de solicitudes.",
+      "scenario_evidence": "Revisión del desarrollador y aceptación de la coordinadora."
+    },
+    {
+      "achievement_id": "ach-002",
+      "project_id": "proj-001",
+      "situation_id": "S1",
+      "description": "Corregir un filtro que omitía solicitudes sin responsable.",
+      "scenario_evidence": "Caso reproducible antes del cambio y prueba de regresión después."
+    },
+    {
+      "achievement_id": "ach-003",
+      "situation_id": "S4",
+      "description": "Mejorar la guía de instalación local.",
+      "scenario_evidence": "Un compañero logró preparar el entorno siguiendo la versión corregida."
+    },
+    {
+      "achievement_id": "ach-004",
+      "project_id": "proj-002",
+      "description": "Completar su contribución al proyecto de título.",
+      "scenario_evidence": "Demostración académica del registro de productos y movimientos."
+    }
+  ],
+  "behavioral_situations": [
+    {
+      "situation_id": "S1",
+      "title": "Resolver un error de consulta",
+      "project_id": "proj-001",
+      "context": "La coordinadora detectó solicitudes ausentes del listado.",
+      "actions": [
+        "Reprodujo el problema.",
+        "Identificó que un INNER JOIN excluía registros sin responsable.",
+        "Consultó su propuesta con el desarrollador.",
+        "Cambió la consulta a LEFT JOIN y añadió una prueba de regresión."
+      ],
+      "outcome": "Los registros volvieron a aparecer en el caso comprobado."
+    },
+    {
+      "situation_id": "S2",
+      "title": "Reconocer una mala estimación",
+      "context": "Estimó dos días para añadir filtros, pero necesitó cuatro porque no consideró validaciones y pruebas.",
+      "actions": ["Comunicó el retraso al reconocerlo.", "Acordó prioridades y terminó la tarea."],
+      "outcome": "Desde entonces divide las tareas e incluye tiempo de verificación; todavía necesita mejorar sus estimaciones."
+    },
+    {
+      "situation_id": "S3",
+      "title": "Aclarar un requisito ambiguo",
+      "context": "Recibió la solicitud de mostrar primero los casos urgentes.",
+      "actions": [
+        "Preguntó qué significaba urgente.",
+        "Acordó con la coordinadora utilizar la prioridad registrada, ordenando por antigüedad cuando coincidiera."
+      ],
+      "outcome": "Evitó implementar una interpretación personal."
+    },
+    {
+      "situation_id": "S4",
+      "title": "Incorporar observaciones sobre documentación",
+      "context": "Un compañero no pudo iniciar el proyecto con su guía.",
+      "actions": [
+        "Revisó el proceso junto al compañero.",
+        "Descubrió pasos omitidos sobre el entorno virtual y la configuración de la base de datos.",
+        "Corrigió el documento y comprobó que el compañero pudiera seguirlo."
+      ],
+      "outcome": "El compañero logró preparar el entorno siguiendo la guía corregida."
+    }
+  ],
+  "professional_competencies": [
+    {"name": "Resolución de problemas", "situation_ids": ["S1"]},
+    {"name": "Comunicación y aclaración de requisitos", "situation_ids": ["S2", "S3"]},
+    {"name": "Colaboración y apertura a observaciones", "situation_ids": ["S1", "S4"]},
+    {"name": "Responsabilidad sobre errores propios", "situation_ids": ["S2", "S4"]},
+    {"name": "Organización y aprendizaje", "situation_ids": ["S2"], "development_note": "Todavía en desarrollo."}
+  ],
+  "strengths": [
+    {"description": "Reproducir problemas antes de corregirlos.", "situation_ids": ["S1"]},
+    {"description": "Pedir aclaraciones.", "situation_ids": ["S3"]},
+    {"description": "Aceptar revisiones.", "situation_ids": ["S1", "S4"]}
+  ],
+  "improvement_areas": [
+    {"description": "Estimar el esfuerzo completo de una tarea.", "situation_ids": ["S2"]},
+    {"description": "Documentar procedimientos pensando en alguien que no conoce el proyecto.", "situation_ids": ["S4"]}
+  ],
+  "work_motivation": "Busca consolidarse en desarrollo backend, trabajar con revisión de código y asumir gradualmente tareas más autónomas.",
+  "personality": {
+    "communication_traits": ["Tranquila", "Respetuosa", "Directa"],
+    "interview_behavior": [
+      "Puede mostrar algo de nerviosismo al comenzar una entrevista.",
+      "Puede pedir aclaraciones y reconocer que necesita ayuda.",
+      "No se presenta como experto ni como una persona que siempre resuelve todo sola."
+    ]
+  }
+}
