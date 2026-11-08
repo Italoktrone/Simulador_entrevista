@@ -1,8 +1,8 @@
 {
   "few_shot_version": "1.0.0",
   "rubric_version": "1.1.0",
-  "reference_sha256": "46733f48859b3348a0b5e0061997f63fe73d98ea58099716f5f426077e3844aa",
-  "demonstrations_sha256": "7ceb57bedcf814df7d9a64c008b5bd77fb68e591558e2080f9a8bb951c5709c5",
+  "reference_sha256": "c9995358a65b76b8baa5af87a3605fbd09b49e8ea176b296cb4db76f02feefe3",
+  "demonstrations_sha256": "f61f5813edfa8e09af368d31c5bbc0f9bb4917350a7cd093a7257920c7133f8a",
   "job_sha256": "40c16aeeb4d41be7fc0eff3d8237178c883cad294e9d04f96c4d4f9b81455f77",
   "case_ids": [
     "E03",

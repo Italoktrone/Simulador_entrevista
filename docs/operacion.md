@@ -53,6 +53,8 @@ La suite `data/reference_questions/rag_basica.json` verifica recuperación y aus
 
 Los schemas públicos de `agent/` se generan desde `RunInput` y `RunOutput` en `app/contracts.py`. `scripts.check_project` comprueba su igualdad antes de ejecutar pruebas. `agent/examples.json` contiene entradas y salidas válidas e inválidas. Los resultados de pytest, Ruff, Bandit y recuperación quedan en `reports/`, excluidos de Git y conservados por GitHub Actions como artefactos.
 
+Los archivos JSON versionados usan saltos de línea LF, fijados en `.gitattributes`, también al clonar en Windows. Las huellas de las referencias y demostraciones se comprueban sobre los bytes del archivo: editar conservando LF evita diferencias de formato entre equipos. La corrección de CI del 8 de noviembre de 2026 actualiza las dos huellas que se habían calculado con CRLF a las de los mismos JSON con LF; no cambia preguntas, niveles, razones ni ejemplos. Los registros históricos conservan sus huellas originales. GitHub Actions comprueba Windows y Linux y conserva un artefacto separado por sistema. La regresión realiza una extracción real con Git para `core.autocrlf=true`, `false` e `input`, y valida las demostraciones del evaluador y del clasificador.
+
 `scripts.check_clean_install` exporta el estado local vigente, crea otro entorno, instala las dependencias y ejecuta la verificación completa. `--wheels RUTA` permite usar paquetes previamente descargados. El resumen distingue esa exportación de un clon remoto.
 
 <a name="entorno-python"></a>

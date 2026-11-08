@@ -28,7 +28,7 @@ def main(argv=None):
         [git, "ls-files", "-co", "--exclude-standard", "-z"], cwd=ROOT, check=True, capture_output=True
     ).stdout.decode("utf-8").split("\0")
     allowed = {"agent", "app", "config", "data", "docs", "harness", "scripts", "schemas", "tests", ".github"}
-    allowed_files = {"README.md", "requirements.txt", "requirements-dev.txt", "pyproject.toml", ".gitignore", ".env.example"}
+    allowed_files = {"README.md", "requirements.txt", "requirements-dev.txt", "pyproject.toml", ".gitignore", ".gitattributes", ".env.example"}
     with TemporaryDirectory(prefix="clean-install-", dir=reports) as temporary:
         snapshot = Path(temporary) / "project"
         snapshot.mkdir()
