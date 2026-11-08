@@ -323,6 +323,8 @@ func _details(value: Variant, indent: String = "") -> String:
 
 
 func _error_message(code: String) -> String:
+	if code == "unsupported_candidate_claim":
+		return "La respuesta no respetó los antecedentes del candidato. La pregunta se conserva para un nuevo envío."
 	if code == "timeout_error":
 		return "Se agotó el tiempo de espera. Reintentar conserva la misma petición y evita duplicarla."
 	var messages := {"connection_error": "No se pudo conectar. Inicia la API y pulsa Reintentar.", "transport_error": "No se confirmó la respuesta. Reintentar conserva la misma petición y evita duplicarla.", "invalid_json": "El servicio devolvió una respuesta ilegible. Revisa la API y reintenta.", "invalid_response": "La respuesta del servicio es incompatible. Revisa la API y reintenta.", "unauthorized": "El servicio requiere una credencial de acceso. Configura la conexión antes de continuar.", "session_busy": "La sesión todavía está ocupada. Espera un momento y reintenta.", "session_not_found": "La sesión ya no está disponible. Inicia una nueva entrevista.", "session_closed": "Esta entrevista ya está cerrada. Puedes iniciar otra.", "model_error": "El modelo no pudo responder. La pregunta se conserva para que puedas enviarla de nuevo.", "fallo_clasificacion": "No se pudo interpretar la pregunta. Puedes revisarla y enviarla de nuevo.", "execution_error": "La entrevista se interrumpió. Puedes iniciar una nueva sesión.", "session_capacity": "El servicio alcanzó su capacidad de sesiones. Reinícialo antes de continuar."}

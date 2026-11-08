@@ -347,3 +347,28 @@ def test_behavioral_selection_audit_belongs_to_each_cached_request(api, monkeypa
     assert finished[received["request_id"]]["selected"] == [{"direction": "received", "situation_id": "S1"}]
     assert finished[provided["request_id"]]["selected"] == [{"direction": "provided", "situation_id": "S4"}]
     assert all(e["candidate_id"] == "cand-001" and "quote" not in json.dumps(e) for e in finished.values())
+
+
+def test_unsupported_support_claim_is_retained_without_publishing_or_regenerating(api, monkeypatch):
+    client, _, model, directory = api
+    raw = "El desarrollador y yo cambiamos la consulta y añadimos una prueba de regresión."
+
+    def generated(messages):
+        model.requests.append(deepcopy(messages))
+        return LLMResponse(raw, "simulado", "ollama", 0.1)
+
+    monkeypatch.setattr(model, "generate", generated)
+    identifier, _ = start(client)
+    payload = question(identifier, question="Cuéntame una ocasión en que necesitaste ayuda de un compañero y cómo trabajaron juntos.")
+    result = client.post("/run", json=payload).json()
+    assert result["status"] == "error" and result["reply"] is None
+    assert result["error_code"] == "unsupported_candidate_claim"
+    assert result["questions_asked"] == 1 and not result["closed"]
+    assert client.post("/run", json=payload).json() == result and len(model.requests) == 1
+    events = client.get("/logs", params={"session_id": identifier}).json()["events"]
+    event = next(e for e in events if e["event"] == "run_finished")
+    assert event["behavioral_validation"]["status"] == "rejected"
+    assert event["behavioral_selection"]["selected"] == [{"direction": "received", "situation_id": "S1"}]
+    client.post(f"/sessions/{identifier}/close").raise_for_status()
+    saved = load_session(directory / "sessions" / f"session-{identifier}.json")
+    assert saved["attempts"][0]["response"]["text"] == raw and saved["attempts"][0]["status"] == "error"

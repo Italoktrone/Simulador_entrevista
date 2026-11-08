@@ -44,6 +44,9 @@ def simulated_factory(options, *, scenario="smoke", offline_url=None):
 
         def generate(self, messages):
             self.calls += 1
+            if self.calls == 1 and scenario == "unsupported_claim":
+                return LLMResponse("El desarrollador y yo cambiamos la consulta y añadimos una prueba de regresión.",
+                                   "simulado", "ollama", 0.01)
             if self.calls == 1 and scenario == "ollama_unavailable":
                 # Conexión TCP real a un puerto reservado sin servidor escuchando.
                 with OllamaClient(OllamaSettings(base_url=offline_url, connection_retries=0,
@@ -92,7 +95,7 @@ def main(argv=None):
     parser.add_argument("--question", default="¿Has utilizado Git?", help="Pregunta del recorrido normal; útil para comprobar regresiones desde la interfaz")
     parser.add_argument("--no-evaluation", action="store_true", help="En modo real, comprobar solo la conversación")
     parser.add_argument("--screenshot", action="store_true", help="Renderizar y capturar la interfaz (requiere escritorio)")
-    parser.add_argument("--scenario", choices=("smoke", "ollama_unavailable", "timeout", "evaluation_unavailable", "limit"),
+    parser.add_argument("--scenario", choices=("smoke", "ollama_unavailable", "timeout", "evaluation_unavailable", "unsupported_claim", "limit"),
                         default="smoke", help="Provocar fallos o comprobar veinte turnos con modelos simulados")
     args = parser.parse_args(argv)
     if not args.question.strip() or len(args.question) > 4000:
@@ -187,7 +190,7 @@ def main(argv=None):
         return 1
     saved = reports / "api/sessions" / f"session-{report['session_id']}.json"
     session = load_session(saved)
-    expected_attempts = {"smoke": 1, "timeout": 1, "ollama_unavailable": 2, "evaluation_unavailable": 2, "limit": 20}[args.scenario]
+    expected_attempts = {"smoke": 1, "timeout": 1, "ollama_unavailable": 2, "evaluation_unavailable": 2, "unsupported_claim": 2, "limit": 20}[args.scenario]
     if (session["status"] != "closed" or session["candidate_id"] != args.candidate
             or len(session["attempts"]) != expected_attempts or session["attempts"][-1]["status"] != "completed"):
         raise RuntimeError("El recorrido no conservó la sesión esperada.")
@@ -204,6 +207,12 @@ def main(argv=None):
     if args.scenario == "ollama_unavailable":
         if session["attempts"][0]["status"] != "error" or not any(i["code"] in {"connection_error", "timeout"} for i in session["attempts"][0]["issues"]):
             raise RuntimeError("No se registró el proveedor local inaccesible.")
+    if args.scenario == "unsupported_claim":
+        first = session["attempts"][0]
+        rejected = any(event.get("error_code") == "unsupported_candidate_claim"
+                       for event in application.state.service.logs(report["session_id"]))
+        if first["status"] != "error" or not first["response"] or first["issues"][0]["code"] != "invalid_response" or not rejected:
+            raise RuntimeError("No se conservó la respuesta rechazada por su atribución de acciones.")
     if args.scenario in ("evaluation_unavailable", "limit"):
         index = 0 if args.scenario == "evaluation_unavailable" else -1
         if session["evaluations"][index]["status"] != "no_disponible" or not session["attempts"][index]["response"]:

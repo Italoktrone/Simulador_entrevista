@@ -63,6 +63,8 @@ Para preguntas explícitas sobre apoyo recibido o prestado, `harness/behavioral_
 
 `run_finished.behavioral_selection` registra versión, candidato, dirección solicitada, episodio y ausencia de evidencia. No copia los relatos privados al JSONL. La selección queda vinculada al UUID del turno, incluso al recuperar un resultado cacheado después de otros turnos. Es un rastro de los hechos suministrados al modelo, no una aprobación automática de la prosa. `scripts.check_npc_isolation --suite support` y las pruebas de la API comprueban esa correspondencia.
 
+`run_finished.behavioral_validation` indica versión y resultado del control posterior. Este bloquea formas explícitas de coautoría o incapacidad no respaldadas por las acciones seleccionadas. Una consulta al desarrollador no permite atribuirle la ejecución de la corrección. La API devuelve `unsupported_candidate_claim`, sin mostrar la salida rechazada ni perder su texto original en el JSON de sesión. Godot conserva el borrador y habilita otro envío con un nuevo UUID. El reintento del UUID original recupera el mismo error, sin otra generación. El control es conservador y acotado; el cotejo semántico del conjunto sigue siendo necesario.
+
 La suite `data/reference_questions/rag_basica.json` verifica recuperación y ausencia de resultados para consultas desconocidas. Las pruebas HTTP comprueban que los pasajes llegan al candidato, se conserva el historial, los errores quedan controlados y los reintentos no duplican generaciones. Las llamadas a modelos son simuladas.
 
 ### Contratos y evidencia de entrega

@@ -61,7 +61,7 @@ func _capture() -> void:
 
 
 func _ask() -> void:
-	ui.question_input.text = "¿Has utilizado Git?"
+	ui.question_input.text = "Cuéntame una ocasión en que necesitaste ayuda de un compañero y cómo trabajaron juntos." if scenario == "unsupported_claim" else "¿Has utilizado Git?"
 	ui.send_button.pressed.emit()
 
 
@@ -107,12 +107,17 @@ func _run() -> void:
 			return
 		if not _expect(ui.history.get_parsed_text().count("Tú\n") == 1 and ui.get_node("%Counter").text == "1 / 20 preguntas", "Timeout resuelto sin duplicar pregunta ni contador"):
 			return
-	elif scenario == "ollama_unavailable":
-		if not _expect(not ui.api.has_pending_request() and ui.question_input.editable and not ui.send_button.disabled and "modelo no pudo responder" in ui.notice.text, "Ollama inaccesible: error visible y controles recuperados"):
+	elif scenario in ["ollama_unavailable", "unsupported_claim"]:
+		var expected_notice := "antecedentes del candidato" if scenario == "unsupported_claim" else "modelo no pudo responder"
+		if not _expect(not ui.api.has_pending_request() and ui.question_input.editable and not ui.send_button.disabled and expected_notice in ui.notice.text, "Error confirmado visible y controles recuperados: " + scenario):
 			return
-		if not _expect(ui.question_input.text == "¿Has utilizado Git?" and ui.get_node("%Counter").text == "1 / 20 preguntas", "Fallo del modelo conserva el borrador y registra el intento consumido"):
+		if not _expect(not ui.question_input.text.is_empty() and ui.get_node("%Counter").text == "1 / 20 preguntas", "Fallo del modelo conserva el borrador y registra el intento consumido"):
+			return
+		if scenario == "unsupported_claim" and not _expect(not "cambiamos la consulta" in ui.history.get_parsed_text(), "La atribución rechazada no aparece en la conversación"):
 			return
 		await _capture()
+		if scenario == "unsupported_claim":
+			ui.question_input.text = "¿Has utilizado Git?"
 		ui.send_button.pressed.emit()
 		if not _expect(await _idle() and ui.get_node("%Counter").text == "2 / 20 preguntas", "Nuevo envío tras recuperar el modelo"):
 			return

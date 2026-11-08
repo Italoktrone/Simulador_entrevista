@@ -23,6 +23,7 @@ from harness.response_policy import ResponsePolicyDecision
 from harness.runtime import InterviewRuntime
 from harness.scoring import load_rubric
 from harness.session_log import save_session
+from harness.response_validator import ResponseSupportError, SUPPORT_VALIDATION_VERSION
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -193,6 +194,8 @@ class InterviewService:
                     error_code = response.code if status == "error" else None
                 else:
                     reply, status, action = response.text, "completed", "responder"
+            except ResponseSupportError:
+                error_code = "unsupported_candidate_claim"
             except LLMError:
                 error_code = "model_error"
             except Exception:
@@ -216,6 +219,9 @@ class InterviewService:
             self.log(session.runtime.session_id, identifier, "run_finished", status=result["status"],
                      questions_asked=result["questions_asked"], error_code=result["error_code"],
                      behavioral_selection=record.behavioral_selection,
+                     behavioral_validation={"version": SUPPORT_VALIDATION_VERSION,
+                                            "status": "rejected" if result["error_code"] == "unsupported_candidate_claim" else
+                                            "checked" if record.behavioral_selection is not None and result["status"] == "completed" else "not_checked"},
                      documents=[{key: source[key] for key in ("document_id", "source", "sha256")}
                                 for source in result["sources"]])
             record.logged = True

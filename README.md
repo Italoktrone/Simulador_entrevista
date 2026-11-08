@@ -104,6 +104,8 @@ Conserva la primera salida, las fuentes y las sesiones; no repite generaciones p
 
 La regresión específica de apoyo recibido y prestado utiliza `--suite support --with-history`: siete preguntas idénticas por los tres perfiles y cuatro repreguntas por candidato. `--questions R01 R03` permite seleccionar casos y `--candidates cand-001` limitar el perfil. La selección previa del episodio deriva las acciones de los datos existentes, acota la vista de trabajo y registra la decisión por turno. Si falta un episodio explícito, se reconoce la ausencia de un ejemplo concreto. No cambia los perfiles originales ni supone que el candidato nunca haya ayudado a nadie. Los patrones de selección cubren formulaciones explícitas en español; la pertinencia de las respuestas requiere revisar las salidas.
 
+Un control posterior detecta expresiones explícitas de ejecución compartida o incapacidad que el episodio no respalda. Rechaza la salida con `unsupported_candidate_claim`, conserva el original en la sesión y permite un envío nuevo; no reescribe la respuesta ni vuelve a generar automáticamente. Su alcance son las expresiones comprobadas, no toda la semántica de la prosa. `scripts.check_godot --scenario unsupported_claim --godot $godot` reproduce un rechazo deliberado con modelos simulados y comprueba la recuperación de la interfaz.
+
 Para repetir la pregunta de ayuda recibida desde los controles de Godot con Ollama y análisis activo:
 
 ```powershell
