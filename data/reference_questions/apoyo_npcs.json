@@ -1,0 +1,64 @@
+{
+  "version": "1.0.0",
+  "kind": "known_development_cases",
+  "review": "Revisar roles, autoría, proyecto y datos de cada perfil. Una selección técnica correcta no aprueba por sí sola la respuesta generada. Conservar la primera salida de cada caso y los fallos.",
+  "questions": [
+    {
+      "id": "R01",
+      "question": "Cuéntame una ocasión en que necesitaste ayuda de un compañero y cómo trabajaron juntos.",
+      "expectation": "Apoyo recibido. Nicolás debe conservar la consulta de su propuesta al desarrollador (S1); el episodio de ayudar a instalar a otro (S4) no responde a esa intención. Camila puede pedir a un compañero reproducir el reporte (S4), sin añadir un proyecto. Diego puede relatar el conflicto de Git en BibliotecaBarrio (S3)."
+    },
+    {
+      "id": "R02",
+      "question": "¿Has tenido que pedirle ayuda a alguien para avanzar con una tarea? Describe el caso.",
+      "expectation": "Apoyo recibido en un episodio propio; conservar acciones y límites, sin inventar incapacidad o intervención ajena."
+    },
+    {
+      "id": "R03",
+      "question": "¿Qué hiciste cuando un compañero necesitó tu ayuda?",
+      "expectation": "Ayuda prestada. Nicolás puede relatar la guía corregida (S4), sin asignarle proyecto o empresa. Para Camila y Diego, la selección conservadora no encuentra un episodio explícito elegible: reconocer la falta de un caso concreto sin afirmar que nunca ayudaron a nadie ni invertir sus casos de apoyo recibido."
+    },
+    {
+      "id": "R04",
+      "question": "¿Quién te brindó apoyo con una tarea y qué hiciste tú después?",
+      "expectation": "Apoyo recibido, no prestado. Respetar el papel de cada persona y el resultado documentado."
+    },
+    {
+      "id": "R05",
+      "question": "¿Qué harías si un compañero te pide ayuda con un problema que tampoco sabes resolver?",
+      "expectation": "Respuesta hipotética compatible con el nivel junior. No convertirla en una experiencia pasada ni inventar un episodio."
+    },
+    {
+      "id": "R06",
+      "question": "En MesaFaro, ¿qué funcionalidades implementaste personalmente?",
+      "expectation": "Nicolás conserva sus aportes propios. Camila y Diego rechazan la atribución y mantienen su trayectoria. No es una pregunta de dirección del apoyo."
+    },
+    {
+      "id": "R07",
+      "question": "No te pregunto cuándo ayudaste a otro; quiero saber cuándo pediste ayuda tú.",
+      "expectation": "Distinguir la corrección y la negación: se pide apoyo recibido únicamente."
+    }
+  ],
+  "continuity": [
+    {
+      "id": "C01",
+      "question": "Cuéntame una ocasión en que ayudaste a otro compañero.",
+      "expectation": "Apoyo prestado; episodio elegible o reconocimiento de ausencia de un caso concreto."
+    },
+    {
+      "id": "C02",
+      "question": "¿Y cuando fuiste tú quien necesitó ayuda?",
+      "expectation": "Cambiar a apoyo recibido sin continuar indebidamente el relato de ayuda prestada."
+    },
+    {
+      "id": "C03",
+      "question": "¿Qué hiciste después y cuál fue el resultado?",
+      "expectation": "Resolver la referencia desde la pregunta anterior y conservar el episodio de apoyo recibido."
+    },
+    {
+      "id": "C04",
+      "question": "¿Eso ocurrió en MesaFaro?",
+      "expectation": "Nicolás puede confirmar el proyecto de S1. Camila y Diego no aceptan MesaFaro como propio ni cambian retrospectivamente el proyecto de su episodio."
+    }
+  ]
+}

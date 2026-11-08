@@ -8,6 +8,7 @@ var live := false
 var wait_seconds := 40.0
 var screenshot := ""
 var candidate := "cand-001"
+var question := "¿Has utilizado Git?"
 const PROFILES = {"cand-001": ["Nicolás Vera Soto", "MesaFaro"], "cand-002": ["Camila Rojas Medina", "TurnosBrújula"], "cand-003": ["Diego Muñoz Leiva", "ConciliaciónLadera"]}
 
 
@@ -22,6 +23,8 @@ func _init() -> void:
 			screenshot = argument.trim_prefix("--screenshot=")
 		elif argument.begins_with("--candidate="):
 			candidate = argument.trim_prefix("--candidate=")
+		elif argument.begins_with("--question="):
+			question = argument.trim_prefix("--question=")
 	call_deferred("_run")
 
 
@@ -101,7 +104,6 @@ func _run() -> void:
 		return
 	if not _expect(not ui.get_node("%Currículum").text.is_empty() and not ui.get_node("%Puesto").text.is_empty(), "CV y puesto disponibles"):
 		return
-	var question := "¿Has utilizado Git?"
 	ui.question_input.text = question
 	ui.send_button.pressed.emit()
 	if not _expect(ui.send_button.disabled and not ui.question_input.editable, "Controles bloqueados durante la petición"):

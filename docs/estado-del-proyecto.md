@@ -36,6 +36,14 @@ Las instrucciones 1.0.13 hacen explícito que las situaciones sin `project_id` c
 
 T17 dispone de `scripts.check_clean_install --published`: clona origin/E2, crea un entorno nuevo, instala sin caché de pip, comprueba dependencias y repite calidad y Godot. Registra el commit y conserva evidencias fuera del clon; el entorno temporal se elimina al terminar. Los comandos y límites de cada modo se agrupan en el README. El cierre en Notion debe referirse al resultado de ejecución y a su versión publicada.
 
+### T13: selección del episodio y autoría del apoyo
+
+Las instrucciones 1.0.15 incorporan una selección previa de episodios para apoyo recibido y prestado. La selección 1.0.1 utiliza evidencia textual del perfil actual, conserva la dirección y distingue acciones propias, consultas, solicitudes y acciones conjuntas. La vista del contexto excluye episodios ajenos a la intención y sus referencias vinculadas, sin modificar los JSON de candidatos ni atribuir un proyecto a relatos sin vínculo. Un episodio ausente se reconoce como falta de un ejemplo concreto, sin generalizar sobre toda la trayectoria.
+
+La selección se registra en el evento JSONL del turno y se conserva al recuperar una solicitud idempotente. La suite conocida de apoyo añade variantes, negación, preguntas hipotéticas, cambios de rol y repreguntas; la revisión semántica permanece separada del éxito técnico. El cierre de T13 se registra en Notion con su versión, primeras salidas, resultados y límites. Los conjuntos y los comandos están agrupados en el README y en la guía de operación.
+
+Verificación técnica de la selección 1.0.1: **1954 pruebas aprobadas**, una advertencia de dependencia, Ruff y Bandit sin hallazgos y recuperación documental 6/6. Los perfiles y las referencias protegidas conservaron sus datos. Las pruebas incluyen las citas exactas de las acciones, el cambio entre apoyo recibido y prestado, las preguntas de seguimiento, la ausencia de episodios y la auditoría correcta de solicitudes cacheadas.
+
 ### Hito T06: interfaz mínima publicada y comprobada
 
 Verificación de interfaz: 21 comprobaciones con la API real y modelos simulados, incluyendo pérdida de respuestas después de completar la operación y respuesta de turno incompatible. Los reintentos conservan UUID y contenido, con una sola sesión y un solo turno guardado. También funcionó una copia del proyecto sin caché del editor. Con Ollama `gemma4:e4b` se completaron 12 comprobaciones, respuesta real, evaluación de cuatro criterios y cierre validado; el recorrido con captura duró 65,42 segundos. Resultados locales en `reports/godot/simulated/interface.json` y `reports/godot/live/interface.json`; sesión real `334055c4-3ad9-4213-bee3-3035ac89670d`. Es una prueba funcional, sin ampliar las métricas de precisión del modelo.
@@ -109,7 +117,7 @@ Raíz: `C:\Users\franc\Downloads\Ejemplo_de_proyecto`. Python del proyecto: `.ve
 - Perfil aprobado: `data/candidates/candidato_junior.json`, Nicolás Vera Soto, `cand-001`. Fecha ficticia del escenario **2026-10-20**, independiente de la fecha real.
 - Puesto: `data/jobs/desarrollador_junior.json`, Aplicaciones Nexo, Desarrollador de Software Junior.
 - Configuración: `config/interviews/basica.json`. Máximo **20 preguntas enviadas**, incluyendo fallos.
-- Reglas del candidato: `agent/agent.md`, versión **1.0.13**. No modificar antecedentes aprobados para acomodar respuestas.
+- Reglas del candidato: `agent/agent.md`, versión **1.0.15**. No modificar antecedentes aprobados para acomodar respuestas.
 - Historial completo guardado en sesiones JSON locales; las respuestas completas alimentan la conversación, los intentos fallidos no. Resumen extractivo opcional en local, con auditoría y registro original conservado.
 - Documentación histórica: `docs/estado-del-proyecto.md#estado-etapas`, `docs/validacion-del-candidato.md#validacion-final`. Su validación de 738 pruebas y veinte preguntas corresponde a esa versión; hubo ampliaciones posteriores.
 

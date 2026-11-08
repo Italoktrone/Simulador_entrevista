@@ -15,6 +15,7 @@ from harness.hybrid_question_classifier import HybridQuestionClassifier
 from harness.intervention_log import classification_configuration, select_classification_context
 from harness.response_policy import ResponsePolicyDecision, decide_response
 from harness.response_validator import ResponseCitationError
+from harness.behavioral_evidence import select_support_evidence, audit_support_selection
 
 
 class InterviewFinishedError(RuntimeError):
@@ -57,6 +58,11 @@ class InterviewRuntime:
                 raise ValueError("El evaluador requiere QuestionEvaluator y clasificación activa.")
             self._session.enable_evaluation(evaluator.rubric)
         self._evaluator = evaluator
+        self._last_behavioral_selection = None
+
+    @property
+    def last_behavioral_selection(self):
+        return audit_support_selection(self._last_behavioral_selection)
 
     @property
     def evaluation_enabled(self) -> bool:
@@ -166,6 +172,7 @@ class InterviewRuntime:
 
     def ask(self, question: str, *, on_candidate_response=None) -> LLMResponse | ResponsePolicyDecision:
         """Clasificar primero si está activo; solo los envíos al candidato cuentan."""
+        self._last_behavioral_selection = None
         if self.finished:
             raise InterviewFinishedError("La entrevista ya finalizó o alcanzó su límite.")
         if self._classifier is None:
@@ -247,6 +254,7 @@ class InterviewRuntime:
             self._setup, question, instructions=self._instructions, history=self.history_messages(),
             candidate_metadata=candidate_metadata,
         )
+        self._last_behavioral_selection = select_support_evidence(self._setup.candidate.to_dict(), question, self.history_messages())
         self.assert_source_unchanged()
         context_event = None
         if self._context_policy is not None:

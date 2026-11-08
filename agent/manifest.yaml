@@ -1,7 +1,7 @@
 id: simulador-entrevista
 name: Candidato virtual de entrevistas
 version: 1.0.0
-instructions_version: 1.0.13
+instructions_version: 1.0.15
 language: es
 instructions: agent/agent.md
 classifier_instructions: agent/classifier.md

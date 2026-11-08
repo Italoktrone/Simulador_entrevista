@@ -313,3 +313,37 @@ def test_invalid_citation_is_not_published_but_original_is_saved_and_retry_is_id
     assert saved["attempts"][0]["response"]["text"] == raw
     assert saved["attempts"][0]["status"] == "error"
     assert saved["attempts"][0]["issues"][0]["code"] == "invalid_response"
+
+
+def test_behavioral_selection_audit_belongs_to_each_cached_request(api, monkeypatch):
+    client, service, model, _ = api
+
+    def generated(messages):
+        model.requests.append(deepcopy(messages))
+        return LLMResponse("Consulté mi propuesta antes de aplicar el cambio.", "simulado", "ollama", 0.1)
+
+    monkeypatch.setattr(model, "generate", generated)
+    identifier, _ = start(client)
+    received = question(identifier, question="Cuéntame una ocasión en que necesitaste ayuda de un compañero y cómo trabajaron juntos.")
+    original_log = service.log
+    first_failure = True
+
+    def fail_one_log(session_id, request_id, event, **fields):
+        nonlocal first_failure
+        if request_id == received["request_id"] and event == "run_finished" and first_failure:
+            first_failure = False
+            raise OSError("Fallo de auditoría provocado")
+        return original_log(session_id, request_id, event, **fields)
+
+    monkeypatch.setattr(service, "log", fail_one_log)
+    assert client.post("/run", json=received).status_code == 500
+    provided = question(identifier, question="¿Qué hiciste cuando un compañero necesitó tu ayuda?")
+    assert client.post("/run", json=provided).json()["status"] == "completed"
+    assert client.post("/run", json=received).json()["status"] == "completed"
+    assert len(model.requests) == 2
+    assert "Un compañero no pudo iniciar el proyecto con su guía." not in model.requests[0][0]["content"]
+    events = client.get("/logs", params={"session_id": identifier}).json()["events"]
+    finished = {e["run_id"]: e["behavioral_selection"] for e in events if e["event"] == "run_finished"}
+    assert finished[received["request_id"]]["selected"] == [{"direction": "received", "situation_id": "S1"}]
+    assert finished[provided["request_id"]]["selected"] == [{"direction": "provided", "situation_id": "S4"}]
+    assert all(e["candidate_id"] == "cand-001" and "quote" not in json.dumps(e) for e in finished.values())

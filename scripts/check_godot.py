@@ -89,11 +89,14 @@ def main(argv=None):
     parser.add_argument("--live", action="store_true", help="Usar el modelo local de Ollama en vez de modelos simulados")
     parser.add_argument("--model", default="gemma4:e4b")
     parser.add_argument("--candidate", choices=tuple(CANDIDATES), default="cand-001")
+    parser.add_argument("--question", default="¿Has utilizado Git?", help="Pregunta del recorrido normal; útil para comprobar regresiones desde la interfaz")
     parser.add_argument("--no-evaluation", action="store_true", help="En modo real, comprobar solo la conversación")
     parser.add_argument("--screenshot", action="store_true", help="Renderizar y capturar la interfaz (requiere escritorio)")
     parser.add_argument("--scenario", choices=("smoke", "ollama_unavailable", "timeout", "evaluation_unavailable", "limit"),
                         default="smoke", help="Provocar fallos o comprobar veinte turnos con modelos simulados")
     args = parser.parse_args(argv)
+    if not args.question.strip() or len(args.question) > 4000:
+        parser.error("La pregunta debe contener entre 1 y 4000 caracteres.")
     if args.live and args.scenario != "smoke":
         parser.error("Los escenarios provocados son aislados y utilizan modelos simulados.")
     if args.no_evaluation and not args.live:
@@ -156,7 +159,7 @@ def main(argv=None):
         display = ["--rendering-method", "gl_compatibility", "--windowed", "--resolution", "1280x820"] if args.screenshot else ["--headless"]
         script = "res://tests/Smoke.gd" if args.scenario == "smoke" else "res://tests/Verification.gd"
         command = [executable, *display, "--path", str(PROJECT), "--script", script,
-                   "--", f"--report={report_path.as_posix()}", f"--candidate={args.candidate}", f"--scenario={args.scenario}"]
+                   "--", f"--report={report_path.as_posix()}", f"--candidate={args.candidate}", f"--scenario={args.scenario}", f"--question={args.question}"]
         if args.live:
             command.append("--live")
         if args.screenshot:
@@ -210,7 +213,8 @@ def main(argv=None):
     if not args.live:
         report["http_requests"] = requests
     report.update(session_saved=True, model=args.model if args.live else "simulated",
-                  godot=executable, scenario=args.scenario, session_file=str(saved), elapsed_seconds=round(monotonic() - started, 2))
+                  godot=executable, scenario=args.scenario, question=args.question if args.scenario == "smoke" else None,
+                  session_file=str(saved), elapsed_seconds=round(monotonic() - started, 2))
     report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"Godot: recorrido completo, sesión guardada. Evidencia: {report_path}")
     return 0

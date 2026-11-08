@@ -73,6 +73,7 @@ class RunRecord:
     signature: str
     result: dict
     logged: bool = False
+    behavioral_selection: dict | None = None
 
 
 class InterviewService:
@@ -205,7 +206,7 @@ class InterviewService:
                 sources=session.grounded.sources,
                 evaluation=None if status == "error" else runtime.last_evaluation, error_code=error_code,
             ).model_dump(mode="json")
-            record = RunRecord(signature, result)
+            record = RunRecord(signature, result, behavioral_selection=runtime.last_behavioral_selection)
             session.requests[identifier] = record
             return self.publish(session, identifier, record)
 
@@ -214,6 +215,7 @@ class InterviewService:
         if not record.logged:
             self.log(session.runtime.session_id, identifier, "run_finished", status=result["status"],
                      questions_asked=result["questions_asked"], error_code=result["error_code"],
+                     behavioral_selection=record.behavioral_selection,
                      documents=[{key: source[key] for key in ("document_id", "source", "sha256")}
                                 for source in result["sources"]])
             record.logged = True

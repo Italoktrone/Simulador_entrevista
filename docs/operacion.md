@@ -59,6 +59,10 @@ Con `use_rag=true`, la API recupera hasta tres pasajes y los incorpora al contex
 
 Las citas públicas solo admiten `document_id` recuperados; una ruta interna o un ID inventado rechaza la respuesta. Se conserva su texto original en el intento marcado con error, sin mostrarlo como respuesta válida. Esta validación verifica referencias, no la fidelidad factual de la prosa. Las preguntas conocidas y el ensayo con continuidad de los tres NPC se repiten con `scripts.check_npc_isolation`; sus resultados requieren cotejo con los perfiles.
 
+Para preguntas explícitas sobre apoyo recibido o prestado, `harness/behavioral_evidence.py` selecciona un episodio por dirección a partir de acciones del perfil de esa sesión. Distingue consultas, peticiones y acciones conjuntas; conserva citas exactas que permiten revisar la procedencia. El modelo recibe una vista con esos episodios y sus referencias relacionadas. Los archivos originales y el CV público permanecen completos. Las repreguntas breves pueden heredar la intención de las preguntas previas del usuario; las respuestas anteriores no añaden hechos. Las hipótesis y preguntas ajenas a esos patrones conservan el contexto habitual.
+
+`run_finished.behavioral_selection` registra versión, candidato, dirección solicitada, episodio y ausencia de evidencia. No copia los relatos privados al JSONL. La selección queda vinculada al UUID del turno, incluso al recuperar un resultado cacheado después de otros turnos. Es un rastro de los hechos suministrados al modelo, no una aprobación automática de la prosa. `scripts.check_npc_isolation --suite support` y las pruebas de la API comprueban esa correspondencia.
+
 La suite `data/reference_questions/rag_basica.json` verifica recuperación y ausencia de resultados para consultas desconocidas. Las pruebas HTTP comprueban que los pasajes llegan al candidato, se conserva el historial, los errores quedan controlados y los reintentos no duplican generaciones. Las llamadas a modelos son simuladas.
 
 ### Contratos y evidencia de entrega
