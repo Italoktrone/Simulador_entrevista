@@ -14,6 +14,10 @@ class JsonLoadError(ValueError):
         super().__init__(f"No se pudo cargar '{path}': {detail}")
 
 
+class JsonTextError(ValueError):
+    """Texto JSON inválido sin copiar contenido no confiable al error."""
+
+
 def _unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
     """Evita que una clave repetida sobrescriba silenciosamente su valor."""
     result = {}
@@ -33,6 +37,24 @@ def _finite_float(value: str) -> float:
     if not math.isfinite(number):
         raise ValueError("Un número decimal supera el rango finito admitido.")
     return number
+
+
+def parse_json_text(text: str) -> Any:
+    """Interpretar una salida JSON completa y estricta, sin leer archivos.
+
+    Reutiliza las reglas del cargador local. No elimina Markdown, no extrae
+    objetos entre prosa y no corrige claves repetidas o valores no finitos.
+    """
+    try:
+        if not isinstance(text, str):
+            raise ValueError
+        text.encode("utf-8")
+        data = json.loads(text, object_pairs_hook=_unique_object,
+                          parse_constant=_reject_constant, parse_float=_finite_float)
+        json.dumps(data, ensure_ascii=False, allow_nan=False).encode("utf-8")
+        return data
+    except (TypeError, ValueError, RecursionError, UnicodeError):
+        raise JsonTextError("La salida no contiene un documento JSON UTF-8 estricto.") from None
 
 
 def load_json(path: str | Path) -> Any:

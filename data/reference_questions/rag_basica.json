@@ -1,0 +1,12 @@
+{
+  "suite_version": "1.0.0",
+  "kind": "retrieval_only",
+  "cases": [
+    {"id": "D01", "query": "MesaFaro", "expected_document": "resume.projects"},
+    {"id": "D02", "query": "Inventario Aula", "expected_document": "resume.projects"},
+    {"id": "D03", "query": "responsabilidades", "expected_document": "job.responsibilities"},
+    {"id": "D04", "query": "competencias", "expected_document": "job.competencies_to_explore"},
+    {"id": "D05", "query": "zzzinexistenteqqq", "expected_document": null},
+    {"id": "D06", "query": "la y de el", "expected_document": null}
+  ]
+}

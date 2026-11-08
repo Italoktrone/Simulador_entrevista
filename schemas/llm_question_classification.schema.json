@@ -1,0 +1,367 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Respuesta del clasificador LLM con citas literales",
+  "description": "Contrato LLM 1.3.0. Python deriva el global de una sola unidad y valida el resultado público 1.0.0.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "intervention_id",
+    "original_text",
+    "evaluability",
+    "non_evaluable_reason",
+    "units",
+    "classification",
+    "context_turn_ids",
+    "rationale"
+  ],
+  "properties": {
+    "contract_version": {
+      "const": "1.3.0"
+    },
+    "intervention_id": {
+      "$ref": "#/$defs/identifier"
+    },
+    "original_text": {
+      "type": "string"
+    },
+    "evaluability": {
+      "enum": [
+        "evaluable",
+        "no_evaluable"
+      ]
+    },
+    "non_evaluable_reason": {
+      "enum": [
+        "vacia",
+        "saludo",
+        "agradecimiento",
+        "acuse",
+        "transicion",
+        "instruccion_sistema",
+        "fuera_entrevista",
+        null
+      ]
+    },
+    "units": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/unit"
+      }
+    },
+    "classification": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/single_global"
+        },
+        {
+          "$ref": "#/$defs/classification"
+        }
+      ]
+    },
+    "context_turn_ids": {
+      "$ref": "#/$defs/turn_ids"
+    },
+    "rationale": {
+      "$ref": "#/$defs/rationale"
+    }
+  },
+  "$defs": {
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "identifier": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]*$"
+    },
+    "rationale": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 600,
+      "pattern": "\\S"
+    },
+    "optional_reason": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/rationale"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "approach": {
+      "enum": [
+        "conductual",
+        "situacional",
+        "factual_tecnico",
+        "otro",
+        "indeterminado"
+      ]
+    },
+    "known_approach": {
+      "enum": [
+        "conductual",
+        "situacional",
+        "factual_tecnico",
+        "otro"
+      ]
+    },
+    "form": {
+      "enum": [
+        "abierta",
+        "cerrada",
+        "opcion_multiple",
+        "indeterminada"
+      ]
+    },
+    "turn_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "integer",
+        "minimum": 1
+      }
+    },
+    "rule_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/identifier"
+      }
+    },
+    "classification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "main_approach",
+        "main_approach_reason",
+        "main_form",
+        "main_form_reason",
+        "rationale"
+      ],
+      "properties": {
+        "main_approach": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/approach"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "main_approach_reason": {
+          "$ref": "#/$defs/optional_reason",
+          "description": "Solo justificar prioridad entre varias etiquetas; con una etiqueta o sin principal debe ser null. La explicación general va en rationale."
+        },
+        "main_form": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/form"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "main_form_reason": {
+          "$ref": "#/$defs/optional_reason",
+          "description": "Solo justificar prioridad entre varias etiquetas; con una etiqueta o sin principal debe ser null. La explicación general va en rationale."
+        },
+        "rationale": {
+          "$ref": "#/$defs/rationale"
+        }
+      }
+    },
+    "unit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "unit_id",
+        "quote",
+        "classification",
+        "context_status",
+        "followup_of",
+        "depends_on"
+      ],
+      "properties": {
+        "unit_id": {
+          "type": "string",
+          "pattern": "^u[1-9][0-9]*$"
+        },
+        "quote": {
+          "$ref": "#/$defs/text",
+          "description": "Copia literal y contigua del texto original, sin reformular, corregir o calcular índices."
+        },
+        "classification": {
+          "$ref": "#/$defs/unit_classification"
+        },
+        "context_status": {
+          "enum": [
+            "no_necesario",
+            "suficiente",
+            "insuficiente"
+          ]
+        },
+        "followup_of": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "depends_on": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^u[1-9][0-9]*$"
+        }
+      }
+    },
+    "unit_classification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "approaches",
+        "main_approach",
+        "main_approach_reason",
+        "forms",
+        "main_form",
+        "main_form_reason",
+        "attributes",
+        "certainty",
+        "rationale"
+      ],
+      "properties": {
+        "approaches": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/approach"
+          },
+          "maxItems": 5
+        },
+        "main_approach": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/approach"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "main_approach_reason": {
+          "$ref": "#/$defs/optional_reason",
+          "description": "Solo justificar prioridad entre varias etiquetas; con una etiqueta o sin principal debe ser null. La explicación general va en rationale."
+        },
+        "forms": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/form"
+          },
+          "maxItems": 1
+        },
+        "main_form": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/form"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "main_form_reason": {
+          "type": "null"
+        },
+        "attributes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "directiva",
+              "sugestiva"
+            ]
+          },
+          "maxItems": 2
+        },
+        "certainty": {
+          "enum": [
+            "clara",
+            "ambigua",
+            "indeterminada"
+          ]
+        },
+        "rationale": {
+          "$ref": "#/$defs/rationale"
+        }
+      }
+    },
+    "single_global": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {}
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "evaluability": {
+          "const": "no_evaluable"
+        },
+        "classification": {
+          "type": "null"
+        },
+        "units": {
+          "maxItems": 0
+        }
+      }
+    },
+    {
+      "properties": {
+        "evaluability": {
+          "const": "evaluable"
+        },
+        "non_evaluable_reason": {
+          "type": "null"
+        },
+        "classification": {
+          "$ref": "#/$defs/single_global"
+        },
+        "units": {
+          "minItems": 1,
+          "maxItems": 1
+        }
+      }
+    },
+    {
+      "properties": {
+        "evaluability": {
+          "const": "evaluable"
+        },
+        "non_evaluable_reason": {
+          "type": "null"
+        },
+        "classification": {
+          "$ref": "#/$defs/classification"
+        },
+        "units": {
+          "minItems": 2
+        }
+      }
+    }
+  ]
+}

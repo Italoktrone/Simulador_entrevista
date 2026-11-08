@@ -1,0 +1,16 @@
+{
+  "few_shot_version": "1.0.0",
+  "rubric_version": "1.1.0",
+  "reference_sha256": "46733f48859b3348a0b5e0061997f63fe73d98ea58099716f5f426077e3844aa",
+  "demonstrations_sha256": "7ceb57bedcf814df7d9a64c008b5bd77fb68e591558e2080f9a8bb951c5709c5",
+  "job_sha256": "40c16aeeb4d41be7fc0eff3d8237178c883cad294e9d04f96c4d4f9b81455f77",
+  "case_ids": [
+    "E03",
+    "E05",
+    "E07",
+    "E08",
+    "E12",
+    "E15"
+  ],
+  "rubric_definition_sha256": "dad5c4e1e5f32c9c56eb4f2dd6149f0bb71b84a2b00bb6335115c3d027748f06"
+}

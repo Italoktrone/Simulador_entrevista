@@ -6,3 +6,11 @@ httpx==0.28.1
 
 # Pruebas automatizadas del proyecto.
 pytest==9.2.0
+
+# API HTTP para Godot y contratos públicos.
+fastapi==0.162.1
+uvicorn==0.54.0
+PyYAML==6.0.3
+# Fijar el generador de schemas y la capa ASGI probados con esta API.
+pydantic==2.14.3
+starlette==1.10.0

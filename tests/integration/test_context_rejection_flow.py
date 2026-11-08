@@ -57,5 +57,6 @@ def test_rejection_does_not_remove_prior_context_or_pollute_next_request_and_is_
     assert failed["response"] is None and failed["issues"][0]["code"] == "context_limit"
     assert record["source_integrity"] == "unchanged" and record["close_reason"] == "user_exit"
     assert "Preguntas enviadas: 3/20" in text and "Respuestas completas: 2" in text
-    assert "falta de espacio de contexto" in text and "DETALLE_RESERVADO" not in text + json.dumps(record)
+    assert "falta de espacio de contexto" in " ".join(text.split())
+    assert "DETALLE_RESERVADO" not in text + json.dumps(record)
     assert requests[0]["messages"][0] == requests[2]["messages"][0]

@@ -1,5 +1,34 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Entrada de un turno de entrevista",
-  "$comment": "Marcador estructural pendiente. No define propiedades ni restricciones; no utilizar como validación implementada."
+  "additionalProperties": false,
+  "properties": {
+    "session_id": {
+      "format": "uuid",
+      "title": "Session Id",
+      "type": "string"
+    },
+    "request_id": {
+      "format": "uuid",
+      "title": "Request Id",
+      "type": "string"
+    },
+    "question": {
+      "maxLength": 4000,
+      "minLength": 1,
+      "pattern": "\\S",
+      "title": "Question",
+      "type": "string"
+    },
+    "use_rag": {
+      "default": true,
+      "title": "Use Rag",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "session_id",
+    "request_id",
+    "question"
+  ],
+  "title": "RunInput",
+  "type": "object"
 }

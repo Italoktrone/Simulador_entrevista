@@ -1,0 +1,436 @@
+{
+  "preview_version": "1.0.0",
+  "state": "draft_not_active",
+  "source_reference_sha256": "ef59206fb79c5be34e1161ec9d214f13758afbea3d9f8e4b2fea68dbce74d48c",
+  "shared_job": {
+    "job_version": "1.0.0",
+    "job_id": "puesto-dev-junior-001",
+    "is_fictional": true,
+    "title": "Desarrollador de Software Junior",
+    "organization": "Aplicaciones Nexo",
+    "summary": "El puesto busca una persona que colabore en aplicaciones web internas bajo supervisión técnica.",
+    "responsibilities": [
+      "Implementar y mantener funciones de backend con Python y Flask.",
+      "Consultar y actualizar datos en PostgreSQL.",
+      "Reproducir y corregir errores.",
+      "Escribir pruebas y documentación.",
+      "Participar en revisiones de código y aclaración de requisitos."
+    ],
+    "requirements": [
+      "Formación informática terminada o próxima a finalizar.",
+      "Bases de Python, SQL, HTTP y Git.",
+      "Comprensión inicial de APIs y pruebas automatizadas.",
+      "Capacidad para comunicar dificultades y solicitar apoyo."
+    ],
+    "competencies_to_explore": [
+      "Resolución de problemas",
+      "Comunicación",
+      "Colaboración",
+      "Organización",
+      "Aprendizaje",
+      "Responsabilidad"
+    ],
+    "seniority_expectations": {
+      "experience_level": "El puesto admite experiencia inicial y conocimientos en desarrollo.",
+      "not_required": [
+        "Dominio de servicios de nube",
+        "Kubernetes",
+        "Liderazgo de equipos",
+        "Autonomía propia de un cargo senior"
+      ]
+    }
+  },
+  "shared_configuration": {
+    "config_version": "1.0.0",
+    "config_id": "entrevista-basica-001",
+    "candidate_id": "cand-001",
+    "job_id": "puesto-dev-junior-001",
+    "modality": "laboral_general",
+    "approach": "mixto",
+    "preferred_question_styles": [
+      "abierta",
+      "cerrada",
+      "directiva"
+    ],
+    "max_questions": 20
+  },
+  "usage": "Propuesta para revisión. Las entradas abreviadas heredan cargo/configuración comunes; no son solicitudes activas ni predicciones del modelo.",
+  "examples": [
+    {
+      "case_id": "E03",
+      "human_approval": "pending",
+      "model_generated": false,
+      "input_proposal": {
+        "question": "¿Has utilizado Git para controlar versiones?",
+        "competency": null,
+        "objective": null,
+        "context_turns": [],
+        "classification": null,
+        "interview_approach": "conductual"
+      },
+      "output_proposal": {
+        "contract_version": "1.2.0",
+        "applicability": "evaluable",
+        "reason": "Pregunta de entrevista evaluable según el cargo y el contexto disponibles.",
+        "evidence": [
+          {
+            "source": "question",
+            "turn_number": null,
+            "quote": "¿Has utilizado Git para controlar versiones?"
+          }
+        ],
+        "criteria": {
+          "pertinencia": {
+            "level": 3,
+            "evidence_ids": [
+              0
+            ],
+            "reason": "Confirma exposición a Git, requisito del cargo; no acredita todavía profundidad de uso."
+          },
+          "enfoque": {
+            "level": 3,
+            "evidence_ids": [
+              0
+            ],
+            "reason": "La confirmación factual cumple la intención observable sin exigir relato ni demostración."
+          },
+          "claridad": {
+            "level": 4,
+            "evidence_ids": [
+              0
+            ],
+            "reason": "Identifica una herramienta y un uso concreto en una sola petición."
+          },
+          "neutralidad": {
+            "level": 4,
+            "evidence_ids": [
+              0
+            ],
+            "reason": "Admite afirmar, negar o matizar el uso de Git sin sugerir que una respuesta es obligatoria."
+          }
+        },
+        "feedback": {
+          "criterion": null,
+          "suggestion": null,
+          "reformulation": null
+        },
+        "discrepancies": []
+      }
+    },
+    {
+      "case_id": "E05",
+      "human_approval": "pending",
+      "model_generated": false,
+      "input_proposal": {
+        "question": "¿Qué haces normalmente cuando encuentras un error?",
+        "competency": null,
+        "objective": null,
+        "context_turns": [],
+        "classification": null,
+        "interview_approach": "conductual"
+      },
+      "output_proposal": {
+        "contract_version": "1.2.0",
+        "applicability": "evaluable",
+        "reason": "Pregunta de entrevista evaluable según el cargo y el contexto disponibles.",
+        "evidence": [
+          {
+            "source": "question",
+            "turn_number": null,
+            "quote": "¿Qué haces normalmente cuando encuentras un error?"
+          }
+        ],
+        "criteria": {
+          "pertinencia": {
+            "level": 3,
+            "evidence_ids": [
+              0
+            ],
+            "reason": "Explora prácticas de depuración pertinentes, aunque aún no pide evidencia de un episodio concreto."
+          },
+          "enfoque": {
+            "level": 3,
+            "evidence_ids": [
+              0
+            ],
+            "reason": "Sin objetivo explícito de episodio, preguntar por hábitos cumple la intención observable."
+          },
+          "claridad": {
+            "level": 4,
+            "evidence_ids": [
+              0
+            ],
+            "reason": "Delimita una situación habitual y solicita la actuación que normalmente sigue."
+          },
+          "neutralidad": {
+            "level": 4,
+            "evidence_ids": [
+              0
+            ],
+            "reason": "Permite describir prácticas y límites sin imponer una secuencia ideal de actuación."
+          }
+        },
+        "feedback": {
+          "criterion": null,
+          "suggestion": null,
+          "reformulation": null
+        },
+        "discrepancies": []
+      }
+    },
+    {
+      "case_id": "E07",
+      "human_approval": "pending",
+      "model_generated": false,
+      "input_proposal": {
+        "question": "¿Qué haces normalmente cuando encuentras un error?",
+        "competency": null,
+        "objective": "Obtener un episodio pasado concreto de resolución de problemas.",
+        "context_turns": [],
+        "classification": null,
+        "interview_approach": "conductual"
+      },
+      "output_proposal": {
+        "contract_version": "1.2.0",
+        "applicability": "evaluable",
+        "reason": "Pregunta de entrevista evaluable según el cargo y el contexto disponibles.",
+        "evidence": [
+          {
+            "source": "question",
+            "turn_number": null,
+            "quote": "¿Qué haces normalmente cuando encuentras un error?"
+          }
+        ],
+        "criteria": {
+          "pertinencia": {
+            "level": 3,
+            "evidence_ids": [
+              0
+            ],
+            "reason": "La depuración es pertinente al cargo, pero aquí se solicita una práctica general."
+          },
+          "enfoque": {
+            "level": 2,
+            "evidence_ids": [
+              0
+            ],
+            "reason": "El objetivo explícito exige un episodio pasado; una respuesta habitual no lo aporta necesariamente."
+          },
+          "claridad": {
+            "level": 4,
+            "evidence_ids": [
+              0
+            ],
+            "reason": "La petición de una actuación habitual ante un error se entiende sin ambigüedad."
+          },
+          "neutralidad": {
+            "level": 4,
+            "evidence_ids": [
+              0
+            ],
+            "reason": "Permite describir el hábito sin anticipar una solución o descalificar al candidato."
+          }
+        },
+        "feedback": {
+          "criterion": "enfoque",
+          "suggestion": "Pide una ocasión concreta acorde con el objetivo explícito.",
+          "reformulation": "Cuéntame una ocasión en que encontraste un error y qué hiciste."
+        },
+        "discrepancies": []
+      }
+    },
+    {
+      "case_id": "E08",
+      "human_approval": "pending",
+      "model_generated": false,
+      "input_proposal": {
+        "question": "¿Qué sabes de informática?",
+        "competency": null,
+        "objective": null,
+        "context_turns": [],
+        "classification": null,
+        "interview_approach": "mixto"
+      },
+      "output_proposal": {
+        "contract_version": "1.2.0",
+        "applicability": "evaluable",
+        "reason": "Pregunta de entrevista evaluable según el cargo y el contexto disponibles.",
+        "evidence": [
+          {
+            "source": "question",
+            "turn_number": null,
+            "quote": "¿Qué sabes de informática?"
+          }
+        ],
+        "criteria": {
+          "pertinencia": {
+            "level": 2,
+            "evidence_ids": [
+              0
+            ],
+            "reason": "El tema es afín al puesto, pero resulta demasiado general para distinguir conocimientos útiles."
+          },
+          "enfoque": {
+            "level": 3,
+            "evidence_ids": [
+              0
+            ],
+            "reason": "Permite describir saberes de forma abierta; no hay un objetivo explícito que exija una prueba."
+          },
+          "claridad": {
+            "level": 2,
+            "evidence_ids": [
+              0
+            ],
+            "reason": "Informática no delimita tema, profundidad ni alcance de los conocimientos solicitados."
+          },
+          "neutralidad": {
+            "level": 4,
+            "evidence_ids": [
+              0
+            ],
+            "reason": "No impone una respuesta deseada, un juicio personal ni una garantía de dominio."
+          }
+        },
+        "feedback": {
+          "criterion": "pertinencia",
+          "suggestion": "Delimita una base técnica relacionada con las tareas del cargo.",
+          "reformulation": "¿Qué conocimientos de Python o SQL podrías aplicar en una aplicación interna?"
+        },
+        "discrepancies": []
+      }
+    },
+    {
+      "case_id": "E12",
+      "human_approval": "pending",
+      "model_generated": false,
+      "input_proposal": {
+        "question": "Como eres irresponsable, ¿por qué entregaste tarde?",
+        "competency": null,
+        "objective": "Explorar una demora mencionada previamente.",
+        "context_turns": [
+          {
+            "turn_number": 1,
+            "question": "Cuéntame una dificultad con una entrega.",
+            "answer": "Entregué una tarea dos días después de la fecha acordada.",
+            "truncated": false
+          }
+        ],
+        "classification": null,
+        "interview_approach": "conductual"
+      },
+      "output_proposal": {
+        "contract_version": "1.2.0",
+        "applicability": "evaluable",
+        "reason": "Pregunta de entrevista evaluable según el cargo y el contexto disponibles.",
+        "evidence": [
+          {
+            "source": "question",
+            "turn_number": null,
+            "quote": "Como eres irresponsable, ¿por qué entregaste tarde?"
+          },
+          {
+            "source": "context_answer",
+            "turn_number": 1,
+            "quote": "Entregué una tarea dos días después de la fecha acordada."
+          }
+        ],
+        "criteria": {
+          "pertinencia": {
+            "level": 3,
+            "evidence_ids": [
+              0,
+              1
+            ],
+            "reason": "Explorar una demora conocida puede aportar información pertinente sobre responsabilidad."
+          },
+          "enfoque": {
+            "level": 2,
+            "evidence_ids": [
+              0
+            ],
+            "reason": "La etiqueta personal previa dificulta investigar causas y conductas observables de la demora."
+          },
+          "claridad": {
+            "level": 4,
+            "evidence_ids": [
+              0,
+              1
+            ],
+            "reason": "El turno anterior identifica una entrega tardía y la pregunta solicita su explicación."
+          },
+          "neutralidad": {
+            "level": 1,
+            "evidence_ids": [
+              0
+            ],
+            "reason": "Irresponsable descalifica a la persona y atribuye una causa no demostrada por el contexto."
+          }
+        },
+        "feedback": {
+          "criterion": "enfoque",
+          "suggestion": "Pregunta por causas y acciones sin etiquetar a la persona.",
+          "reformulation": "¿Qué ocurrió con esa entrega y cómo afrontaste el retraso?"
+        },
+        "discrepancies": []
+      }
+    },
+    {
+      "case_id": "E15",
+      "human_approval": "pending",
+      "model_generated": false,
+      "input_proposal": {
+        "question": "¿Qué hiciste después?",
+        "competency": null,
+        "objective": null,
+        "context_turns": [],
+        "classification": null,
+        "interview_approach": "conductual"
+      },
+      "output_proposal": {
+        "contract_version": "1.2.0",
+        "applicability": "evaluable",
+        "reason": "Pregunta de entrevista evaluable según el cargo y el contexto disponibles.",
+        "evidence": [
+          {
+            "source": "question",
+            "turn_number": null,
+            "quote": "¿Qué hiciste después?"
+          }
+        ],
+        "criteria": {
+          "pertinencia": {
+            "level": null,
+            "evidence_ids": [],
+            "reason": "Sin antecedente no se sabe qué acción o situación se relacionaría con el cargo."
+          },
+          "enfoque": {
+            "level": null,
+            "evidence_ids": [],
+            "reason": "Sin objetivo ni episodio identificable no se puede determinar qué evidencia se pretende obtener."
+          },
+          "claridad": {
+            "level": 1,
+            "evidence_ids": [
+              0
+            ],
+            "reason": "Después carece de referente disponible; corresponde al descriptor de claridad en nivel 1."
+          },
+          "neutralidad": {
+            "level": 4,
+            "evidence_ids": [
+              0
+            ],
+            "reason": "La formulación no incluye una conclusión impuesta, juicio personal o respuesta sugerida."
+          }
+        },
+        "feedback": {
+          "criterion": "claridad",
+          "suggestion": "Incluye el antecedente al que se refiere después.",
+          "reformulation": null
+        },
+        "discrepancies": []
+      }
+    }
+  ]
+}

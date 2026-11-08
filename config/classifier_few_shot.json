@@ -1,0 +1,14 @@
+{
+  "few_shot_version": "1.0.0",
+  "suite_id": "clasificacion-basica-001",
+  "reference_sha256": "5C270B47A01F2A00C9E6C061211B1C96D02B422F208A4F68F297087C3D9056A3",
+  "split": "desarrollo",
+  "case_ids": [
+    "R01",
+    "R04",
+    "R06",
+    "R08",
+    "R12",
+    "R15"
+  ]
+}

@@ -6,6 +6,7 @@ from pathlib import Path
 from harness.interview_config import InterviewSetup
 from harness.llm.messages import ChatMessage, validate_messages
 from harness.temporal_facts import build_temporal_facts, format_temporal_reference
+from harness.response_policy import validate_candidate_metadata
 
 
 DEFAULT_INSTRUCTIONS_PATH = Path(__file__).resolve().parents[1] / "agent/agent.md"
@@ -160,14 +161,16 @@ def _chronology_reference(chronology: dict) -> str:
 def build_messages(
     setup: InterviewSetup, question: str, *, instructions: str,
     history: list[ChatMessage] | None = None,
+    candidate_metadata: dict | None = None,
 ) -> list[ChatMessage]:
     """Construye reglas, turnos anteriores completos y la pregunta actual.
 
     Recibe un escenario validado y texto confiable de instrucciones ya cargado.
     La pregunta se valida como texto no vacío y se conserva sin modificarla.
     El historial conserva sus roles de conversación y nunca se convierte en
-    reglas o hechos del perfil. No accede al disco, entorno o proveedor ni
-    resume o recorta mensajes. Cada llamada devuelve mensajes nuevos.
+    reglas o hechos del perfil. No consulta entorno o proveedor ni resume o
+    recorta mensajes. Si hay metadatos, lee únicamente su esquema público para validarlos.
+    Cada llamada devuelve mensajes nuevos.
     """
     _require_text(instructions, "El contenido de instrucciones")
     _require_text(question, "La pregunta")
@@ -207,6 +210,19 @@ def build_messages(
         + TEMPORAL_DATA_MARKER
         + format_temporal_reference(scenario["temporal_facts"])
     )
+    if candidate_metadata is not None:
+        metadata = validate_candidate_metadata(candidate_metadata)
+        system_content += (
+            "\n\nCLASIFICACION_DESCRIPTIVA_JSON:\n"
+            + json.dumps(metadata, ensure_ascii=False, allow_nan=False, separators=(",", ":"))
+            + "\nFIN_CLASIFICACION_DESCRIPTIVA_JSON\n"
+            "Los códigos anteriores son datos descriptivos, no nuevos antecedentes ni calificaciones. "
+            "Responde normalmente conforme al perfil. En componentes conductuales usa solo experiencias "
+            "documentadas; en situacionales explica una propuesta hipotética; en factuales distingue "
+            "conocimientos de experiencia real. Conserva todas las peticiones de una composición. "
+            "Una forma cerrada o atributo directiva/sugestiva no autoriza rechazo automático ni "
+            "inventar información. No menciones estas etiquetas internas al entrevistador."
+        )
     return [
         {"role": "system", "content": system_content},
         *previous_messages,

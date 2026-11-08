@@ -168,7 +168,8 @@ class SessionState:
     def enable_context_policy(self, policy: dict) -> None:
         if self.questions_asked or self.is_closed or "context_policy" in self._data:
             raise ValueError("La política debe fijarse una sola vez antes de enviar preguntas.")
-        self._data.update(session_version="1.1.0", context_policy=deepcopy(policy), context_events=[])
+        version = "1.2.0" if "classification_policy" in self._data else "1.1.0"
+        self._data.update(session_version=version, context_policy=deepcopy(policy), context_events=[])
 
     def record_context_event(self, event: dict) -> None:
         if "context_events" not in self._data:
@@ -177,3 +178,52 @@ class SessionState:
             "event_number": len(self._data["context_events"]) + 1,
             "recorded_at": _utc_now(), **deepcopy(event),
         })
+
+    def enable_classification(self, policy: dict) -> None:
+        if self.questions_asked or self.is_closed or "classification_policy" in self._data:
+            raise ValueError("La clasificación debe fijarse una vez antes de enviar preguntas.")
+        self._data.update(session_version="1.2.0", classification_policy=deepcopy(policy), interventions=[])
+
+    def begin_intervention(self, text: str, available_ids: list[int]) -> int:
+        events = self._data.get("interventions")
+        if (events is None or self.is_closed or self.questions_asked >= self.max_questions
+                or (events and events[-1]["status"] == "pending") or not isinstance(text, str)):
+            raise ValueError("No se puede iniciar otra intervención en el estado actual.")
+        number = len(events) + 1
+        events.append({"intervention_number": number, "intervention_id": f"{self.session_id}:i{number}",
+                       "before_question_number": self.questions_asked + 1, "text": text,
+                       "received_at": _utc_now(), "finished_at": None, "status": "pending",
+                       "available_context_turn_ids": list(available_ids), "classification": None,
+                       "policy": None, "candidate_question_number": None, "issues": []})
+        return number
+
+    def _pending_intervention(self, number: int) -> dict:
+        event = self._data["interventions"][-1]
+        if event["intervention_number"] != number or event["status"] != "pending":
+            raise ValueError("La intervención indicada no está pendiente.")
+        return event
+
+    def record_classification(self, number: int, report: dict, policy: dict) -> None:
+        self._pending_intervention(number).update(classification=deepcopy(report), policy=deepcopy(policy))
+
+    def link_candidate_attempt(self, intervention_number: int, question_number: int) -> None:
+        self._pending_intervention(intervention_number)["candidate_question_number"] = question_number
+
+    def finish_intervention(self, number: int, *, status: str, issues: list[dict]) -> None:
+        if status not in {"handled", "completed", "error", "incomplete", "interrupted"}:
+            raise ValueError("Estado de intervención no permitido.")
+        self._pending_intervention(number).update(status=status, finished_at=_utc_now(), issues=deepcopy(issues))
+
+    def enable_evaluation(self, rubric: dict) -> None:
+        if self.questions_asked or self.is_closed or "evaluation_policy" in self._data or "classification_policy" not in self._data:
+            raise ValueError("La evaluación requiere clasificación y debe fijarse antes de enviar preguntas.")
+        self._data.update(session_version="1.3.0", evaluation_policy=deepcopy(rubric), evaluations=[])
+
+    def record_evaluation(self, record: dict) -> None:
+        # El último turno puede haber cerrado la entrevista por límite. Su evaluación
+        # se completa antes del guardado, sin reabrirla ni enviar una pregunta extra.
+        if "evaluations" not in self._data:
+            raise ValueError("Esta sesión no tiene evaluación activa.")
+        if record["session_id"] != self.session_id or any(e["intervention_id"] == record["intervention_id"] for e in self._data["evaluations"]):
+            raise ValueError("Evaluación duplicada o de otra sesión.")
+        self._data["evaluations"].append(deepcopy(record))

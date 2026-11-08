@@ -1,2 +1,33 @@
-# Por completar: identidad y versión del agente, rutas de instrucciones,
-# contratos y capacidades. Este archivo todavía no configura un agente.
+id: simulador-entrevista
+name: Candidato virtual de entrevistas
+version: 1.0.0
+instructions_version: 1.0.11
+language: es
+instructions: agent/agent.md
+classifier_instructions: agent/classifier.md
+evaluator_instructions: agent/evaluator.md
+input_schema: agent/input.schema.json
+output_schema: agent/output.schema.json
+examples: agent/examples.json
+tools: agent/tools.yaml
+entrypoint: app.main:app
+transport: http-json
+endpoints:
+  health: GET /health
+  metadata: GET /metadata
+  start: POST /sessions
+  run: POST /run
+  session: GET /sessions/{session_id}
+  close: POST /sessions/{session_id}/close
+  logs: GET /logs?session_id={session_id}
+capabilities:
+  - entrevista-con-historial
+  - clasificacion-descriptiva
+  - evaluacion-provisional
+  - recuperacion-documental-con-fuentes
+limits:
+  max_questions: 20
+  max_question_characters: 4000
+  max_sessions_per_process: 100
+  active_sessions_survive_restart: false
+  workers: 1

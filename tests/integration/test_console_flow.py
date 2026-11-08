@@ -51,7 +51,9 @@ def test_console_entry_point_uses_real_setup_and_adapter_without_changing_source
     )
     assert questions[0] in requests[1]["messages"][0]["content"]
     assert "CURRÍCULUM RESUMIDO" in output and "COMPETENCIAS A EXPLORAR" in output
-    assert "Candidato: Respuesta simulada 1." in output and "Candidato: Respuesta simulada 2." in output
+    assert "RESPUESTA DEL CANDIDATO | PREGUNTA 01/20" in output
+    assert "RESPUESTA DEL CANDIDATO | PREGUNTA 02/20" in output
+    assert "Respuesta simulada 1." in output and "Respuesta simulada 2." in output
     assert "Archivo original del candidato intacto" in output
     assert client._http.is_closed
     assert {path: path.read_bytes() for path in sources} == original

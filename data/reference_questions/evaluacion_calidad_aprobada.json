@@ -1,0 +1,1322 @@
+{
+  "suite_version": "1.0.0",
+  "rubric_version": "1.1.0",
+  "description": "40 referencias y contextos aprobados explícitamente por el usuario. Globales recalculados con la Regla Crítica aprobada; partición conocida 30/10.",
+  "cases": [
+    {
+      "case_id": "E01",
+      "question": "¿Cómo identificaste y corregiste un error en una aplicación?",
+      "approach": "conductual",
+      "objective": null,
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "desarrollo",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": 4,
+          "enfoque": 4,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Destacado",
+        "justifications": {
+          "pertinencia": "Depurar un error propio aporta evidencia concreta sobre una responsabilidad del cargo junior.",
+          "enfoque": "Pide el procedimiento de un episodio pasado; no necesita un objetivo adicional inventado.",
+          "claridad": "Identificar y corregir son acciones relacionadas dentro de un mismo episodio comprensible.",
+          "neutralidad": "Permite describir acciones y dificultades sin atribuir culpa ni imponer una solución."
+        }
+      }
+    },
+    {
+      "case_id": "E02",
+      "question": "¿Qué harías si una prueba automática comienza a fallar después de un cambio?",
+      "approach": "situacional",
+      "objective": null,
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "desarrollo",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": 4,
+          "enfoque": 4,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Destacado",
+        "justifications": {
+          "pertinencia": "Investigar fallos tras un cambio aporta evidencia concreta sobre pruebas y depuración.",
+          "enfoque": "El escenario permite explicar una estrategia futura sin atribuir experiencia pasada.",
+          "claridad": "Delimita un desencadenante y un problema único: una prueba que falla tras un cambio.",
+          "neutralidad": "Permite proponer diagnósticos, límites y apoyo sin indicar una respuesta obligatoria."
+        }
+      }
+    },
+    {
+      "case_id": "E03",
+      "question": "¿Has utilizado Git para controlar versiones?",
+      "approach": "conductual",
+      "objective": null,
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "desarrollo",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": 3,
+          "enfoque": 3,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Logrado",
+        "justifications": {
+          "pertinencia": "Confirma exposición a Git, requisito del cargo; no acredita todavía profundidad de uso.",
+          "enfoque": "La confirmación factual cumple la intención observable sin exigir relato ni demostración.",
+          "claridad": "Identifica una herramienta y un uso concreto en una sola petición.",
+          "neutralidad": "Admite afirmar, negar o matizar el uso de Git sin sugerir que una respuesta es obligatoria."
+        }
+      }
+    },
+    {
+      "case_id": "E04",
+      "question": "¿Qué herramientas utilizaste en tu proyecto académico más reciente?",
+      "approach": "mixto",
+      "objective": "Identificar herramientas del proyecto.",
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "desarrollo",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": 3,
+          "enfoque": 3,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Logrado",
+        "justifications": {
+          "pertinencia": "Las herramientas de un proyecto académico son información útil para un cargo de entrada.",
+          "enfoque": "Solicitar una lista permite identificar herramientas, que es el objetivo declarado.",
+          "claridad": "El proyecto académico más reciente delimita la experiencia a la que se refiere.",
+          "neutralidad": "Permite nombrar las herramientas usadas sin imponer tecnologías o juzgar la experiencia."
+        }
+      }
+    },
+    {
+      "case_id": "E05",
+      "question": "¿Qué haces normalmente cuando encuentras un error?",
+      "approach": "conductual",
+      "objective": null,
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "desarrollo",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": 3,
+          "enfoque": 3,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Logrado",
+        "justifications": {
+          "pertinencia": "Explora prácticas de depuración pertinentes, aunque aún no pide evidencia de un episodio concreto.",
+          "enfoque": "Sin objetivo explícito de episodio, preguntar por hábitos cumple la intención observable.",
+          "claridad": "Delimita una situación habitual y solicita la actuación que normalmente sigue.",
+          "neutralidad": "Permite describir prácticas y límites sin imponer una secuencia ideal de actuación."
+        }
+      }
+    },
+    {
+      "case_id": "E06",
+      "question": "¿Cómo explicarías a una persona no técnica un retraso en una tarea?",
+      "approach": "situacional",
+      "objective": "Explorar comunicación de dificultades.",
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "desarrollo",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": 4,
+          "enfoque": 4,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Destacado",
+        "justifications": {
+          "pertinencia": "Comunicar retrasos a personas no técnicas es pertinente para el trabajo bajo supervisión.",
+          "enfoque": "El escenario permite explicar cómo comunicar una dificultad sin exigir experiencia previa.",
+          "claridad": "Identifica destinatario y situación para orientar una respuesta concreta.",
+          "neutralidad": "No atribuye una demora real al candidato ni prescribe una excusa o respuesta correcta."
+        }
+      }
+    },
+    {
+      "case_id": "E07",
+      "question": "¿Qué haces normalmente cuando encuentras un error?",
+      "approach": "conductual",
+      "objective": "Obtener un episodio pasado concreto de resolución de problemas.",
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "desarrollo",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": 3,
+          "enfoque": 2,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Logrado",
+        "justifications": {
+          "pertinencia": "La depuración es pertinente al cargo, pero aquí se solicita una práctica general.",
+          "enfoque": "El objetivo explícito exige un episodio pasado; una respuesta habitual no lo aporta necesariamente.",
+          "claridad": "La petición de una actuación habitual ante un error se entiende sin ambigüedad.",
+          "neutralidad": "Permite describir el hábito sin anticipar una solución o descalificar al candidato."
+        }
+      }
+    },
+    {
+      "case_id": "E08",
+      "question": "¿Qué sabes de informática?",
+      "approach": "mixto",
+      "objective": null,
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "desarrollo",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": 2,
+          "enfoque": 3,
+          "claridad": 2,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Logrado",
+        "justifications": {
+          "pertinencia": "El tema es afín al puesto, pero resulta demasiado general para distinguir conocimientos útiles.",
+          "enfoque": "Permite describir saberes de forma abierta; no hay un objetivo explícito que exija una prueba.",
+          "claridad": "Informática no delimita tema, profundidad ni alcance de los conocimientos solicitados.",
+          "neutralidad": "No impone una respuesta deseada, un juicio personal ni una garantía de dominio."
+        }
+      }
+    },
+    {
+      "case_id": "E09",
+      "question": "¿Cuál es tu color favorito?",
+      "approach": "mixto",
+      "objective": "Consultar preferencias personales.",
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "desarrollo",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": 1,
+          "enfoque": 3,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "En desarrollo",
+        "justifications": {
+          "pertinencia": "Una preferencia de color no aporta información sobre responsabilidades o requisitos del cargo.",
+          "enfoque": "La consulta directa permite conocer la preferencia personal declarada como objetivo.",
+          "claridad": "Solicita un dato único y comprensible: el color preferido.",
+          "neutralidad": "Permite cualquier preferencia sin sugerir una alternativa correcta o deseable."
+        }
+      }
+    },
+    {
+      "case_id": "E10",
+      "question": "¿Cuántos equipos internacionales de más de cien personas has dirigido?",
+      "approach": "mixto",
+      "objective": "Verificar liderazgo ejecutivo como requisito obligatorio.",
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "desarrollo",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": 1,
+          "enfoque": 3,
+          "claridad": 4,
+          "neutralidad": 3
+        },
+        "status": "evaluada",
+        "visible_level": "En desarrollo",
+        "justifications": {
+          "pertinencia": "Exigir liderazgo ejecutivo de equipos enormes contradice las expectativas del cargo junior.",
+          "enfoque": "Solicitar un conteo permite verificar la experiencia planteada como objetivo.",
+          "claridad": "Define el tipo y tamaño de los equipos y pide una cantidad.",
+          "neutralidad": "La formulación permite responder cero; la exigencia impropia del cargo se valora en pertinencia."
+        }
+      }
+    },
+    {
+      "case_id": "E11",
+      "question": "¿Verdad que siempre pruebas todo antes de entregar?",
+      "approach": "conductual",
+      "objective": "Explorar prácticas reales de pruebas.",
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "desarrollo",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": 3,
+          "enfoque": 2,
+          "claridad": 4,
+          "neutralidad": 2
+        },
+        "status": "evaluada",
+        "visible_level": "Logrado",
+        "justifications": {
+          "pertinencia": "Las prácticas de pruebas son pertinentes a las responsabilidades del puesto.",
+          "enfoque": "Busca confirmar un absoluto en vez de obtener una descripción interpretable de prácticas reales.",
+          "claridad": "Se entiende la conducta y la frecuencia absoluta por las que pregunta.",
+          "neutralidad": "Verdad que y siempre orientan a confirmar una conducta idealizada."
+        }
+      }
+    },
+    {
+      "case_id": "E12",
+      "question": "Como eres irresponsable, ¿por qué entregaste tarde?",
+      "approach": "conductual",
+      "objective": "Explorar una demora mencionada previamente.",
+      "competency": null,
+      "context_turns": [
+        {
+          "turn_number": 1,
+          "question": "Cuéntame una dificultad con una entrega.",
+          "answer": "Entregué una tarea dos días después de la fecha acordada.",
+          "truncated": false
+        }
+      ],
+      "classification": null,
+      "difficulty": "media",
+      "split": "desarrollo",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": 3,
+          "enfoque": 2,
+          "claridad": 4,
+          "neutralidad": 1
+        },
+        "status": "evaluada",
+        "visible_level": "En desarrollo",
+        "justifications": {
+          "pertinencia": "Explorar una demora conocida puede aportar información pertinente sobre responsabilidad.",
+          "enfoque": "La etiqueta personal previa dificulta investigar causas y conductas observables de la demora.",
+          "claridad": "El turno anterior identifica una entrega tardía y la pregunta solicita su explicación.",
+          "neutralidad": "Irresponsable descalifica a la persona y atribuye una causa no demostrada por el contexto."
+        }
+      }
+    },
+    {
+      "case_id": "E13",
+      "question": "¿Qué aprendiste de una estimación que resultó demasiado optimista?",
+      "approach": "conductual",
+      "objective": "Explorar aprendizaje de una estimación descrita.",
+      "competency": null,
+      "context_turns": [
+        {
+          "turn_number": 1,
+          "question": "Cuéntame una estimación que no se cumplió.",
+          "answer": "La estimé en dos días y tomó cuatro.",
+          "truncated": false
+        }
+      ],
+      "classification": null,
+      "difficulty": "alta",
+      "split": "desarrollo",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": 4,
+          "enfoque": 4,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Destacado",
+        "justifications": {
+          "pertinencia": "Aprender de una estimación fallida aporta evidencia concreta de organización y aprendizaje.",
+          "enfoque": "La repregunta obtiene aprendizaje de una experiencia específica ya relatada.",
+          "claridad": "El contexto de dos días estimados y cuatro reales identifica la estimación aludida.",
+          "neutralidad": "Demoró más de lo estimado según el contexto; no se añade culpa ni se impone una lección."
+        }
+      }
+    },
+    {
+      "case_id": "E14",
+      "question": "¿Qué hiciste después para comprobar que el problema estaba resuelto?",
+      "approach": "conductual",
+      "objective": "Explorar verificación posterior a una corrección relatada.",
+      "competency": null,
+      "context_turns": [
+        {
+          "turn_number": 1,
+          "question": "Cuéntame un error que corregiste.",
+          "answer": "Corregí una consulta que excluía solicitudes sin responsable.",
+          "truncated": false
+        }
+      ],
+      "classification": null,
+      "difficulty": "alta",
+      "split": "desarrollo",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": 4,
+          "enfoque": 4,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Destacado",
+        "justifications": {
+          "pertinencia": "Comprobar una corrección aporta evidencia concreta sobre pruebas y resolución de problemas.",
+          "enfoque": "Pide acciones de verificación posteriores a la corrección ya relatada.",
+          "claridad": "El problema y la corrección tienen antecedente explícito en el turno anterior.",
+          "neutralidad": "Permite describir la verificación y sus límites sin imponer una prueba o resultado específico."
+        }
+      }
+    },
+    {
+      "case_id": "E15",
+      "question": "¿Qué hiciste después?",
+      "approach": "conductual",
+      "objective": null,
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "alta",
+      "split": "desarrollo",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": null,
+          "enfoque": null,
+          "claridad": 1,
+          "neutralidad": 4
+        },
+        "status": "parcial",
+        "visible_level": null,
+        "justifications": {
+          "pertinencia": "Sin antecedente no se sabe qué acción o situación se relacionaría con el cargo.",
+          "enfoque": "Sin objetivo ni episodio identificable no se puede determinar qué evidencia se pretende obtener.",
+          "claridad": "Después carece de referente disponible; corresponde al descriptor de claridad en nivel 1.",
+          "neutralidad": "La formulación no incluye una conclusión impuesta, juicio personal o respuesta sugerida."
+        }
+      }
+    },
+    {
+      "case_id": "E16",
+      "question": "¿Y el resultado?",
+      "approach": "conductual",
+      "objective": "Conocer el efecto de una mejora relatada.",
+      "competency": null,
+      "context_turns": [
+        {
+          "turn_number": 1,
+          "question": "¿Qué hiciste para reducir errores?",
+          "answer": "Añadí una validación al formulario.",
+          "truncated": false
+        }
+      ],
+      "classification": null,
+      "difficulty": "alta",
+      "split": "desarrollo",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": 4,
+          "enfoque": 4,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Destacado",
+        "justifications": {
+          "pertinencia": "El efecto de una validación de formulario permite explorar un resultado técnico concreto.",
+          "enfoque": "La repregunta obtiene el resultado de la acción identificada en el contexto.",
+          "claridad": "El resultado remite a una única mejora recién relatada; la brevedad no lo vuelve ambiguo.",
+          "neutralidad": "No exige que el resultado sea positivo ni anticipa cuál debería haber sido."
+        }
+      }
+    },
+    {
+      "case_id": "E17",
+      "question": "¿Qué lenguaje usaste y qué harías si una prueba fallara?",
+      "approach": "mixto",
+      "objective": "Combinar aclaración factual y razonamiento situacional.",
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "desarrollo",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": 3,
+          "enfoque": 3,
+          "claridad": 3,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Logrado",
+        "justifications": {
+          "pertinencia": "Lenguajes y pruebas son temas pertinentes, aunque la petición reúne información general.",
+          "enfoque": "La aclaración factual y el escenario sirven al objetivo mixto declarado sin conflicto automático.",
+          "claridad": "Se entienden ambas peticiones, pero no se precisa en qué experiencia se usó el lenguaje.",
+          "neutralidad": "Permite indicar cualquier lenguaje y proponer una actuación sin respuesta impuesta."
+        }
+      }
+    },
+    {
+      "case_id": "E18",
+      "question": "Explica tu proyecto, sus tecnologías, todos sus errores, los requisitos, los plazos y qué harías en otra empresa.",
+      "approach": "mixto",
+      "objective": "Explorar un proyecto de forma ordenada.",
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "desarrollo",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": 3,
+          "enfoque": 2,
+          "claridad": 2,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Logrado",
+        "justifications": {
+          "pertinencia": "Proyecto, tecnologías, errores y requisitos son información relacionada con el puesto.",
+          "enfoque": "La acumulación y el salto a otra empresa dificultan explorar ordenadamente un proyecto.",
+          "claridad": "Todos sus errores y varias demandas sin jerarquía dejan un alcance excesivo y poco delimitado.",
+          "neutralidad": "No anticipa soluciones ni juicios sobre el candidato; la sobrecarga se valora en claridad."
+        }
+      }
+    },
+    {
+      "case_id": "E19",
+      "question": "¿Usaste Python o JavaScript en ese proyecto?",
+      "approach": "mixto",
+      "objective": "Precisar un lenguaje de un proyecto previamente identificado.",
+      "competency": null,
+      "context_turns": [
+        {
+          "turn_number": 1,
+          "question": "Cuéntame tu proyecto académico.",
+          "answer": "En Inventario Aula implementé el backend.",
+          "truncated": false
+        }
+      ],
+      "classification": null,
+      "difficulty": "alta",
+      "split": "desarrollo",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": 3,
+          "enfoque": 3,
+          "claridad": 4,
+          "neutralidad": 3
+        },
+        "status": "evaluada",
+        "visible_level": "Logrado",
+        "justifications": {
+          "pertinencia": "Precisar un lenguaje del backend del proyecto aporta información útil para el cargo.",
+          "enfoque": "La aclaración factual permite identificar la herramienta sin necesitar un episodio completo.",
+          "claridad": "Ese proyecto tiene un antecedente único disponible: Inventario Aula.",
+          "neutralidad": "No impone un juicio, aunque las dos alternativas no invitan expresamente a mencionar otra."
+        }
+      }
+    },
+    {
+      "case_id": "E20",
+      "question": "¿Qué opción elegiste y qué alternativas descartaste?",
+      "approach": "conductual",
+      "objective": "Explorar una decisión técnica relatada.",
+      "competency": null,
+      "context_turns": [
+        {
+          "turn_number": 1,
+          "question": "Cuéntame una decisión técnica.",
+          "answer": "Elegí un LEFT JOIN para incluir solicitudes sin responsable.",
+          "truncated": false
+        }
+      ],
+      "classification": null,
+      "difficulty": "alta",
+      "split": "desarrollo",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": 4,
+          "enfoque": 4,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Destacado",
+        "justifications": {
+          "pertinencia": "Contrastar una decisión de consulta SQL aporta evidencia concreta de razonamiento técnico.",
+          "enfoque": "Solicita la elección y las alternativas para explorar el proceso de decisión declarado.",
+          "claridad": "El LEFT JOIN del contexto identifica la decisión y permite interpretar la repregunta.",
+          "neutralidad": "No señala una opción correcta ni impone que el candidato deba justificar la del entrevistador."
+        }
+      }
+    },
+    {
+      "case_id": "E21",
+      "question": "Hola, buenos días.",
+      "approach": "mixto",
+      "objective": null,
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "alta",
+      "split": "desarrollo",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": null,
+          "enfoque": null,
+          "claridad": null,
+          "neutralidad": null
+        },
+        "status": "no_evaluable",
+        "visible_level": null,
+        "justifications": {
+          "pertinencia": "Un saludo no solicita información del cargo; pertinencia no se puntúa.",
+          "enfoque": "No hay una petición para obtener evidencia de entrevista; método no se puntúa.",
+          "claridad": "La claridad de un saludo no constituye desempeño de una pregunta de entrevista.",
+          "neutralidad": "No se asigna neutralidad a una intervención fuera de la rúbrica."
+        }
+      }
+    },
+    {
+      "case_id": "E22",
+      "question": "Gracias por tu respuesta.",
+      "approach": "mixto",
+      "objective": null,
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "alta",
+      "split": "desarrollo",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": null,
+          "enfoque": null,
+          "claridad": null,
+          "neutralidad": null
+        },
+        "status": "no_evaluable",
+        "visible_level": null,
+        "justifications": {
+          "pertinencia": "Un agradecimiento no solicita información sobre requisitos o responsabilidades del cargo.",
+          "enfoque": "No solicita nueva evidencia del candidato; método no se puntúa.",
+          "claridad": "No existe una nueva pregunta cuya claridad pueda evaluarse con esta rúbrica.",
+          "neutralidad": "No se convierte la cortesía en un nivel de neutralidad de una pregunta inexistente."
+        }
+      }
+    },
+    {
+      "case_id": "E23",
+      "question": "   ",
+      "approach": "mixto",
+      "objective": null,
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "alta",
+      "split": "desarrollo",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": null,
+          "enfoque": null,
+          "claridad": null,
+          "neutralidad": null
+        },
+        "status": "no_evaluable",
+        "visible_level": null,
+        "justifications": {
+          "pertinencia": "Una entrada en blanco no aporta una pregunta pertinente al puesto.",
+          "enfoque": "No contiene una petición de evidencia que permita valorar el método.",
+          "claridad": "No hay contenido de pregunta al que aplicar los descriptores de claridad.",
+          "neutralidad": "La ausencia de pregunta no recibe un nivel de neutralidad."
+        }
+      }
+    },
+    {
+      "case_id": "E24",
+      "question": "Describe cómo comprobarías una consulta SQL antes de publicarla.",
+      "approach": "situacional",
+      "objective": "Explorar comprobación de una consulta.",
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "desarrollo",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": 4,
+          "enfoque": 4,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Destacado",
+        "justifications": {
+          "pertinencia": "Verificar una consulta SQL aporta evidencia concreta de bases de datos y pruebas.",
+          "enfoque": "La petición imperativa de actuación hipotética permite explorar cómo comprobaría la consulta.",
+          "claridad": "Delimita una consulta, una acción de comprobación y el momento previo a publicarla.",
+          "neutralidad": "No impone un procedimiento único ni una conclusión sobre la capacidad del candidato."
+        }
+      }
+    },
+    {
+      "case_id": "E25",
+      "question": "¿Has usado Python?",
+      "approach": "mixto",
+      "objective": "Confirmar si ha utilizado Python antes de profundizar.",
+      "competency": null,
+      "context_turns": [],
+      "classification": {
+        "evaluability": "evaluable",
+        "technical_error": null,
+        "labels": {
+          "approaches": [
+            "factual_tecnico"
+          ],
+          "forms": [
+            "abierta"
+          ],
+          "attributes": [
+            "directiva"
+          ],
+          "certainty": "clara"
+        }
+      },
+      "difficulty": "alta",
+      "split": "desarrollo",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": 3,
+          "enfoque": 3,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Logrado",
+        "justifications": {
+          "pertinencia": "Confirma exposición a Python, útil para el cargo, sin acreditar todavía dominio técnico.",
+          "enfoque": "Preguntar si lo ha usado cumple el objetivo de confirmación previo a profundizar.",
+          "claridad": "Solicita una confirmación sobre una herramienta identificada sin ambigüedad.",
+          "neutralidad": "El texto permite responder sí o no; una etiqueta auxiliar errónea no lo vuelve inductivo."
+        }
+      }
+    },
+    {
+      "case_id": "E26",
+      "question": "Cuéntame cómo resolviste un desacuerdo en tu equipo.",
+      "approach": "conductual",
+      "objective": "Explorar colaboración mediante una experiencia.",
+      "competency": null,
+      "context_turns": [],
+      "classification": {
+        "evaluability": "evaluable",
+        "technical_error": null,
+        "labels": {
+          "approaches": [
+            "situacional"
+          ],
+          "forms": [
+            "abierta"
+          ],
+          "attributes": [
+            "directiva"
+          ],
+          "certainty": "clara"
+        }
+      },
+      "difficulty": "alta",
+      "split": "desarrollo",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": 4,
+          "enfoque": 4,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Destacado",
+        "justifications": {
+          "pertinencia": "Resolver un desacuerdo propio aporta evidencia concreta de colaboración en equipo.",
+          "enfoque": "Cómo resolviste pide experiencia pasada, aunque la clasificación auxiliar diga situacional.",
+          "claridad": "Solicita una actuación propia ante un desacuerdo identificable en el equipo.",
+          "neutralidad": "No prejuzga quién tenía razón ni prescribe que el candidato debió imponerse."
+        }
+      }
+    },
+    {
+      "case_id": "E27",
+      "question": "¿Qué harías si una entrega no cumpliera los requisitos?",
+      "approach": "situacional",
+      "objective": "Explorar actuación frente a requisitos incumplidos.",
+      "competency": null,
+      "context_turns": [],
+      "classification": {
+        "evaluability": "evaluable",
+        "technical_error": null,
+        "labels": {
+          "approaches": [
+            "situacional"
+          ],
+          "forms": [
+            "abierta"
+          ],
+          "attributes": [
+            "directiva"
+          ],
+          "certainty": "clara"
+        }
+      },
+      "difficulty": "alta",
+      "split": "desarrollo",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": 4,
+          "enfoque": 4,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Destacado",
+        "justifications": {
+          "pertinencia": "Gestionar requisitos incumplidos aporta evidencia concreta sobre el trabajo del puesto.",
+          "enfoque": "El condicional solicita una actuación hipotética acorde con el objetivo declarado.",
+          "claridad": "El escenario tiene un problema definido: una entrega que no cumple los requisitos.",
+          "neutralidad": "Permite proponer acciones sin culpar al candidato ni imponer la solución."
+        }
+      }
+    },
+    {
+      "case_id": "E28",
+      "question": "Como eres incapaz, ¿qué signo zodiacal garantiza que jamás cometerás errores?",
+      "approach": "mixto",
+      "objective": "Explorar cómo reconoce y gestiona errores.",
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "desarrollo",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": 1,
+          "enfoque": 1,
+          "claridad": 2,
+          "neutralidad": 1
+        },
+        "status": "evaluada",
+        "visible_level": "Inicial",
+        "justifications": {
+          "pertinencia": "Un signo zodiacal no aporta evidencia de desempeño para las responsabilidades del cargo.",
+          "enfoque": "Ningún signo permite demostrar una garantía universal de no cometer errores.",
+          "claridad": "Se entiende la frase, pero no define una relación interpretable entre signo, garantía y desempeño.",
+          "neutralidad": "Incapaz descalifica y jamás cometerás errores exige una garantía absoluta injustificada."
+        }
+      }
+    },
+    {
+      "case_id": "E29",
+      "question": "¿Qué periodo de tu trayectoria corresponde a esa estimación?",
+      "approach": "conductual",
+      "objective": "Aclarar la ubicación temporal de un ejemplo relatado.",
+      "competency": null,
+      "context_turns": [
+        {
+          "turn_number": 1,
+          "question": "Describe una estimación que no se cumplió.",
+          "answer": "Durante mi empleo estimé una tarea en dos días y tomó cuatro.",
+          "truncated": false
+        }
+      ],
+      "classification": null,
+      "difficulty": "alta",
+      "split": "desarrollo",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": 3,
+          "enfoque": 3,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Logrado",
+        "justifications": {
+          "pertinencia": "Ubicar una experiencia en la trayectoria aporta información temporal útil al entrevistador.",
+          "enfoque": "La aclaración factual obtiene el periodo buscado sin exigir un relato adicional.",
+          "claridad": "Esa estimación tiene un antecedente concreto de dos días previstos y cuatro reales.",
+          "neutralidad": "No atribuye una fecha o puesto no mencionado; permite que el candidato precise el periodo."
+        }
+      }
+    },
+    {
+      "case_id": "E30",
+      "question": "¿En qué parte del proyecto pediste revisión y por qué?",
+      "approach": "conductual",
+      "objective": "Explorar límites y colaboración en un proyecto relatado.",
+      "competency": null,
+      "context_turns": [
+        {
+          "turn_number": 1,
+          "question": "Cuéntame un proyecto de equipo.",
+          "answer": "Trabajé en el módulo de solicitudes de MesaFaro.",
+          "truncated": false
+        }
+      ],
+      "classification": null,
+      "difficulty": "alta",
+      "split": "desarrollo",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": 4,
+          "enfoque": 4,
+          "claridad": 4,
+          "neutralidad": 2
+        },
+        "status": "evaluada",
+        "visible_level": "Destacado",
+        "justifications": {
+          "pertinencia": "La revisión de trabajo propio puede aportar evidencia concreta de colaboración y límites.",
+          "enfoque": "Solicitar dónde y por qué pidió revisión obtiene acciones y motivos del tipo buscado.",
+          "claridad": "El proyecto del contexto es único y las dos peticiones sobre revisión son comprensibles.",
+          "neutralidad": "Pediste revisión presupone un hecho que el contexto no afirma; debería comprobarse primero."
+        }
+      }
+    },
+    {
+      "case_id": "E31",
+      "question": "¿Para qué sirve una clave primaria en una base de datos?",
+      "approach": "mixto",
+      "objective": "Comprobar una base de SQL.",
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "comprobacion_conocida",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": 4,
+          "enfoque": 4,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Destacado",
+        "justifications": {
+          "pertinencia": "Comprender una clave primaria aporta evidencia concreta de un fundamento requerido de SQL.",
+          "enfoque": "Pedir su función permite comprobar el fundamento técnico declarado como objetivo.",
+          "claridad": "Identifica un concepto y su ámbito: clave primaria en una base de datos.",
+          "neutralidad": "No incorpora la definición esperada ni juzga de antemano el conocimiento del candidato."
+        }
+      }
+    },
+    {
+      "case_id": "E32",
+      "question": "¿Cómo organizarías tu trabajo si dos tareas urgentes coincidieran?",
+      "approach": "situacional",
+      "objective": "Explorar organización y comunicación de prioridades.",
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "comprobacion_conocida",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": 4,
+          "enfoque": 4,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Destacado",
+        "justifications": {
+          "pertinencia": "Priorizar tareas en conflicto aporta evidencia concreta de organización en el cargo junior.",
+          "enfoque": "El escenario permite razonar sobre prioridades y apoyo sin exigir autonomía senior.",
+          "claridad": "Delimita un conflicto único entre dos tareas urgentes que coinciden.",
+          "neutralidad": "No exige resolver sin ayuda ni prescribe cuál tarea debe tener prioridad."
+        }
+      }
+    },
+    {
+      "case_id": "E33",
+      "question": "Tu solución fue obviamente mala, ¿por qué no elegiste la correcta?",
+      "approach": "conductual",
+      "objective": "Explorar una decisión técnica relatada.",
+      "competency": null,
+      "context_turns": [
+        {
+          "turn_number": 1,
+          "question": "¿Qué alternativa elegiste?",
+          "answer": "Elegí mantener la validación y consultar la prioridad con mi supervisor.",
+          "truncated": false
+        }
+      ],
+      "classification": null,
+      "difficulty": "alta",
+      "split": "comprobacion_conocida",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": 3,
+          "enfoque": 2,
+          "claridad": 2,
+          "neutralidad": 1
+        },
+        "status": "evaluada",
+        "visible_level": "En desarrollo",
+        "justifications": {
+          "pertinencia": "La decisión técnica relatada es pertinente aunque su formulación sea descalificadora.",
+          "enfoque": "Solicita una explicación, pero falta identificar la alternativa y los criterios para investigarla.",
+          "claridad": "La correcta alude a una alternativa no identificada ni respaldada por el contexto.",
+          "neutralidad": "Obviamente mala impone un juicio de error y una opción correcta sin sustento disponible."
+        }
+      }
+    },
+    {
+      "case_id": "E34",
+      "question": "¿Puedes detallar qué aportaste tú y qué correspondió al resto del equipo?",
+      "approach": "conductual",
+      "objective": "Distinguir contribución propia de contribución colectiva.",
+      "competency": null,
+      "context_turns": [
+        {
+          "turn_number": 1,
+          "question": "Cuéntame tu proyecto académico.",
+          "answer": "En Inventario Aula trabajamos en equipo.",
+          "truncated": false
+        }
+      ],
+      "classification": null,
+      "difficulty": "alta",
+      "split": "comprobacion_conocida",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": 4,
+          "enfoque": 4,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Destacado",
+        "justifications": {
+          "pertinencia": "Distinguir aportes en un proyecto concreto permite explorar colaboración y responsabilidad.",
+          "enfoque": "Separar la acción propia de la colectiva permite atribuir la evidencia al participante adecuado.",
+          "claridad": "El proyecto y el equipo están identificados; las dos peticiones delimitan responsabilidades.",
+          "neutralidad": "Permite reconocer el trabajo ajeno sin atribuir todo el resultado al candidato."
+        }
+      }
+    },
+    {
+      "case_id": "E35",
+      "question": "¿Cómo lo hiciste?",
+      "approach": "conductual",
+      "objective": "Profundizar en una acción técnica recién mencionada.",
+      "competency": null,
+      "context_turns": [
+        {
+          "turn_number": 1,
+          "question": "Cuéntame una corrección técnica.",
+          "answer": "Cambié la consulta para incluir registros sin responsable.",
+          "truncated": false
+        }
+      ],
+      "classification": null,
+      "difficulty": "alta",
+      "split": "comprobacion_conocida",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": 4,
+          "enfoque": 4,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Destacado",
+        "justifications": {
+          "pertinencia": "Profundizar en una corrección de consulta aporta evidencia concreta de depuración.",
+          "enfoque": "Cómo pide el procedimiento de la acción técnica recién descrita.",
+          "claridad": "Lo remite a una corrección única disponible; no falta antecedente en este caso.",
+          "neutralidad": "Permite explicar el procedimiento real sin imponer una técnica correcta de antemano."
+        }
+      }
+    },
+    {
+      "case_id": "E36",
+      "question": "¿Cómo lo hiciste?",
+      "approach": "conductual",
+      "objective": null,
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "alta",
+      "split": "comprobacion_conocida",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": null,
+          "enfoque": null,
+          "claridad": 1,
+          "neutralidad": 4
+        },
+        "status": "parcial",
+        "visible_level": null,
+        "justifications": {
+          "pertinencia": "Sin antecedente no se identifica una acción relacionada con el cargo.",
+          "enfoque": "No hay acción ni objetivo identificados para decidir qué tipo de evidencia se solicita.",
+          "claridad": "Lo carece de referente disponible; se observa dependencia de un antecedente ausente.",
+          "neutralidad": "No incorpora juicio, presión o conclusión impuesta sobre cómo actuó la persona."
+        }
+      }
+    },
+    {
+      "case_id": "E37",
+      "question": "¿Cuántos meses duró tu práctica?",
+      "approach": "mixto",
+      "objective": "Aclarar la duración de una experiencia formativa.",
+      "competency": null,
+      "context_turns": [
+        {
+          "turn_number": 1,
+          "question": "¿Qué experiencia formativa has realizado?",
+          "answer": "Realicé una práctica de soporte.",
+          "truncated": false
+        }
+      ],
+      "classification": null,
+      "difficulty": "media",
+      "split": "comprobacion_conocida",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": 3,
+          "enfoque": 3,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Logrado",
+        "justifications": {
+          "pertinencia": "Precisar una experiencia formativa aporta información temporal útil para un perfil junior.",
+          "enfoque": "Pedir meses obtiene la duración buscada; un relato de acciones no es necesario.",
+          "claridad": "La práctica está confirmada en el turno anterior y la unidad solicitada es meses.",
+          "neutralidad": "El contexto respalda que hubo práctica; la pregunta no impone una duración o valoración."
+        }
+      }
+    },
+    {
+      "case_id": "E38",
+      "question": "¿Qué experiencia tienes liderando despliegues globales sin supervisión?",
+      "approach": "mixto",
+      "objective": "Explorar exposición adicional, sin convertirla en requisito del cargo.",
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "comprobacion_conocida",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": 2,
+          "enfoque": 3,
+          "claridad": 4,
+          "neutralidad": 3
+        },
+        "status": "evaluada",
+        "visible_level": "Logrado",
+        "justifications": {
+          "pertinencia": "Los despliegues globales autónomos son periféricos al puesto, aunque el objetivo no los exige.",
+          "enfoque": "Solicitar experiencia permite explorar exposición adicional sin requerir una prueba de dominio.",
+          "claridad": "Identifica el tipo de actividad y el grado de supervisión sobre los que pregunta.",
+          "neutralidad": "Permite indicar que no tiene experiencia; no introduce una descalificación o respuesta ideal."
+        }
+      }
+    },
+    {
+      "case_id": "E39",
+      "question": "¿Qué cambió después de aplicar esa corrección?",
+      "approach": "conductual",
+      "objective": "Explorar el resultado de una corrección relatada.",
+      "competency": null,
+      "context_turns": [
+        {
+          "turn_number": 1,
+          "question": "Cuéntame un error que corregiste.",
+          "answer": "Corregí una consulta que excluía solicitudes sin responsable.",
+          "truncated": false
+        }
+      ],
+      "classification": null,
+      "difficulty": "alta",
+      "split": "comprobacion_conocida",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": 4,
+          "enfoque": 4,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Destacado",
+        "justifications": {
+          "pertinencia": "Contrastar el efecto de una corrección aporta evidencia concreta sobre resultados técnicos.",
+          "enfoque": "Pedir el cambio posterior permite explorar el resultado de la acción relatada.",
+          "claridad": "Esa corrección tiene antecedente único en la consulta mencionada previamente.",
+          "neutralidad": "No presupone una mejora: se puede describir un cambio negativo, nulo o positivo."
+        }
+      }
+    },
+    {
+      "case_id": "E40",
+      "question": "Cuéntame una dificultad, qué hiciste para resolverla y qué resultado obtuviste.",
+      "approach": "conductual",
+      "objective": "Obtener un episodio con acción y resultado.",
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "comprobacion_conocida",
+      "review_status": "approved",
+      "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+      "expected": {
+        "levels": {
+          "pertinencia": 4,
+          "enfoque": 4,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Destacado",
+        "justifications": {
+          "pertinencia": "Un episodio con dificultad, acciones y resultado aporta evidencia concreta de desempeño junior.",
+          "enfoque": "Organiza la obtención de experiencia pasada en situación, actuación y efecto.",
+          "claridad": "Las tres peticiones están ordenadas y vinculadas a una misma dificultad.",
+          "neutralidad": "Permite relatar un resultado favorable o desfavorable sin exigir una actuación perfecta."
+        }
+      }
+    }
+  ],
+  "proposal_version": "1.1.0",
+  "source_file": "data/reference_questions/evaluacion_calidad.json",
+  "source_sha256": "d55335190888200d01e05f04504b46dfe9a9addc194ba591d56df609da840b4b",
+  "reference_version": "1.1.0",
+  "approval": {
+    "approved_on": "2026-11-02",
+    "reviewer": "usuario_aprobacion_explicita_chat_2026-11-02",
+    "proposal_version": "1.1.0",
+    "proposal_sha256": "ef59206fb79c5be34e1161ec9d214f13758afbea3d9f8e4b2fea68dbce74d48c",
+    "critical_rule": "Cualquier criterio en nivel 1 limita el global como máximo a En desarrollo, conservando el porcentaje.",
+    "demonstration_case_ids": [
+      "E03",
+      "E05",
+      "E07",
+      "E08",
+      "E12",
+      "E15"
+    ]
+  }
+}

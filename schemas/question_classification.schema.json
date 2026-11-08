@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Clasificación descriptiva de una intervención de entrevista",
+  "description": "Contrato 1.0.0. Requiere además las relaciones comprobadas por classification_contract.py; no certifica corrección semántica.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version", "intervention_id", "original_text", "evaluability",
+    "non_evaluable_reason", "classification", "units", "context_turn_ids",
+    "method", "rule_ids", "technical_error", "validation_status", "rationale"
+  ],
+  "properties": {
+    "contract_version": {"const": "1.0.0"},
+    "intervention_id": {"$ref": "#/$defs/identifier"},
+    "original_text": {"type": "string"},
+    "evaluability": {"enum": ["evaluable", "no_evaluable", null]},
+    "non_evaluable_reason": {
+      "enum": ["vacia", "saludo", "agradecimiento", "acuse", "transicion", "instruccion_sistema", "fuera_entrevista", null]
+    },
+    "classification": {
+      "anyOf": [{"$ref": "#/$defs/classification"}, {"type": "null"}]
+    },
+    "units": {"type": "array", "items": {"$ref": "#/$defs/unit"}},
+    "context_turn_ids": {"$ref": "#/$defs/turn_ids"},
+    "method": {"enum": ["reglas", "llm", "hibrido", "respaldo"]},
+    "rule_ids": {"$ref": "#/$defs/rule_ids"},
+    "technical_error": {"enum": ["json_invalido", "contrato_invalido", "error_proveedor", null]},
+    "validation_status": {"enum": ["pendiente", "validada"]},
+    "rationale": {"$ref": "#/$defs/rationale"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"evaluability": {"const": "evaluable"}}},
+      "then": {
+        "properties": {
+          "original_text": {"$ref": "#/$defs/text"},
+          "non_evaluable_reason": {"type": "null"},
+          "classification": {"$ref": "#/$defs/classification"},
+          "units": {"minItems": 1},
+          "method": {"enum": ["reglas", "llm", "hibrido"]},
+          "technical_error": {"type": "null"}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"evaluability": {"const": "no_evaluable"}}},
+      "then": {
+        "properties": {
+          "non_evaluable_reason": {"type": "string"},
+          "classification": {"type": "null"},
+          "units": {"maxItems": 0},
+          "method": {"enum": ["reglas", "llm"]},
+          "technical_error": {"type": "null"}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"evaluability": {"type": "null"}}},
+      "then": {
+        "properties": {
+          "non_evaluable_reason": {"type": "null"},
+          "classification": {"$ref": "#/$defs/classification"},
+          "units": {"maxItems": 0},
+          "method": {"const": "respaldo"},
+          "rule_ids": {"maxItems": 0},
+          "technical_error": {"type": "string"}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"method": {"const": "reglas"}}},
+      "then": {"properties": {"rule_ids": {"minItems": 1}}}
+    },
+    {
+      "if": {"properties": {"method": {"const": "llm"}}},
+      "then": {"properties": {"rule_ids": {"maxItems": 0}}}
+    }
+  ],
+  "$defs": {
+    "text": {"type": "string", "minLength": 1, "pattern": "\\S"},
+    "identifier": {"type": "string", "minLength": 1, "maxLength": 80, "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]*$"},
+    "rationale": {"type": "string", "minLength": 1, "maxLength": 600, "pattern": "\\S"},
+    "optional_reason": {"anyOf": [{"$ref": "#/$defs/rationale"}, {"type": "null"}]},
+    "approach": {"enum": ["conductual", "situacional", "factual_tecnico", "otro", "indeterminado"]},
+    "known_approach": {"enum": ["conductual", "situacional", "factual_tecnico", "otro"]},
+    "form": {"enum": ["abierta", "cerrada", "opcion_multiple", "indeterminada"]},
+    "turn_ids": {"type": "array", "uniqueItems": true, "items": {"type": "integer", "minimum": 1}},
+    "rule_ids": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/identifier"}},
+    "classification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "approaches", "main_approach", "secondary_approaches", "main_approach_reason",
+        "forms", "main_form", "main_form_reason", "attributes", "certainty", "rationale"
+      ],
+      "properties": {
+        "approaches": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/approach"}},
+        "main_approach": {"anyOf": [{"$ref": "#/$defs/approach"}, {"type": "null"}]},
+        "secondary_approaches": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/known_approach"}},
+        "main_approach_reason": {"$ref": "#/$defs/optional_reason"},
+        "forms": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/form"}},
+        "main_form": {"anyOf": [{"$ref": "#/$defs/form"}, {"type": "null"}]},
+        "main_form_reason": {"$ref": "#/$defs/optional_reason"},
+        "attributes": {"type": "array", "uniqueItems": true, "items": {"enum": ["directiva", "sugestiva"]}},
+        "certainty": {"enum": ["clara", "ambigua", "indeterminada"]},
+        "rationale": {"$ref": "#/$defs/rationale"}
+      }
+    },
+    "unit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "unit_id", "text", "source_start", "source_end", "classification", "method",
+        "rule_ids", "context_status", "followup_of", "depends_on"
+      ],
+      "properties": {
+        "unit_id": {"type": "string", "pattern": "^u[1-9][0-9]*$"},
+        "text": {"$ref": "#/$defs/text"},
+        "source_start": {"type": "integer", "minimum": 0},
+        "source_end": {"type": "integer", "minimum": 1},
+        "classification": {"$ref": "#/$defs/classification"},
+        "method": {"enum": ["reglas", "llm"]},
+        "rule_ids": {"$ref": "#/$defs/rule_ids"},
+        "context_status": {"enum": ["no_necesario", "suficiente", "insuficiente"]},
+        "followup_of": {"type": ["integer", "null"], "minimum": 1},
+        "depends_on": {"type": ["string", "null"], "pattern": "^u[1-9][0-9]*$"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"method": {"const": "reglas"}}},
+          "then": {"properties": {"rule_ids": {"minItems": 1}}},
+          "else": {"properties": {"rule_ids": {"maxItems": 0}}}
+        }
+      ]
+    }
+  }
+}

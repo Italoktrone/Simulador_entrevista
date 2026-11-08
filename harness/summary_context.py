@@ -54,6 +54,7 @@ def _extract(turn: dict) -> str:
 
 def prepare_summary_context(
     setup: InterviewSetup, question: str, *, instructions: str, session: dict, summary: dict,
+    candidate_metadata: dict | None = None,
 ) -> dict:
     """Recibir sesión validada y propuesta; devolver mensajes y una decisión.
 
@@ -63,7 +64,8 @@ def prepare_summary_context(
     """
     validate_summary(summary, session)
     # build_messages valida pregunta, instrucciones y los roles del historial.
-    full = build_messages(setup, question, instructions=instructions, history=_history(session))
+    full = build_messages(setup, question, instructions=instructions, history=_history(session),
+                          candidate_metadata=candidate_metadata)
     full[0]["content"] += CONVERSATION_REFERENCE_GUIDANCE
     if (session["candidate_id"] != setup.candidate.candidate_id or
             session["candidate_source_sha256"] != setup.candidate.source_sha256 or
@@ -81,7 +83,8 @@ def prepare_summary_context(
         working.extend([{"role": "user", "content": turn["question"]}, {"role": "assistant", "content": content}])
     for turn in summary["recent_turns"]:
         working.extend([{"role": "user", "content": turn["question"]}, {"role": "assistant", "content": turn["answer"]}])
-    proposed = build_messages(setup, question, instructions=instructions, history=working)
+    proposed = build_messages(setup, question, instructions=instructions, history=working,
+                              candidate_metadata=candidate_metadata)
     proposed[0]["content"] += CONVERSATION_REFERENCE_GUIDANCE
     if omitted:
         proposed[0]["content"] += EXTRACT_GUIDANCE

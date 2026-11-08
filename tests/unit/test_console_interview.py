@@ -193,7 +193,8 @@ def test_console_accepts_questions_and_restarting_does_not_reset_limit(setup):
     code, text = drive(runtime, [" /INICIAR ", " ", "Primera.", "/iniciar", "/cv", "Segunda."])
     assert code == 0 and runtime.questions_asked == 2
     assert [messages[-1]["content"] for messages in client.messages] == ["Primera.", "Segunda."]
-    assert text.count("Candidato: Respuesta simulada.") == 2
+    assert text.count("RESPUESTA DEL CANDIDATO | PREGUNTA") == 2
+    assert text.count("Respuesta simulada.") == 2
     assert "contador se conserva" in text and "Límite de 2" in text
 
 
@@ -204,7 +205,7 @@ def test_console_recovers_from_technical_error_without_retrying_or_exceeding_lim
     assert code == 0 and len(client.messages) == 2 and runtime.questions_asked == 2
     assert "No se obtuvo una respuesta válida" in text and "Límite de 2" in text
     assert text.count("Puedes formular otra") == 1
-    assert "Candidato: Respuesta" not in text
+    assert "RESPUESTA DEL CANDIDATO |" not in text
 
 
 def test_console_hides_truncated_text_and_allows_early_exit(setup):

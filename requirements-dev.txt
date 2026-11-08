@@ -1,0 +1,5 @@
+-r requirements.txt
+
+# Calidad y revisión de seguridad.
+ruff==0.17.4
+bandit==1.9.4

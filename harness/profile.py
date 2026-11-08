@@ -321,11 +321,11 @@ def validate_profile_data(profile: dict[str, Any], schema: dict[str, Any]) -> No
                 raise ProfileConsistencyError(
                     path, "reference_mismatch", "El logro y su situación apuntan a proyectos distintos."
                 )
-    for field in ("professional_competencies", "strengths", "improvement_areas"):
-        for index, record in enumerate(profile[field]):
+    for section in ("professional_competencies", "strengths", "improvement_areas"):
+        for index, record in enumerate(profile[section]):
             for position, situation_id in enumerate(record["situation_ids"]):
                 _require_reference(
-                    situation_id, situations, f"/{field}/{index}/situation_ids/{position}"
+                    situation_id, situations, f"/{section}/{index}/situation_ids/{position}"
                 )
 
 

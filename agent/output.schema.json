@@ -1,5 +1,142 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Salida del candidato virtual",
-  "$comment": "Marcador estructural pendiente. No define propiedades ni restricciones; no utilizar como validación implementada."
+  "$defs": {
+    "Source": {
+      "additionalProperties": false,
+      "properties": {
+        "document_id": {
+          "title": "Document Id",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "source": {
+          "title": "Source",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "document_id",
+        "title",
+        "source",
+        "sha256",
+        "text"
+      ],
+      "title": "Source",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "api_version": {
+      "const": "1.0.0",
+      "default": "1.0.0",
+      "title": "Api Version",
+      "type": "string"
+    },
+    "session_id": {
+      "format": "uuid",
+      "title": "Session Id",
+      "type": "string"
+    },
+    "request_id": {
+      "format": "uuid",
+      "title": "Request Id",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "completed",
+        "handled",
+        "error"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "reply": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Reply"
+    },
+    "action": {
+      "title": "Action",
+      "type": "string"
+    },
+    "questions_asked": {
+      "maximum": 20,
+      "minimum": 0,
+      "title": "Questions Asked",
+      "type": "integer"
+    },
+    "max_questions": {
+      "maximum": 20,
+      "minimum": 1,
+      "title": "Max Questions",
+      "type": "integer"
+    },
+    "closed": {
+      "title": "Closed",
+      "type": "boolean"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/Source"
+      },
+      "title": "Sources",
+      "type": "array"
+    },
+    "evaluation": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Evaluation"
+    },
+    "error_code": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Error Code"
+    }
+  },
+  "required": [
+    "session_id",
+    "request_id",
+    "status",
+    "reply",
+    "action",
+    "questions_asked",
+    "max_questions",
+    "closed",
+    "sources",
+    "evaluation",
+    "error_code"
+  ],
+  "title": "RunOutput",
+  "type": "object"
 }

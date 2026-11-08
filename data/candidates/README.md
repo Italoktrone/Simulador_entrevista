@@ -6,7 +6,7 @@ El archivo contiene el perfil interno completo. Sus antecedentes y evidencias so
 
 Las fechas de formación y experiencia usan meses (`AAAA-MM`) para conservar la precisión de los antecedentes aprobados. La fecha de referencia del escenario usa un día concreto (`AAAA-MM-DD`) y es independiente de la fecha de ejecución del programa.
 
-El contrato está en [candidate.schema.json](../../schemas/candidate.schema.json) y se aplica con [schema_validator.py](../../harness/schema_validator.py). [json_loader.py](../../harness/json_loader.py) lee los archivos y [profile.py](../../harness/profile.py) valida y protege al candidato y deriva su CV. [harness/application/cli.py](../../harness/application/cli.py) lo presenta como texto. [interview_config.py](../../harness/interview_config.py) carga también configuración y puesto y comprueba sus referencias con `candidate_id` y `target_job_id`. La oferta permanece en [desarrollador_junior.json](../jobs/desarrollador_junior.json). La combinación se comprueba en [tests/integration](../../tests/integration/README.md). Todavía no hay entrevista ejecutable.
+El contrato está en [candidate.schema.json](../../schemas/candidate.schema.json) y se aplica con [schema_validator.py](../../harness/schema_validator.py). [json_loader.py](../../harness/json_loader.py) lee los archivos y [profile.py](../../harness/profile.py) valida y protege al candidato y deriva su CV. [harness/application/cli.py](../../harness/application/cli.py) lo presenta como texto. [interview_config.py](../../harness/interview_config.py) carga también configuración y puesto y comprueba sus referencias con `candidate_id` y `target_job_id`. La oferta permanece en [desarrollador_junior.json](../jobs/desarrollador_junior.json). La combinación se comprueba en [tests/integration](../../docs/validacion-del-candidato.md#integration). Todavía no hay entrevista ejecutable.
 
 ## Evidencia de comprobación inicial
 
@@ -63,7 +63,7 @@ El 30 de octubre de 2026 se incorporó `validate_profile_data(profile, schema)`.
 
 Los intervalos mensuales incluyen ambos extremos; se comparan con el mes fijo del escenario, no con la fecha actual. Las jornadas de un cargo, si están declaradas, deben cubrir todo su periodo sin huecos ni solapamientos. No se rechaza por defecto estudiar y trabajar simultáneamente. Los proyectos deben pertenecer a un cargo o formación existentes y desarrollarse dentro de su periodo. Los identificadores de los registros deben ser únicos y sus referencias deben existir y corresponder a los registros declarados.
 
-El conjunto completo terminó con **95 passed in 6.87s**: 40 nuevas pruebas unitarias del perfil, una nueva prueba de integración y los 54 casos anteriores. La prueba de integración conserva los bytes del perfil y su hash original `6C32C1B93ED11E4A4A446172083338AEFA0C960D0035A2FC991F43B189688CD3`. Véase [el registro de pruebas unitarias](../../tests/unit/README.md).
+El conjunto completo terminó con **95 passed in 6.87s**: 40 nuevas pruebas unitarias del perfil, una nueva prueba de integración y los 54 casos anteriores. La prueba de integración conserva los bytes del perfil y su hash original `6C32C1B93ED11E4A4A446172083338AEFA0C960D0035A2FC991F43B189688CD3`. Véase [el registro de pruebas unitarias](../../docs/validacion-del-candidato.md#unit).
 
 Estas reglas no verifican automáticamente el significado de los relatos ni garantizan consistencia de respuestas futuras del modelo. No se ha implementado todavía una entrevista.
 

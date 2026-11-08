@@ -1,0 +1,36 @@
+{
+  "rubric_version": "1.1.0",
+  "weights": {"pertinencia": 35, "enfoque": 30, "claridad": 20, "neutralidad": 15},
+  "thresholds": [1.5, 2.5, 3.5],
+  "level_one_visible_cap": "En desarrollo",
+  "context_pairs": 3,
+  "context_characters": 1600,
+  "read_timeout_seconds": 90,
+  "max_output_tokens": 2048,
+  "descriptors": {
+    "pertinencia": [
+      "Solicita información ajena al cargo y al objetivo conocido, o exige experiencia impropia del nivel junior sin justificación.",
+      "Tiene relación indirecta con el cargo, pero solicita información demasiado genérica o poco útil para el objetivo conocido.",
+      "Solicita información relacionada con una responsabilidad, requisito o competencia pertinente al cargo y al objetivo del turno.",
+      "Solicita evidencia concreta y útil para distinguir el desempeño esperado en el cargo junior, con un alcance apropiado al objetivo."
+    ],
+    "enfoque": [
+      "La petición no permite obtener el tipo de evidencia que exige el objetivo explícito del turno.",
+      "Se aproxima al tipo de evidencia buscado, pero omite elementos necesarios para interpretarla o confunde hechos con hipótesis.",
+      "La formulación permite obtener la evidencia buscada; acepta aclaraciones factuales y mezclas justificadas dentro de la entrevista.",
+      "La formulación orienta con precisión la obtención de evidencia pertinente, diferenciando experiencia, hipótesis o comprobación cuando corresponde."
+    ],
+    "claridad": [
+      "No permite identificar qué se solicita, contiene contradicciones internas o depende de un antecedente ausente.",
+      "Permite identificar la intención general, pero contiene ambigüedad evitable, términos imprecisos o demasiadas demandas sin organizar.",
+      "Permite comprender qué información se solicita; sus referencias contextuales están disponibles y las demandas son manejables.",
+      "Solicita información con precisión, alcance y organización adecuados; una repregunta breve también puede cumplir este descriptor."
+    ],
+    "neutralidad": [
+      "Incorpora presión explícita, un juicio descalificador o una premisa injustificada que condiciona sustancialmente la respuesta.",
+      "Sugiere una respuesta deseada o introduce una presuposición no respaldada que dificulta responder libremente.",
+      "Permite responder sin una conclusión impuesta y utiliza premisas respaldadas por el contexto disponible.",
+      "Solicita o contrasta información sin imponer conclusiones y permite reconocer límites, discrepancias o alternativas cuando corresponde."
+    ]
+  }
+}

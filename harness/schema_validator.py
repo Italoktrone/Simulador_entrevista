@@ -8,6 +8,7 @@ from collections.abc import Iterable
 from typing import Any
 
 from jsonschema import Draft202012Validator, SchemaError, ValidationError
+from jsonschema.exceptions import best_match
 
 
 class InvalidSchemaError(ValueError):
@@ -20,6 +21,7 @@ class DataValidationError(ValueError):
     def __init__(self, path: str, rule: str, detail: str) -> None:
         self.path = path
         self.rule = rule
+        self.detail = detail
         super().__init__(f"Datos inválidos en {path}: {detail}")
 
 
@@ -41,7 +43,9 @@ def _describe_error(error: ValidationError) -> str:
         "enum": "El valor no está entre las opciones permitidas.",
         "pattern": "El texto no tiene el formato esperado.",
         "minLength": "El texto tiene menos caracteres de los requeridos.",
+        "maxLength": "El texto tiene más caracteres de los permitidos.",
         "minItems": "La lista tiene menos elementos de los requeridos.",
+        "maxItems": "La lista tiene más elementos de los permitidos.",
         "uniqueItems": "La lista contiene elementos repetidos.",
         "minimum": "El número es menor que el mínimo permitido.",
         "maximum": "El número supera el máximo permitido.",
@@ -53,12 +57,14 @@ def _describe_error(error: ValidationError) -> str:
     return messages.get(error.validator, "No se cumple una regla del esquema.")
 
 
-def validate_data(data: object, schema: dict[str, Any]) -> None:
+def validate_data(data: object, schema: dict[str, Any], *, detailed_errors: bool = False) -> None:
     """Valida datos ya cargados y devuelve None si cumplen el esquema.
 
     Lanza InvalidSchemaError si las reglas están mal definidas, o
     DataValidationError ante el primer error de datos. Esta última excepción
-    expone path y rule para que la interfaz pueda mostrar un error comprensible.
+    expone path, rule y detail sin el valor rechazado. detailed_errors permite
+    seleccionar el fallo interno pertinente de alternativas del clasificador;
+    por defecto conserva las rutas históricas de los demás documentos.
     No valida calendario, cronología, existencia de referencias ni unicidad
     de identificadores entre registros distintos.
     """
@@ -73,6 +79,10 @@ def validate_data(data: object, schema: dict[str, Any]) -> None:
     try:
         Draft202012Validator(schema).validate(data)
     except ValidationError as error:
+        # anyOf/oneOf puede envolver el fallo real de un campo; conservar el
+        # diagnóstico más pertinente sin copiar message ni instance del modelo.
+        if detailed_errors:
+            error = best_match([error])
         raise DataValidationError(
             path=_format_path(error.absolute_path),
             rule=str(error.validator),

@@ -1,2 +1,30 @@
-# Reserva estructural: automatización de pruebas pendiente.
-# No hay un workflow habilitado ni verificaciones automáticas implementadas.
+name: Calidad y API
+
+on: [push, pull_request, workflow_dispatch]
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      PYTHONIOENCODING: utf-8
+      LLM_PROVIDER: ollama
+      LLM_ALLOW_EXTERNAL_API: 'false'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.14'
+      - name: Instalar dependencias
+        run: python -m pip install --no-compile -r requirements-dev.txt
+      - name: Verificar contratos, pruebas, Ruff, Bandit y recuperación
+        run: python -B -m scripts.check_project
+      - name: Conservar evidencia técnica
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: quality-reports
+          path: reports/

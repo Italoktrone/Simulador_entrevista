@@ -1,0 +1,71 @@
+{
+  "valid": [
+    {
+      "session_id": "11111111-1111-4111-8111-111111111111",
+      "request_id": "22222222-2222-4222-8222-222222222222",
+      "question": "¿Qué tecnologías utilizaste en MesaFaro?",
+      "use_rag": true
+    }
+  ],
+  "invalid": [
+    {
+      "session_id": "incorrecto",
+      "request_id": "22222222-2222-4222-8222-222222222222",
+      "question": "Pregunta"
+    },
+    {
+      "session_id": "11111111-1111-4111-8111-111111111111",
+      "request_id": "22222222-2222-4222-8222-222222222222",
+      "question": "   "
+    },
+    {
+      "session_id": "11111111-1111-4111-8111-111111111111",
+      "request_id": "22222222-2222-4222-8222-222222222222",
+      "question": "Pregunta",
+      "api_key": "campo-no-permitido"
+    },
+    {
+      "session_id": "11111111-1111-4111-8111-111111111111",
+      "request_id": "22222222-2222-4222-8222-222222222222",
+      "question": 42
+    },
+    {
+      "question": "Faltan los identificadores"
+    }
+  ],
+  "valid_outputs": [
+    {
+      "api_version": "1.0.0",
+      "session_id": "11111111-1111-4111-8111-111111111111",
+      "request_id": "22222222-2222-4222-8222-222222222222",
+      "status": "completed",
+      "reply": "Utilicé Git.",
+      "action": "responder",
+      "questions_asked": 1,
+      "max_questions": 20,
+      "closed": false,
+      "sources": [],
+      "evaluation": null,
+      "error_code": null
+    }
+  ],
+  "invalid_outputs": [
+    {
+      "api_version": "1.0.0",
+      "session_id": "11111111-1111-4111-8111-111111111111",
+      "request_id": "22222222-2222-4222-8222-222222222222",
+      "status": "inventado",
+      "reply": "Utilicé Git.",
+      "action": "responder",
+      "questions_asked": 1,
+      "max_questions": 20,
+      "closed": false,
+      "sources": [],
+      "evaluation": null,
+      "error_code": null
+    },
+    {
+      "reply": "Faltan los campos del contrato"
+    }
+  ]
+}

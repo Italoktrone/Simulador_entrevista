@@ -7,6 +7,7 @@ import re
 from typing import Self
 
 import httpx
+from jsonschema import Draft202012Validator, SchemaError
 
 from harness.llm.client import (
     LLMConnectionError,
@@ -96,8 +97,21 @@ class OllamaClient:
         settings: OllamaSettings | None = None,
         *,
         transport: httpx.BaseTransport | None = None,
+        output_schema: dict | None = None,
     ) -> None:
         self.settings = settings if settings is not None else OllamaSettings()
+        self._output_schema_json = None
+        if output_schema is not None:
+            try:
+                if not isinstance(output_schema, dict):
+                    raise ValueError
+                encoded = json.dumps(output_schema, ensure_ascii=False, allow_nan=False)
+                encoded.encode("utf-8")
+                Draft202012Validator.check_schema(output_schema)
+                # Instantánea independiente de mutaciones externas del esquema.
+                self._output_schema_json = encoded
+            except (ValueError, TypeError, RecursionError, UnicodeError, SchemaError):
+                raise ValueError("output_schema debe ser un JSON Schema válido y serializable.") from None
         self._http = httpx.Client(
             base_url=self.settings.base_url.rstrip("/"),
             timeout=httpx.Timeout(
@@ -120,8 +134,24 @@ class OllamaClient:
     def close(self) -> None:
         self._http.close()
 
-    def generate(self, messages: list[ChatMessage]) -> LLMResponse:
+    @property
+    def structured_output_enabled(self) -> bool:
+        return self._output_schema_json is not None
+
+    def generate(self, messages: list[ChatMessage], *, output_schema: dict | None = None) -> LLMResponse:
         validate_messages(messages)
+        schema_json = self._output_schema_json
+        if output_schema is not None:
+            # Copia por solicitud: nunca modifica el formato del cliente
+            # compartido ni hereda IDs de una intervención anterior.
+            try:
+                if not isinstance(output_schema, dict):
+                    raise ValueError
+                schema_json = json.dumps(output_schema, ensure_ascii=False, allow_nan=False)
+                schema_json.encode("utf-8")
+                Draft202012Validator.check_schema(output_schema)
+            except (ValueError, TypeError, RecursionError, UnicodeError, SchemaError):
+                raise ValueError("output_schema debe ser un JSON Schema válido y serializable.") from None
         payload = {
             "model": self.settings.model,
             "messages": _model_messages(self.settings.model, messages),
@@ -136,6 +166,8 @@ class OllamaClient:
                 "temperature": self.settings.temperature,
             },
         }
+        if schema_json is not None:
+            payload["format"] = json.loads(schema_json)
         started = perf_counter()
         for attempt in range(self.settings.connection_retries + 1):
             try:

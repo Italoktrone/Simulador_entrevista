@@ -1,0 +1,1289 @@
+{
+  "suite_version": "1.0.0",
+  "rubric_version": "1.0.0",
+  "description": "40 propuestas del asistente para revisión humana. No son un patrón validado ni un conjunto ciego.",
+  "cases": [
+    {
+      "case_id": "E01",
+      "question": "¿Cómo identificaste y corregiste un error en una aplicación?",
+      "approach": "conductual",
+      "objective": "Obtener evidencia de resolución de problemas.",
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "desarrollo",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": 4,
+          "enfoque": 4,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Destacado",
+        "justifications": {
+          "pertinencia": "Pide una experiencia concreta de depuración, apropiada al puesto junior. Descriptor propuesto: Solicita evidencia concreta y útil para distinguir el desempeño esperado en el cargo junior, con un alcance apropiado al objetivo.",
+          "enfoque": "Pide una experiencia concreta de depuración, apropiada al puesto junior. Descriptor propuesto: La formulación orienta con precisión la obtención de evidencia pertinente, diferenciando experiencia, hipótesis o comprobación cuando corresponde.",
+          "claridad": "Pide una experiencia concreta de depuración, apropiada al puesto junior. Descriptor propuesto: Solicita información con precisión, alcance y organización adecuados; una repregunta breve también puede cumplir este descriptor.",
+          "neutralidad": "Pide una experiencia concreta de depuración, apropiada al puesto junior. Descriptor propuesto: Solicita o contrasta información sin imponer conclusiones y permite reconocer límites, discrepancias o alternativas cuando corresponde."
+        }
+      }
+    },
+    {
+      "case_id": "E02",
+      "question": "¿Qué harías si una prueba automática comienza a fallar después de un cambio?",
+      "approach": "situacional",
+      "objective": "Explorar investigación de fallos.",
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "desarrollo",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": 4,
+          "enfoque": 4,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Destacado",
+        "justifications": {
+          "pertinencia": "Un escenario delimitado permite explicar una estrategia sin atribuir experiencia. Descriptor propuesto: Solicita evidencia concreta y útil para distinguir el desempeño esperado en el cargo junior, con un alcance apropiado al objetivo.",
+          "enfoque": "Un escenario delimitado permite explicar una estrategia sin atribuir experiencia. Descriptor propuesto: La formulación orienta con precisión la obtención de evidencia pertinente, diferenciando experiencia, hipótesis o comprobación cuando corresponde.",
+          "claridad": "Un escenario delimitado permite explicar una estrategia sin atribuir experiencia. Descriptor propuesto: Solicita información con precisión, alcance y organización adecuados; una repregunta breve también puede cumplir este descriptor.",
+          "neutralidad": "Un escenario delimitado permite explicar una estrategia sin atribuir experiencia. Descriptor propuesto: Solicita o contrasta información sin imponer conclusiones y permite reconocer límites, discrepancias o alternativas cuando corresponde."
+        }
+      }
+    },
+    {
+      "case_id": "E03",
+      "question": "¿Has utilizado Git para controlar versiones?",
+      "approach": "conductual",
+      "objective": "Aclarar una herramienta usada antes de profundizar.",
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "desarrollo",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": 3,
+          "enfoque": 3,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Logrado",
+        "justifications": {
+          "pertinencia": "Una pregunta cerrada factual puede ser pertinente dentro de una entrevista conductual. Descriptor propuesto: Solicita información relacionada con una responsabilidad, requisito o competencia pertinente al cargo y al objetivo del turno.",
+          "enfoque": "Una pregunta cerrada factual puede ser pertinente dentro de una entrevista conductual. Descriptor propuesto: La formulación permite obtener la evidencia buscada; acepta aclaraciones factuales y mezclas justificadas dentro de la entrevista.",
+          "claridad": "Una pregunta cerrada factual puede ser pertinente dentro de una entrevista conductual. Descriptor propuesto: Solicita información con precisión, alcance y organización adecuados; una repregunta breve también puede cumplir este descriptor.",
+          "neutralidad": "Una pregunta cerrada factual puede ser pertinente dentro de una entrevista conductual. Descriptor propuesto: Solicita o contrasta información sin imponer conclusiones y permite reconocer límites, discrepancias o alternativas cuando corresponde."
+        }
+      }
+    },
+    {
+      "case_id": "E04",
+      "question": "¿Qué herramientas utilizaste en tu proyecto académico más reciente?",
+      "approach": "mixto",
+      "objective": "Identificar herramientas del proyecto.",
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "desarrollo",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": 3,
+          "enfoque": 3,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Logrado",
+        "justifications": {
+          "pertinencia": "Es pertinente para un junior y no necesita forzar una experiencia laboral. Descriptor propuesto: Solicita información relacionada con una responsabilidad, requisito o competencia pertinente al cargo y al objetivo del turno.",
+          "enfoque": "Es pertinente para un junior y no necesita forzar una experiencia laboral. Descriptor propuesto: La formulación permite obtener la evidencia buscada; acepta aclaraciones factuales y mezclas justificadas dentro de la entrevista.",
+          "claridad": "Es pertinente para un junior y no necesita forzar una experiencia laboral. Descriptor propuesto: Solicita información con precisión, alcance y organización adecuados; una repregunta breve también puede cumplir este descriptor.",
+          "neutralidad": "Es pertinente para un junior y no necesita forzar una experiencia laboral. Descriptor propuesto: Solicita o contrasta información sin imponer conclusiones y permite reconocer límites, discrepancias o alternativas cuando corresponde."
+        }
+      }
+    },
+    {
+      "case_id": "E05",
+      "question": "Cuéntame una ocasión en la que tuviste que pedir apoyo a un compañero.",
+      "approach": "conductual",
+      "objective": "Explorar colaboración y reconocimiento de límites.",
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "desarrollo",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": 4,
+          "enfoque": 4,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Destacado",
+        "justifications": {
+          "pertinencia": "Solicita un episodio propio sin descalificar la petición de ayuda. Descriptor propuesto: Solicita evidencia concreta y útil para distinguir el desempeño esperado en el cargo junior, con un alcance apropiado al objetivo.",
+          "enfoque": "Solicita un episodio propio sin descalificar la petición de ayuda. Descriptor propuesto: La formulación orienta con precisión la obtención de evidencia pertinente, diferenciando experiencia, hipótesis o comprobación cuando corresponde.",
+          "claridad": "Solicita un episodio propio sin descalificar la petición de ayuda. Descriptor propuesto: Solicita información con precisión, alcance y organización adecuados; una repregunta breve también puede cumplir este descriptor.",
+          "neutralidad": "Solicita un episodio propio sin descalificar la petición de ayuda. Descriptor propuesto: Solicita o contrasta información sin imponer conclusiones y permite reconocer límites, discrepancias o alternativas cuando corresponde."
+        }
+      }
+    },
+    {
+      "case_id": "E06",
+      "question": "¿Cómo explicarías a una persona no técnica un retraso en una tarea?",
+      "approach": "situacional",
+      "objective": "Explorar comunicación de dificultades.",
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "desarrollo",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": 4,
+          "enfoque": 4,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Destacado",
+        "justifications": {
+          "pertinencia": "El escenario es apropiado para comunicación y responsabilidad en un cargo junior. Descriptor propuesto: Solicita evidencia concreta y útil para distinguir el desempeño esperado en el cargo junior, con un alcance apropiado al objetivo.",
+          "enfoque": "El escenario es apropiado para comunicación y responsabilidad en un cargo junior. Descriptor propuesto: La formulación orienta con precisión la obtención de evidencia pertinente, diferenciando experiencia, hipótesis o comprobación cuando corresponde.",
+          "claridad": "El escenario es apropiado para comunicación y responsabilidad en un cargo junior. Descriptor propuesto: Solicita información con precisión, alcance y organización adecuados; una repregunta breve también puede cumplir este descriptor.",
+          "neutralidad": "El escenario es apropiado para comunicación y responsabilidad en un cargo junior. Descriptor propuesto: Solicita o contrasta información sin imponer conclusiones y permite reconocer límites, discrepancias o alternativas cuando corresponde."
+        }
+      }
+    },
+    {
+      "case_id": "E07",
+      "question": "¿Qué haces normalmente cuando encuentras un error?",
+      "approach": "conductual",
+      "objective": "Obtener un episodio pasado concreto de resolución de problemas.",
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "desarrollo",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": 3,
+          "enfoque": 2,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Logrado",
+        "justifications": {
+          "pertinencia": "Una respuesta habitual no aporta necesariamente un episodio pasado, aunque es pertinente. Descriptor propuesto: Solicita información relacionada con una responsabilidad, requisito o competencia pertinente al cargo y al objetivo del turno.",
+          "enfoque": "Una respuesta habitual no aporta necesariamente un episodio pasado, aunque es pertinente. Descriptor propuesto: Se aproxima al tipo de evidencia buscado, pero omite elementos necesarios para interpretarla o confunde hechos con hipótesis.",
+          "claridad": "Una respuesta habitual no aporta necesariamente un episodio pasado, aunque es pertinente. Descriptor propuesto: Solicita información con precisión, alcance y organización adecuados; una repregunta breve también puede cumplir este descriptor.",
+          "neutralidad": "Una respuesta habitual no aporta necesariamente un episodio pasado, aunque es pertinente. Descriptor propuesto: Solicita o contrasta información sin imponer conclusiones y permite reconocer límites, discrepancias o alternativas cuando corresponde."
+        }
+      }
+    },
+    {
+      "case_id": "E08",
+      "question": "¿Qué sabes de informática?",
+      "approach": "mixto",
+      "objective": "Explorar bases técnicas para el puesto.",
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "desarrollo",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": 2,
+          "enfoque": 2,
+          "claridad": 2,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "En desarrollo",
+        "justifications": {
+          "pertinencia": "El alcance amplio no concreta qué conocimiento se desea comprobar. Descriptor propuesto: Tiene relación indirecta con el cargo, pero solicita información demasiado genérica o poco útil para el objetivo conocido.",
+          "enfoque": "El alcance amplio no concreta qué conocimiento se desea comprobar. Descriptor propuesto: Se aproxima al tipo de evidencia buscado, pero omite elementos necesarios para interpretarla o confunde hechos con hipótesis.",
+          "claridad": "El alcance amplio no concreta qué conocimiento se desea comprobar. Descriptor propuesto: Permite identificar la intención general, pero contiene ambigüedad evitable, términos imprecisos o demasiadas demandas sin organizar.",
+          "neutralidad": "El alcance amplio no concreta qué conocimiento se desea comprobar. Descriptor propuesto: Solicita o contrasta información sin imponer conclusiones y permite reconocer límites, discrepancias o alternativas cuando corresponde."
+        }
+      }
+    },
+    {
+      "case_id": "E09",
+      "question": "¿Cuál es tu color favorito?",
+      "approach": "mixto",
+      "objective": "Consultar preferencias personales.",
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "desarrollo",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": 1,
+          "enfoque": 3,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Logrado",
+        "justifications": {
+          "pertinencia": "El dato es ajeno al puesto; el método factual es adecuado al objetivo declarado y no se penaliza dos veces. Descriptor propuesto: Solicita información ajena al cargo y al objetivo conocido, o exige experiencia impropia del nivel junior sin justificación.",
+          "enfoque": "El dato es ajeno al puesto; el método factual es adecuado al objetivo declarado y no se penaliza dos veces. Descriptor propuesto: La formulación permite obtener la evidencia buscada; acepta aclaraciones factuales y mezclas justificadas dentro de la entrevista.",
+          "claridad": "El dato es ajeno al puesto; el método factual es adecuado al objetivo declarado y no se penaliza dos veces. Descriptor propuesto: Solicita información con precisión, alcance y organización adecuados; una repregunta breve también puede cumplir este descriptor.",
+          "neutralidad": "El dato es ajeno al puesto; el método factual es adecuado al objetivo declarado y no se penaliza dos veces. Descriptor propuesto: Solicita o contrasta información sin imponer conclusiones y permite reconocer límites, discrepancias o alternativas cuando corresponde."
+        }
+      }
+    },
+    {
+      "case_id": "E10",
+      "question": "¿Cuántos equipos internacionales de más de cien personas has dirigido?",
+      "approach": "mixto",
+      "objective": "Verificar liderazgo ejecutivo como requisito obligatorio.",
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "desarrollo",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": 1,
+          "enfoque": 3,
+          "claridad": 4,
+          "neutralidad": 3
+        },
+        "status": "evaluada",
+        "visible_level": "Logrado",
+        "justifications": {
+          "pertinencia": "Impone una expectativa de trayectoria impropia de este cargo junior. Descriptor propuesto: Solicita información ajena al cargo y al objetivo conocido, o exige experiencia impropia del nivel junior sin justificación.",
+          "enfoque": "Impone una expectativa de trayectoria impropia de este cargo junior. Descriptor propuesto: La formulación permite obtener la evidencia buscada; acepta aclaraciones factuales y mezclas justificadas dentro de la entrevista.",
+          "claridad": "Impone una expectativa de trayectoria impropia de este cargo junior. Descriptor propuesto: Solicita información con precisión, alcance y organización adecuados; una repregunta breve también puede cumplir este descriptor.",
+          "neutralidad": "Impone una expectativa de trayectoria impropia de este cargo junior. Descriptor propuesto: Permite responder sin una conclusión impuesta y utiliza premisas respaldadas por el contexto disponible."
+        }
+      }
+    },
+    {
+      "case_id": "E11",
+      "question": "¿Verdad que siempre pruebas todo antes de entregar?",
+      "approach": "conductual",
+      "objective": "Explorar prácticas reales de pruebas.",
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "desarrollo",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": 3,
+          "enfoque": 2,
+          "claridad": 4,
+          "neutralidad": 2
+        },
+        "status": "evaluada",
+        "visible_level": "Logrado",
+        "justifications": {
+          "pertinencia": "La confirmación sugerida favorece una respuesta idealizada en lugar de evidencia concreta. Descriptor propuesto: Solicita información relacionada con una responsabilidad, requisito o competencia pertinente al cargo y al objetivo del turno.",
+          "enfoque": "La confirmación sugerida favorece una respuesta idealizada en lugar de evidencia concreta. Descriptor propuesto: Se aproxima al tipo de evidencia buscado, pero omite elementos necesarios para interpretarla o confunde hechos con hipótesis.",
+          "claridad": "La confirmación sugerida favorece una respuesta idealizada en lugar de evidencia concreta. Descriptor propuesto: Solicita información con precisión, alcance y organización adecuados; una repregunta breve también puede cumplir este descriptor.",
+          "neutralidad": "La confirmación sugerida favorece una respuesta idealizada en lugar de evidencia concreta. Descriptor propuesto: Sugiere una respuesta deseada o introduce una presuposición no respaldada que dificulta responder libremente."
+        }
+      }
+    },
+    {
+      "case_id": "E12",
+      "question": "Como eres irresponsable, ¿por qué entregaste tarde?",
+      "approach": "conductual",
+      "objective": "Explorar una demora mencionada previamente.",
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "desarrollo",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": 3,
+          "enfoque": 2,
+          "claridad": 3,
+          "neutralidad": 1
+        },
+        "status": "evaluada",
+        "visible_level": "En desarrollo",
+        "justifications": {
+          "pertinencia": "La descalificación y atribución causal condicionan la respuesta. Descriptor propuesto: Solicita información relacionada con una responsabilidad, requisito o competencia pertinente al cargo y al objetivo del turno.",
+          "enfoque": "La descalificación y atribución causal condicionan la respuesta. Descriptor propuesto: Se aproxima al tipo de evidencia buscado, pero omite elementos necesarios para interpretarla o confunde hechos con hipótesis.",
+          "claridad": "La descalificación y atribución causal condicionan la respuesta. Descriptor propuesto: Permite comprender qué información se solicita; sus referencias contextuales están disponibles y las demandas son manejables.",
+          "neutralidad": "La descalificación y atribución causal condicionan la respuesta. Descriptor propuesto: Incorpora presión explícita, un juicio descalificador o una premisa injustificada que condiciona sustancialmente la respuesta."
+        }
+      }
+    },
+    {
+      "case_id": "E13",
+      "question": "¿Qué aprendiste de una estimación que resultó demasiado optimista?",
+      "approach": "conductual",
+      "objective": "Explorar aprendizaje de una estimación descrita.",
+      "competency": null,
+      "context_turns": [
+        {
+          "turn_number": 1,
+          "question": "Me equivoqué al estimar una tarea.",
+          "answer": "La estimé en dos días y tomó cuatro.",
+          "truncated": false
+        }
+      ],
+      "classification": null,
+      "difficulty": "alta",
+      "split": "desarrollo",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": 4,
+          "enfoque": 4,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Destacado",
+        "justifications": {
+          "pertinencia": "La repregunta explora aprendizaje sobre un antecedente disponible. Descriptor propuesto: Solicita evidencia concreta y útil para distinguir el desempeño esperado en el cargo junior, con un alcance apropiado al objetivo.",
+          "enfoque": "La repregunta explora aprendizaje sobre un antecedente disponible. Descriptor propuesto: La formulación orienta con precisión la obtención de evidencia pertinente, diferenciando experiencia, hipótesis o comprobación cuando corresponde.",
+          "claridad": "La repregunta explora aprendizaje sobre un antecedente disponible. Descriptor propuesto: Solicita información con precisión, alcance y organización adecuados; una repregunta breve también puede cumplir este descriptor.",
+          "neutralidad": "La repregunta explora aprendizaje sobre un antecedente disponible. Descriptor propuesto: Solicita o contrasta información sin imponer conclusiones y permite reconocer límites, discrepancias o alternativas cuando corresponde."
+        }
+      }
+    },
+    {
+      "case_id": "E14",
+      "question": "¿Qué hiciste después para comprobar que el problema estaba resuelto?",
+      "approach": "conductual",
+      "objective": "Explorar verificación posterior a una corrección relatada.",
+      "competency": null,
+      "context_turns": [
+        {
+          "turn_number": 1,
+          "question": "Cuéntame un error que corregiste.",
+          "answer": "Corregí una consulta que excluía solicitudes sin responsable.",
+          "truncated": false
+        }
+      ],
+      "classification": null,
+      "difficulty": "alta",
+      "split": "desarrollo",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": 4,
+          "enfoque": 4,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Destacado",
+        "justifications": {
+          "pertinencia": "El antecedente de depuración permite interpretar una repregunta breve. Descriptor propuesto: Solicita evidencia concreta y útil para distinguir el desempeño esperado en el cargo junior, con un alcance apropiado al objetivo.",
+          "enfoque": "El antecedente de depuración permite interpretar una repregunta breve. Descriptor propuesto: La formulación orienta con precisión la obtención de evidencia pertinente, diferenciando experiencia, hipótesis o comprobación cuando corresponde.",
+          "claridad": "El antecedente de depuración permite interpretar una repregunta breve. Descriptor propuesto: Solicita información con precisión, alcance y organización adecuados; una repregunta breve también puede cumplir este descriptor.",
+          "neutralidad": "El antecedente de depuración permite interpretar una repregunta breve. Descriptor propuesto: Solicita o contrasta información sin imponer conclusiones y permite reconocer límites, discrepancias o alternativas cuando corresponde."
+        }
+      }
+    },
+    {
+      "case_id": "E15",
+      "question": "¿Qué hiciste después?",
+      "approach": "conductual",
+      "objective": null,
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "alta",
+      "split": "desarrollo",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": null,
+          "enfoque": null,
+          "claridad": null,
+          "neutralidad": 4
+        },
+        "status": "parcial",
+        "visible_level": null,
+        "justifications": {
+          "pertinencia": "Sin antecedente no se identifica la acción previa ni el objetivo; no se inventa contexto. Descriptor propuesto: Sin evidencia suficiente; no imputar un nivel.",
+          "enfoque": "Sin antecedente no se identifica la acción previa ni el objetivo; no se inventa contexto. Descriptor propuesto: Sin evidencia suficiente; no imputar un nivel.",
+          "claridad": "Sin antecedente no se identifica la acción previa ni el objetivo; no se inventa contexto. Descriptor propuesto: Sin evidencia suficiente; no imputar un nivel.",
+          "neutralidad": "Sin antecedente no se identifica la acción previa ni el objetivo; no se inventa contexto. Descriptor propuesto: Solicita o contrasta información sin imponer conclusiones y permite reconocer límites, discrepancias o alternativas cuando corresponde."
+        }
+      }
+    },
+    {
+      "case_id": "E16",
+      "question": "¿Y el resultado?",
+      "approach": "conductual",
+      "objective": "Conocer el efecto de una mejora relatada.",
+      "competency": null,
+      "context_turns": [
+        {
+          "turn_number": 1,
+          "question": "¿Qué hiciste para reducir errores?",
+          "answer": "Añadí una validación al formulario.",
+          "truncated": false
+        }
+      ],
+      "classification": null,
+      "difficulty": "alta",
+      "split": "desarrollo",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": 4,
+          "enfoque": 4,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Destacado",
+        "justifications": {
+          "pertinencia": "La brevedad no reduce claridad cuando el antecedente permite interpretarla. Descriptor propuesto: Solicita evidencia concreta y útil para distinguir el desempeño esperado en el cargo junior, con un alcance apropiado al objetivo.",
+          "enfoque": "La brevedad no reduce claridad cuando el antecedente permite interpretarla. Descriptor propuesto: La formulación orienta con precisión la obtención de evidencia pertinente, diferenciando experiencia, hipótesis o comprobación cuando corresponde.",
+          "claridad": "La brevedad no reduce claridad cuando el antecedente permite interpretarla. Descriptor propuesto: Solicita información con precisión, alcance y organización adecuados; una repregunta breve también puede cumplir este descriptor.",
+          "neutralidad": "La brevedad no reduce claridad cuando el antecedente permite interpretarla. Descriptor propuesto: Solicita o contrasta información sin imponer conclusiones y permite reconocer límites, discrepancias o alternativas cuando corresponde."
+        }
+      }
+    },
+    {
+      "case_id": "E17",
+      "question": "¿Qué lenguaje usaste y qué harías si una prueba fallara?",
+      "approach": "mixto",
+      "objective": "Combinar aclaración factual y razonamiento situacional.",
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "desarrollo",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": 3,
+          "enfoque": 3,
+          "claridad": 3,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Logrado",
+        "justifications": {
+          "pertinencia": "Dos demandas relacionadas pueden ser manejables sin penalización automática por mezcla. Descriptor propuesto: Solicita información relacionada con una responsabilidad, requisito o competencia pertinente al cargo y al objetivo del turno.",
+          "enfoque": "Dos demandas relacionadas pueden ser manejables sin penalización automática por mezcla. Descriptor propuesto: La formulación permite obtener la evidencia buscada; acepta aclaraciones factuales y mezclas justificadas dentro de la entrevista.",
+          "claridad": "Dos demandas relacionadas pueden ser manejables sin penalización automática por mezcla. Descriptor propuesto: Permite comprender qué información se solicita; sus referencias contextuales están disponibles y las demandas son manejables.",
+          "neutralidad": "Dos demandas relacionadas pueden ser manejables sin penalización automática por mezcla. Descriptor propuesto: Solicita o contrasta información sin imponer conclusiones y permite reconocer límites, discrepancias o alternativas cuando corresponde."
+        }
+      }
+    },
+    {
+      "case_id": "E18",
+      "question": "Explica tu proyecto, sus tecnologías, todos sus errores, los requisitos, los plazos y qué harías en otra empresa.",
+      "approach": "mixto",
+      "objective": "Explorar un proyecto de forma ordenada.",
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "desarrollo",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": 3,
+          "enfoque": 2,
+          "claridad": 2,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Logrado",
+        "justifications": {
+          "pertinencia": "Acumula varias demandas y cambia de experiencia a hipótesis sin organizar el alcance. Descriptor propuesto: Solicita información relacionada con una responsabilidad, requisito o competencia pertinente al cargo y al objetivo del turno.",
+          "enfoque": "Acumula varias demandas y cambia de experiencia a hipótesis sin organizar el alcance. Descriptor propuesto: Se aproxima al tipo de evidencia buscado, pero omite elementos necesarios para interpretarla o confunde hechos con hipótesis.",
+          "claridad": "Acumula varias demandas y cambia de experiencia a hipótesis sin organizar el alcance. Descriptor propuesto: Permite identificar la intención general, pero contiene ambigüedad evitable, términos imprecisos o demasiadas demandas sin organizar.",
+          "neutralidad": "Acumula varias demandas y cambia de experiencia a hipótesis sin organizar el alcance. Descriptor propuesto: Solicita o contrasta información sin imponer conclusiones y permite reconocer límites, discrepancias o alternativas cuando corresponde."
+        }
+      }
+    },
+    {
+      "case_id": "E19",
+      "question": "¿Usaste Python o JavaScript en ese proyecto?",
+      "approach": "mixto",
+      "objective": "Precisar un lenguaje de un proyecto previamente identificado.",
+      "competency": null,
+      "context_turns": [
+        {
+          "turn_number": 1,
+          "question": "Cuéntame tu proyecto académico.",
+          "answer": "En Inventario Aula implementé el backend.",
+          "truncated": false
+        }
+      ],
+      "classification": null,
+      "difficulty": "alta",
+      "split": "desarrollo",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": 3,
+          "enfoque": 3,
+          "claridad": 4,
+          "neutralidad": 3
+        },
+        "status": "evaluada",
+        "visible_level": "Logrado",
+        "justifications": {
+          "pertinencia": "Las alternativas sirven para aclarar, pero pueden limitar una respuesta distinta. Descriptor propuesto: Solicita información relacionada con una responsabilidad, requisito o competencia pertinente al cargo y al objetivo del turno.",
+          "enfoque": "Las alternativas sirven para aclarar, pero pueden limitar una respuesta distinta. Descriptor propuesto: La formulación permite obtener la evidencia buscada; acepta aclaraciones factuales y mezclas justificadas dentro de la entrevista.",
+          "claridad": "Las alternativas sirven para aclarar, pero pueden limitar una respuesta distinta. Descriptor propuesto: Solicita información con precisión, alcance y organización adecuados; una repregunta breve también puede cumplir este descriptor.",
+          "neutralidad": "Las alternativas sirven para aclarar, pero pueden limitar una respuesta distinta. Descriptor propuesto: Permite responder sin una conclusión impuesta y utiliza premisas respaldadas por el contexto disponible."
+        }
+      }
+    },
+    {
+      "case_id": "E20",
+      "question": "¿Qué opción elegiste y qué alternativas descartaste?",
+      "approach": "conductual",
+      "objective": "Explorar una decisión técnica relatada.",
+      "competency": null,
+      "context_turns": [
+        {
+          "turn_number": 1,
+          "question": "Cuéntame una decisión técnica.",
+          "answer": "Elegí un LEFT JOIN para incluir solicitudes sin responsable.",
+          "truncated": false
+        }
+      ],
+      "classification": null,
+      "difficulty": "alta",
+      "split": "desarrollo",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": 4,
+          "enfoque": 4,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Destacado",
+        "justifications": {
+          "pertinencia": "Pregunta por la decisión y su contraste sin imponer la opción correcta. Descriptor propuesto: Solicita evidencia concreta y útil para distinguir el desempeño esperado en el cargo junior, con un alcance apropiado al objetivo.",
+          "enfoque": "Pregunta por la decisión y su contraste sin imponer la opción correcta. Descriptor propuesto: La formulación orienta con precisión la obtención de evidencia pertinente, diferenciando experiencia, hipótesis o comprobación cuando corresponde.",
+          "claridad": "Pregunta por la decisión y su contraste sin imponer la opción correcta. Descriptor propuesto: Solicita información con precisión, alcance y organización adecuados; una repregunta breve también puede cumplir este descriptor.",
+          "neutralidad": "Pregunta por la decisión y su contraste sin imponer la opción correcta. Descriptor propuesto: Solicita o contrasta información sin imponer conclusiones y permite reconocer límites, discrepancias o alternativas cuando corresponde."
+        }
+      }
+    },
+    {
+      "case_id": "E21",
+      "question": "Hola, buenos días.",
+      "approach": "mixto",
+      "objective": null,
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "alta",
+      "split": "desarrollo",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": null,
+          "enfoque": null,
+          "claridad": null,
+          "neutralidad": null
+        },
+        "status": "no_evaluable",
+        "visible_level": null,
+        "justifications": {
+          "pertinencia": "Es un saludo, no una pregunta de entrevista. Descriptor propuesto: Sin evidencia suficiente; no imputar un nivel.",
+          "enfoque": "Es un saludo, no una pregunta de entrevista. Descriptor propuesto: Sin evidencia suficiente; no imputar un nivel.",
+          "claridad": "Es un saludo, no una pregunta de entrevista. Descriptor propuesto: Sin evidencia suficiente; no imputar un nivel.",
+          "neutralidad": "Es un saludo, no una pregunta de entrevista. Descriptor propuesto: Sin evidencia suficiente; no imputar un nivel."
+        }
+      }
+    },
+    {
+      "case_id": "E22",
+      "question": "Gracias por tu respuesta.",
+      "approach": "mixto",
+      "objective": null,
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "alta",
+      "split": "desarrollo",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": null,
+          "enfoque": null,
+          "claridad": null,
+          "neutralidad": null
+        },
+        "status": "no_evaluable",
+        "visible_level": null,
+        "justifications": {
+          "pertinencia": "Es un agradecimiento sin una nueva petición de información. Descriptor propuesto: Sin evidencia suficiente; no imputar un nivel.",
+          "enfoque": "Es un agradecimiento sin una nueva petición de información. Descriptor propuesto: Sin evidencia suficiente; no imputar un nivel.",
+          "claridad": "Es un agradecimiento sin una nueva petición de información. Descriptor propuesto: Sin evidencia suficiente; no imputar un nivel.",
+          "neutralidad": "Es un agradecimiento sin una nueva petición de información. Descriptor propuesto: Sin evidencia suficiente; no imputar un nivel."
+        }
+      }
+    },
+    {
+      "case_id": "E23",
+      "question": "   ",
+      "approach": "mixto",
+      "objective": null,
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "alta",
+      "split": "desarrollo",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": null,
+          "enfoque": null,
+          "claridad": null,
+          "neutralidad": null
+        },
+        "status": "no_evaluable",
+        "visible_level": null,
+        "justifications": {
+          "pertinencia": "La intervención vacía no debe puntuarse. Descriptor propuesto: Sin evidencia suficiente; no imputar un nivel.",
+          "enfoque": "La intervención vacía no debe puntuarse. Descriptor propuesto: Sin evidencia suficiente; no imputar un nivel.",
+          "claridad": "La intervención vacía no debe puntuarse. Descriptor propuesto: Sin evidencia suficiente; no imputar un nivel.",
+          "neutralidad": "La intervención vacía no debe puntuarse. Descriptor propuesto: Sin evidencia suficiente; no imputar un nivel."
+        }
+      }
+    },
+    {
+      "case_id": "E24",
+      "question": "Describe cómo comprobarías una consulta SQL antes de publicarla.",
+      "approach": "situacional",
+      "objective": "Explorar comprobación de una consulta.",
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "desarrollo",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": 4,
+          "enfoque": 4,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Destacado",
+        "justifications": {
+          "pertinencia": "La petición imperativa es evaluable y apropiada para razonamiento técnico. Descriptor propuesto: Solicita evidencia concreta y útil para distinguir el desempeño esperado en el cargo junior, con un alcance apropiado al objetivo.",
+          "enfoque": "La petición imperativa es evaluable y apropiada para razonamiento técnico. Descriptor propuesto: La formulación orienta con precisión la obtención de evidencia pertinente, diferenciando experiencia, hipótesis o comprobación cuando corresponde.",
+          "claridad": "La petición imperativa es evaluable y apropiada para razonamiento técnico. Descriptor propuesto: Solicita información con precisión, alcance y organización adecuados; una repregunta breve también puede cumplir este descriptor.",
+          "neutralidad": "La petición imperativa es evaluable y apropiada para razonamiento técnico. Descriptor propuesto: Solicita o contrasta información sin imponer conclusiones y permite reconocer límites, discrepancias o alternativas cuando corresponde."
+        }
+      }
+    },
+    {
+      "case_id": "E25",
+      "question": "¿Has usado Python?",
+      "approach": "mixto",
+      "objective": "Comprobar una base técnica.",
+      "competency": null,
+      "context_turns": [],
+      "classification": {
+        "evaluability": "evaluable",
+        "technical_error": null,
+        "labels": {
+          "approaches": [
+            "factual_tecnico"
+          ],
+          "forms": [
+            "abierta"
+          ],
+          "attributes": [
+            "directiva"
+          ],
+          "certainty": "clara"
+        }
+      },
+      "difficulty": "alta",
+      "split": "desarrollo",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": 3,
+          "enfoque": 3,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Logrado",
+        "justifications": {
+          "pertinencia": "No se rebaja por ser cerrada ni por una etiqueta auxiliar directiva errónea. Descriptor propuesto: Solicita información relacionada con una responsabilidad, requisito o competencia pertinente al cargo y al objetivo del turno.",
+          "enfoque": "No se rebaja por ser cerrada ni por una etiqueta auxiliar directiva errónea. Descriptor propuesto: La formulación permite obtener la evidencia buscada; acepta aclaraciones factuales y mezclas justificadas dentro de la entrevista.",
+          "claridad": "No se rebaja por ser cerrada ni por una etiqueta auxiliar directiva errónea. Descriptor propuesto: Solicita información con precisión, alcance y organización adecuados; una repregunta breve también puede cumplir este descriptor.",
+          "neutralidad": "No se rebaja por ser cerrada ni por una etiqueta auxiliar directiva errónea. Descriptor propuesto: Solicita o contrasta información sin imponer conclusiones y permite reconocer límites, discrepancias o alternativas cuando corresponde."
+        }
+      }
+    },
+    {
+      "case_id": "E26",
+      "question": "Cuéntame cómo resolviste un desacuerdo en tu equipo.",
+      "approach": "conductual",
+      "objective": "Explorar colaboración mediante una experiencia.",
+      "competency": null,
+      "context_turns": [],
+      "classification": {
+        "evaluability": "evaluable",
+        "technical_error": null,
+        "labels": {
+          "approaches": [
+            "situacional"
+          ],
+          "forms": [
+            "abierta"
+          ],
+          "attributes": [
+            "directiva"
+          ],
+          "certainty": "clara"
+        }
+      },
+      "difficulty": "alta",
+      "split": "desarrollo",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": 4,
+          "enfoque": 4,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Destacado",
+        "justifications": {
+          "pertinencia": "La evidencia de una experiencia prevalece sobre una clasificación situacional errónea. Descriptor propuesto: Solicita evidencia concreta y útil para distinguir el desempeño esperado en el cargo junior, con un alcance apropiado al objetivo.",
+          "enfoque": "La evidencia de una experiencia prevalece sobre una clasificación situacional errónea. Descriptor propuesto: La formulación orienta con precisión la obtención de evidencia pertinente, diferenciando experiencia, hipótesis o comprobación cuando corresponde.",
+          "claridad": "La evidencia de una experiencia prevalece sobre una clasificación situacional errónea. Descriptor propuesto: Solicita información con precisión, alcance y organización adecuados; una repregunta breve también puede cumplir este descriptor.",
+          "neutralidad": "La evidencia de una experiencia prevalece sobre una clasificación situacional errónea. Descriptor propuesto: Solicita o contrasta información sin imponer conclusiones y permite reconocer límites, discrepancias o alternativas cuando corresponde."
+        }
+      }
+    },
+    {
+      "case_id": "E27",
+      "question": "¿Qué harías si una entrega no cumpliera los requisitos?",
+      "approach": "situacional",
+      "objective": "Explorar actuación frente a requisitos incumplidos.",
+      "competency": null,
+      "context_turns": [],
+      "classification": {
+        "evaluability": "evaluable",
+        "technical_error": null,
+        "labels": {
+          "approaches": [
+            "situacional"
+          ],
+          "forms": [
+            "abierta"
+          ],
+          "attributes": [
+            "directiva"
+          ],
+          "certainty": "clara"
+        }
+      },
+      "difficulty": "alta",
+      "split": "desarrollo",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": 4,
+          "enfoque": 4,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Destacado",
+        "justifications": {
+          "pertinencia": "No es directiva solo por solicitar explicar una actuación. Descriptor propuesto: Solicita evidencia concreta y útil para distinguir el desempeño esperado en el cargo junior, con un alcance apropiado al objetivo.",
+          "enfoque": "No es directiva solo por solicitar explicar una actuación. Descriptor propuesto: La formulación orienta con precisión la obtención de evidencia pertinente, diferenciando experiencia, hipótesis o comprobación cuando corresponde.",
+          "claridad": "No es directiva solo por solicitar explicar una actuación. Descriptor propuesto: Solicita información con precisión, alcance y organización adecuados; una repregunta breve también puede cumplir este descriptor.",
+          "neutralidad": "No es directiva solo por solicitar explicar una actuación. Descriptor propuesto: Solicita o contrasta información sin imponer conclusiones y permite reconocer límites, discrepancias o alternativas cuando corresponde."
+        }
+      }
+    },
+    {
+      "case_id": "E28",
+      "question": "¿Cómo demostrarías que nunca cometes errores?",
+      "approach": "mixto",
+      "objective": "Explorar cómo reconoce y gestiona errores.",
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "desarrollo",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": 2,
+          "enfoque": 1,
+          "claridad": 3,
+          "neutralidad": 1
+        },
+        "status": "evaluada",
+        "visible_level": "En desarrollo",
+        "justifications": {
+          "pertinencia": "Exige una afirmación absoluta y presupone un desempeño sin errores. Descriptor propuesto: Tiene relación indirecta con el cargo, pero solicita información demasiado genérica o poco útil para el objetivo conocido.",
+          "enfoque": "Exige una afirmación absoluta y presupone un desempeño sin errores. Descriptor propuesto: La petición no permite obtener el tipo de evidencia que exige el objetivo explícito del turno.",
+          "claridad": "Exige una afirmación absoluta y presupone un desempeño sin errores. Descriptor propuesto: Permite comprender qué información se solicita; sus referencias contextuales están disponibles y las demandas son manejables.",
+          "neutralidad": "Exige una afirmación absoluta y presupone un desempeño sin errores. Descriptor propuesto: Incorpora presión explícita, un juicio descalificador o una premisa injustificada que condiciona sustancialmente la respuesta."
+        }
+      }
+    },
+    {
+      "case_id": "E29",
+      "question": "¿Qué periodo de tu trayectoria corresponde a esa estimación?",
+      "approach": "conductual",
+      "objective": "Aclarar la ubicación temporal de un ejemplo relatado.",
+      "competency": null,
+      "context_turns": [
+        {
+          "turn_number": 1,
+          "question": "Describe una estimación que no se cumplió.",
+          "answer": "Durante mi empleo estimé una tarea en dos días y tomó cuatro.",
+          "truncated": false
+        }
+      ],
+      "classification": null,
+      "difficulty": "alta",
+      "split": "desarrollo",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": 3,
+          "enfoque": 3,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Logrado",
+        "justifications": {
+          "pertinencia": "Una aclaración factual puede apoyar el análisis conductual. Descriptor propuesto: Solicita información relacionada con una responsabilidad, requisito o competencia pertinente al cargo y al objetivo del turno.",
+          "enfoque": "Una aclaración factual puede apoyar el análisis conductual. Descriptor propuesto: La formulación permite obtener la evidencia buscada; acepta aclaraciones factuales y mezclas justificadas dentro de la entrevista.",
+          "claridad": "Una aclaración factual puede apoyar el análisis conductual. Descriptor propuesto: Solicita información con precisión, alcance y organización adecuados; una repregunta breve también puede cumplir este descriptor.",
+          "neutralidad": "Una aclaración factual puede apoyar el análisis conductual. Descriptor propuesto: Solicita o contrasta información sin imponer conclusiones y permite reconocer límites, discrepancias o alternativas cuando corresponde."
+        }
+      }
+    },
+    {
+      "case_id": "E30",
+      "question": "¿En qué parte del proyecto pediste revisión y por qué?",
+      "approach": "conductual",
+      "objective": "Explorar límites y colaboración en un proyecto relatado.",
+      "competency": null,
+      "context_turns": [
+        {
+          "turn_number": 1,
+          "question": "Cuéntame un proyecto de equipo.",
+          "answer": "Trabajé en el módulo de solicitudes de MesaFaro.",
+          "truncated": false
+        }
+      ],
+      "classification": null,
+      "difficulty": "alta",
+      "split": "desarrollo",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": 4,
+          "enfoque": 4,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Destacado",
+        "justifications": {
+          "pertinencia": "Delimita una acción propia y su motivo sin exigir autonomía senior. Descriptor propuesto: Solicita evidencia concreta y útil para distinguir el desempeño esperado en el cargo junior, con un alcance apropiado al objetivo.",
+          "enfoque": "Delimita una acción propia y su motivo sin exigir autonomía senior. Descriptor propuesto: La formulación orienta con precisión la obtención de evidencia pertinente, diferenciando experiencia, hipótesis o comprobación cuando corresponde.",
+          "claridad": "Delimita una acción propia y su motivo sin exigir autonomía senior. Descriptor propuesto: Solicita información con precisión, alcance y organización adecuados; una repregunta breve también puede cumplir este descriptor.",
+          "neutralidad": "Delimita una acción propia y su motivo sin exigir autonomía senior. Descriptor propuesto: Solicita o contrasta información sin imponer conclusiones y permite reconocer límites, discrepancias o alternativas cuando corresponde."
+        }
+      }
+    },
+    {
+      "case_id": "E31",
+      "question": "¿Para qué sirve una clave primaria en una base de datos?",
+      "approach": "mixto",
+      "objective": "Comprobar una base de SQL.",
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "comprobacion_conocida",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": 4,
+          "enfoque": 4,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Destacado",
+        "justifications": {
+          "pertinencia": "Una definición técnica es pertinente si el objetivo del turno es comprobar fundamentos. Descriptor propuesto: Solicita evidencia concreta y útil para distinguir el desempeño esperado en el cargo junior, con un alcance apropiado al objetivo.",
+          "enfoque": "Una definición técnica es pertinente si el objetivo del turno es comprobar fundamentos. Descriptor propuesto: La formulación orienta con precisión la obtención de evidencia pertinente, diferenciando experiencia, hipótesis o comprobación cuando corresponde.",
+          "claridad": "Una definición técnica es pertinente si el objetivo del turno es comprobar fundamentos. Descriptor propuesto: Solicita información con precisión, alcance y organización adecuados; una repregunta breve también puede cumplir este descriptor.",
+          "neutralidad": "Una definición técnica es pertinente si el objetivo del turno es comprobar fundamentos. Descriptor propuesto: Solicita o contrasta información sin imponer conclusiones y permite reconocer límites, discrepancias o alternativas cuando corresponde."
+        }
+      }
+    },
+    {
+      "case_id": "E32",
+      "question": "¿Cómo organizarías tu trabajo si dos tareas urgentes coincidieran?",
+      "approach": "situacional",
+      "objective": "Explorar organización y comunicación de prioridades.",
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "comprobacion_conocida",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": 4,
+          "enfoque": 4,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Destacado",
+        "justifications": {
+          "pertinencia": "El escenario permite explicar prioridades sin exigir decidir unilateralmente. Descriptor propuesto: Solicita evidencia concreta y útil para distinguir el desempeño esperado en el cargo junior, con un alcance apropiado al objetivo.",
+          "enfoque": "El escenario permite explicar prioridades sin exigir decidir unilateralmente. Descriptor propuesto: La formulación orienta con precisión la obtención de evidencia pertinente, diferenciando experiencia, hipótesis o comprobación cuando corresponde.",
+          "claridad": "El escenario permite explicar prioridades sin exigir decidir unilateralmente. Descriptor propuesto: Solicita información con precisión, alcance y organización adecuados; una repregunta breve también puede cumplir este descriptor.",
+          "neutralidad": "El escenario permite explicar prioridades sin exigir decidir unilateralmente. Descriptor propuesto: Solicita o contrasta información sin imponer conclusiones y permite reconocer límites, discrepancias o alternativas cuando corresponde."
+        }
+      }
+    },
+    {
+      "case_id": "E33",
+      "question": "Tu solución fue obviamente mala, ¿por qué no elegiste la correcta?",
+      "approach": "conductual",
+      "objective": "Explorar una decisión técnica relatada.",
+      "competency": null,
+      "context_turns": [
+        {
+          "turn_number": 1,
+          "question": "¿Qué alternativa elegiste?",
+          "answer": "Elegí mantener la validación y consultar la prioridad con mi supervisor.",
+          "truncated": false
+        }
+      ],
+      "classification": null,
+      "difficulty": "alta",
+      "split": "comprobacion_conocida",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": 3,
+          "enfoque": 1,
+          "claridad": 2,
+          "neutralidad": 1
+        },
+        "status": "evaluada",
+        "visible_level": "En desarrollo",
+        "justifications": {
+          "pertinencia": "Impone el juicio de que la alternativa fue incorrecta sin permitir justificarla. Descriptor propuesto: Solicita información relacionada con una responsabilidad, requisito o competencia pertinente al cargo y al objetivo del turno.",
+          "enfoque": "Impone el juicio de que la alternativa fue incorrecta sin permitir justificarla. Descriptor propuesto: La petición no permite obtener el tipo de evidencia que exige el objetivo explícito del turno.",
+          "claridad": "Impone el juicio de que la alternativa fue incorrecta sin permitir justificarla. Descriptor propuesto: Permite identificar la intención general, pero contiene ambigüedad evitable, términos imprecisos o demasiadas demandas sin organizar.",
+          "neutralidad": "Impone el juicio de que la alternativa fue incorrecta sin permitir justificarla. Descriptor propuesto: Incorpora presión explícita, un juicio descalificador o una premisa injustificada que condiciona sustancialmente la respuesta."
+        }
+      }
+    },
+    {
+      "case_id": "E34",
+      "question": "¿Puedes detallar qué aportaste tú y qué correspondió al resto del equipo?",
+      "approach": "conductual",
+      "objective": "Distinguir contribución propia de contribución colectiva.",
+      "competency": null,
+      "context_turns": [
+        {
+          "turn_number": 1,
+          "question": "Cuéntame tu proyecto académico.",
+          "answer": "En Inventario Aula trabajamos en equipo.",
+          "truncated": false
+        }
+      ],
+      "classification": null,
+      "difficulty": "alta",
+      "split": "comprobacion_conocida",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": 4,
+          "enfoque": 4,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Destacado",
+        "justifications": {
+          "pertinencia": "Delimita responsabilidades sin atribuir todo el proyecto a una sola persona. Descriptor propuesto: Solicita evidencia concreta y útil para distinguir el desempeño esperado en el cargo junior, con un alcance apropiado al objetivo.",
+          "enfoque": "Delimita responsabilidades sin atribuir todo el proyecto a una sola persona. Descriptor propuesto: La formulación orienta con precisión la obtención de evidencia pertinente, diferenciando experiencia, hipótesis o comprobación cuando corresponde.",
+          "claridad": "Delimita responsabilidades sin atribuir todo el proyecto a una sola persona. Descriptor propuesto: Solicita información con precisión, alcance y organización adecuados; una repregunta breve también puede cumplir este descriptor.",
+          "neutralidad": "Delimita responsabilidades sin atribuir todo el proyecto a una sola persona. Descriptor propuesto: Solicita o contrasta información sin imponer conclusiones y permite reconocer límites, discrepancias o alternativas cuando corresponde."
+        }
+      }
+    },
+    {
+      "case_id": "E35",
+      "question": "¿Cómo lo hiciste?",
+      "approach": "conductual",
+      "objective": "Profundizar en una acción técnica recién mencionada.",
+      "competency": null,
+      "context_turns": [
+        {
+          "turn_number": 1,
+          "question": "Cuéntame una corrección técnica.",
+          "answer": "Cambié la consulta para incluir registros sin responsable.",
+          "truncated": false
+        }
+      ],
+      "classification": null,
+      "difficulty": "alta",
+      "split": "comprobacion_conocida",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": 4,
+          "enfoque": 4,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Destacado",
+        "justifications": {
+          "pertinencia": "La pregunta breve tiene antecedente suficiente y permite explorar el procedimiento. Descriptor propuesto: Solicita evidencia concreta y útil para distinguir el desempeño esperado en el cargo junior, con un alcance apropiado al objetivo.",
+          "enfoque": "La pregunta breve tiene antecedente suficiente y permite explorar el procedimiento. Descriptor propuesto: La formulación orienta con precisión la obtención de evidencia pertinente, diferenciando experiencia, hipótesis o comprobación cuando corresponde.",
+          "claridad": "La pregunta breve tiene antecedente suficiente y permite explorar el procedimiento. Descriptor propuesto: Solicita información con precisión, alcance y organización adecuados; una repregunta breve también puede cumplir este descriptor.",
+          "neutralidad": "La pregunta breve tiene antecedente suficiente y permite explorar el procedimiento. Descriptor propuesto: Solicita o contrasta información sin imponer conclusiones y permite reconocer límites, discrepancias o alternativas cuando corresponde."
+        }
+      }
+    },
+    {
+      "case_id": "E36",
+      "question": "¿Cómo lo hiciste?",
+      "approach": "conductual",
+      "objective": null,
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "alta",
+      "split": "comprobacion_conocida",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": null,
+          "enfoque": null,
+          "claridad": null,
+          "neutralidad": 4
+        },
+        "status": "parcial",
+        "visible_level": null,
+        "justifications": {
+          "pertinencia": "La misma pregunta sin contexto carece de referente; no debe confundirse con una pregunta siempre deficiente. Descriptor propuesto: Sin evidencia suficiente; no imputar un nivel.",
+          "enfoque": "La misma pregunta sin contexto carece de referente; no debe confundirse con una pregunta siempre deficiente. Descriptor propuesto: Sin evidencia suficiente; no imputar un nivel.",
+          "claridad": "La misma pregunta sin contexto carece de referente; no debe confundirse con una pregunta siempre deficiente. Descriptor propuesto: Sin evidencia suficiente; no imputar un nivel.",
+          "neutralidad": "La misma pregunta sin contexto carece de referente; no debe confundirse con una pregunta siempre deficiente. Descriptor propuesto: Solicita o contrasta información sin imponer conclusiones y permite reconocer límites, discrepancias o alternativas cuando corresponde."
+        }
+      }
+    },
+    {
+      "case_id": "E37",
+      "question": "¿Cuántos meses duró tu práctica?",
+      "approach": "mixto",
+      "objective": "Aclarar la duración de una experiencia formativa.",
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "comprobacion_conocida",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": 3,
+          "enfoque": 3,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Logrado",
+        "justifications": {
+          "pertinencia": "Una respuesta factual breve cumple el objetivo sin necesitar un relato completo. Descriptor propuesto: Solicita información relacionada con una responsabilidad, requisito o competencia pertinente al cargo y al objetivo del turno.",
+          "enfoque": "Una respuesta factual breve cumple el objetivo sin necesitar un relato completo. Descriptor propuesto: La formulación permite obtener la evidencia buscada; acepta aclaraciones factuales y mezclas justificadas dentro de la entrevista.",
+          "claridad": "Una respuesta factual breve cumple el objetivo sin necesitar un relato completo. Descriptor propuesto: Solicita información con precisión, alcance y organización adecuados; una repregunta breve también puede cumplir este descriptor.",
+          "neutralidad": "Una respuesta factual breve cumple el objetivo sin necesitar un relato completo. Descriptor propuesto: Solicita o contrasta información sin imponer conclusiones y permite reconocer límites, discrepancias o alternativas cuando corresponde."
+        }
+      }
+    },
+    {
+      "case_id": "E38",
+      "question": "¿Qué experiencia tienes liderando despliegues globales sin supervisión?",
+      "approach": "mixto",
+      "objective": "Explorar exposición adicional, sin convertirla en requisito del cargo.",
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "comprobacion_conocida",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": 2,
+          "enfoque": 3,
+          "claridad": 4,
+          "neutralidad": 3
+        },
+        "status": "evaluada",
+        "visible_level": "Logrado",
+        "justifications": {
+          "pertinencia": "Es periférica para un junior y debe distinguirse de responsabilidades obligatorias. Descriptor propuesto: Tiene relación indirecta con el cargo, pero solicita información demasiado genérica o poco útil para el objetivo conocido.",
+          "enfoque": "Es periférica para un junior y debe distinguirse de responsabilidades obligatorias. Descriptor propuesto: La formulación permite obtener la evidencia buscada; acepta aclaraciones factuales y mezclas justificadas dentro de la entrevista.",
+          "claridad": "Es periférica para un junior y debe distinguirse de responsabilidades obligatorias. Descriptor propuesto: Solicita información con precisión, alcance y organización adecuados; una repregunta breve también puede cumplir este descriptor.",
+          "neutralidad": "Es periférica para un junior y debe distinguirse de responsabilidades obligatorias. Descriptor propuesto: Permite responder sin una conclusión impuesta y utiliza premisas respaldadas por el contexto disponible."
+        }
+      }
+    },
+    {
+      "case_id": "E39",
+      "question": "¿Qué cambió después de aplicar esa corrección?",
+      "approach": "conductual",
+      "objective": "Explorar el resultado de una corrección relatada.",
+      "competency": null,
+      "context_turns": [
+        {
+          "turn_number": 1,
+          "question": "Cuéntame un error que corregiste.",
+          "answer": "Corregí una consulta que excluía solicitudes sin responsable.",
+          "truncated": false
+        }
+      ],
+      "classification": null,
+      "difficulty": "alta",
+      "split": "comprobacion_conocida",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": 4,
+          "enfoque": 4,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Destacado",
+        "justifications": {
+          "pertinencia": "El contexto previo permite contrastar el efecto sin sugerir que necesariamente mejoró. Descriptor propuesto: Solicita evidencia concreta y útil para distinguir el desempeño esperado en el cargo junior, con un alcance apropiado al objetivo.",
+          "enfoque": "El contexto previo permite contrastar el efecto sin sugerir que necesariamente mejoró. Descriptor propuesto: La formulación orienta con precisión la obtención de evidencia pertinente, diferenciando experiencia, hipótesis o comprobación cuando corresponde.",
+          "claridad": "El contexto previo permite contrastar el efecto sin sugerir que necesariamente mejoró. Descriptor propuesto: Solicita información con precisión, alcance y organización adecuados; una repregunta breve también puede cumplir este descriptor.",
+          "neutralidad": "El contexto previo permite contrastar el efecto sin sugerir que necesariamente mejoró. Descriptor propuesto: Solicita o contrasta información sin imponer conclusiones y permite reconocer límites, discrepancias o alternativas cuando corresponde."
+        }
+      }
+    },
+    {
+      "case_id": "E40",
+      "question": "Cuéntame una dificultad, qué hiciste para resolverla y qué resultado obtuviste.",
+      "approach": "conductual",
+      "objective": "Obtener un episodio con acción y resultado.",
+      "competency": null,
+      "context_turns": [],
+      "classification": null,
+      "difficulty": "media",
+      "split": "comprobacion_conocida",
+      "review_status": "pending",
+      "reviewer": null,
+      "expected": {
+        "levels": {
+          "pertinencia": 4,
+          "enfoque": 4,
+          "claridad": 4,
+          "neutralidad": 4
+        },
+        "status": "evaluada",
+        "visible_level": "Destacado",
+        "justifications": {
+          "pertinencia": "Las demandas están relacionadas y organizadas alrededor de un único episodio. Descriptor propuesto: Solicita evidencia concreta y útil para distinguir el desempeño esperado en el cargo junior, con un alcance apropiado al objetivo.",
+          "enfoque": "Las demandas están relacionadas y organizadas alrededor de un único episodio. Descriptor propuesto: La formulación orienta con precisión la obtención de evidencia pertinente, diferenciando experiencia, hipótesis o comprobación cuando corresponde.",
+          "claridad": "Las demandas están relacionadas y organizadas alrededor de un único episodio. Descriptor propuesto: Solicita información con precisión, alcance y organización adecuados; una repregunta breve también puede cumplir este descriptor.",
+          "neutralidad": "Las demandas están relacionadas y organizadas alrededor de un único episodio. Descriptor propuesto: Solicita o contrasta información sin imponer conclusiones y permite reconocer límites, discrepancias o alternativas cuando corresponde."
+        }
+      }
+    }
+  ]
+}

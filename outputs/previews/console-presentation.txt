@@ -1,0 +1,303 @@
+VISTA PREVIA DE PRESENTACIÓN | Sesión guardada, sin nuevas generaciones
+Las respuestas y evaluaciones que siguen conservan los resultados originales.
+
+==============================================================================
+SIMULADOR DE ENTREVISTA | SELECCIÓN DEL MODELO
+==============================================================================
+1. MODELO LOCAL | OLLAMA (predeterminado)
+
+  Procesa la entrevista en este equipo.
+
+2. API | UNAB IA
+
+  Envía el escenario y la conversación al servicio externo.
+
+Pulsa Enter para usar el modelo local.
+
+
+------------------------------------------------------------------------------
+MENÚ DE LA ENTREVISTA
+------------------------------------------------------------------------------
+  /iniciar          Comenzar la entrevista
+  /cv               Consultar el currículum del candidato
+  /puesto           Consultar la oferta y sus requisitos
+  /sesion           Ver el estado y los contadores
+  /respuestas       Ver el índice de preguntas enviadas
+  /respuesta N      Leer la respuesta y evaluación de la pregunta N
+  /ayuda o /menu    Mostrar este menú
+  /salir            Finalizar y guardar la sesión
+
+Puedes revisar el CV y el puesto antes de escribir /iniciar.
+
+
+==============================================================================
+CURRÍCULUM RESUMIDO - PERFIL FICTICIO
+==============================================================================
+Nicolás Vera Soto
+
+RESUMEN PROFESIONAL
+
+Profesional recién titulado, con una práctica y aproximadamente un año y medio
+de experiencia posterior, inicialmente a jornada parcial. Ha colaborado en
+aplicaciones web con Python, Flask y PostgreSQL, bajo supervisión técnica.
+
+FORMACIÓN
+
+Ingeniería en Informática | Instituto Profesional Horizonte Digital
+  marzo de 2022 a diciembre de 2025.
+  Titulado. Titulación: diciembre de 2025.
+
+EXPERIENCIA LABORAL
+
+Soluciones Digitales Faro
+
+Practicante de desarrollo
+  enero de 2025 a marzo de 2025
+  - Reproducir errores.
+  - Corregir problemas pequeños en Python.
+  - Realizar consultas SQL.
+  - Actualizar documentación.
+
+Desarrollador Junior
+  abril de 2025 a septiembre de 2026
+  Jornada parcial: abril de 2025 a diciembre de 2025.
+  Jornada completa: enero de 2026 a septiembre de 2026.
+  - Colaborar en un sistema interno de solicitudes de soporte mientras
+    terminaba sus estudios.
+  - Implementar funciones de backend.
+  - Escribir pruebas.
+  - Corregir errores.
+  - Atender observaciones de revisión de código.
+
+CONOCIMIENTOS TÉCNICOS
+
+  - Python
+  - Flask y HTTP
+  - SQL y PostgreSQL
+  - Pruebas con pytest
+  - Git y GitHub
+  - HTML, CSS y JavaScript
+
+HERRAMIENTAS
+
+VS Code, Terminal, Entorno virtual de Python, Postman
+
+PROYECTOS
+
+MesaFaro | Profesional
+  abril de 2025 a septiembre de 2026
+  Sistema interno de solicitudes de soporte.
+  Tecnologías: Python, Flask, PostgreSQL, Git, pytest.
+  Aporte personal: Endpoints del módulo de solicitudes; Validaciones;
+  Correcciones de consultas; Pruebas.
+
+Inventario Aula | Académico
+  agosto de 2025 a noviembre de 2025
+  Proyecto de título para registrar productos, entradas, salidas y
+  existencias.
+  Tecnologías: Python, Flask, PostgreSQL, HTML, CSS, JavaScript básico.
+  Aporte personal: Backend de productos y movimientos; Consultas SQL; Parte de
+  las pruebas.
+
+
+==============================================================================
+PUESTO FICTICIO
+==============================================================================
+Desarrollador de Software Junior
+
+Organización: Aplicaciones Nexo
+
+DESCRIPCIÓN
+
+El puesto busca una persona que colabore en aplicaciones web internas bajo
+supervisión técnica.
+
+RESPONSABILIDADES
+
+  - Implementar y mantener funciones de backend con Python y Flask.
+  - Consultar y actualizar datos en PostgreSQL.
+  - Reproducir y corregir errores.
+  - Escribir pruebas y documentación.
+  - Participar en revisiones de código y aclaración de requisitos.
+
+REQUISITOS
+
+  - Formación informática terminada o próxima a finalizar.
+  - Bases de Python, SQL, HTTP y Git.
+  - Comprensión inicial de APIs y pruebas automatizadas.
+  - Capacidad para comunicar dificultades y solicitar apoyo.
+
+COMPETENCIAS A EXPLORAR
+
+  - Resolución de problemas
+  - Comunicación
+  - Colaboración
+  - Organización
+  - Aprendizaje
+  - Responsabilidad
+
+NIVEL ESPERADO
+
+El puesto admite experiencia inicial y conocimientos en desarrollo.
+
+NO REQUERIDO PARA EL PUESTO
+
+  - Dominio de servicios de nube
+  - Kubernetes
+  - Liderazgo de equipos
+  - Autonomía propia de un cargo senior
+
+
+==============================================================================
+ENTREVISTA INICIADA
+==============================================================================
+Máximo: 20 preguntas enviadas al candidato.
+
+Cada pregunta enviada cuenta, aunque falle la respuesta.
+
+Escribe tu primera pregunta. Los comandos siguen disponibles.
+
+La primera respuesta puede tardar mientras se prepara el modelo.
+
+
+------------------------------------------------------------------------------
+ÍNDICE DE PREGUNTAS Y RESPUESTAS
+------------------------------------------------------------------------------
+Pregunta 01 | Respuesta completa
+  ¿Cómo identificaste y corregiste un error en una aplicación?
+
+Pregunta 02 | Respuesta completa
+  ¿Qué harías si una prueba automática comienza a fallar después de un cambio?
+
+Pregunta 03 | Respuesta completa
+  ¿Qué haces normalmente cuando encuentras un error?
+
+Pregunta 04 | Respuesta completa
+  ¿Qué sabes de informática?
+
+Pregunta 05 | Respuesta completa
+  ¿Tienes interes en crear nuevos proyectos?
+
+Pregunta 06 | Respuesta completa
+  Dado que el puesto implica colaboración en aplicaciones internas, ¿qué te
+  motiva más: mantener y mejorar sistemas existentes o participar en la
+  creación de nuevas funcionalidades?
+
+Escribe /respuesta N para consultar una entrada; por ejemplo, /respuesta 1.
+
+
+==============================================================================
+CONSULTA | PREGUNTA 01
+==============================================================================
+PREGUNTA DEL ENTREVISTADOR
+
+  ¿Cómo identificaste y corregiste un error en una aplicación?
+
+------------------------------------------------------------------------------
+RESPUESTA DEL CANDIDATO | PREGUNTA 01/20
+------------------------------------------------------------------------------
+  En el proyecto MesaFaro, la coordinadora detectó solicitudes ausentes en el
+  listado. Yo reproduje el problema e identifiqué que un `INNER JOIN` estaba
+  excluyendo registros sin responsable. Consulté mi propuesta con el
+  desarrollador, cambié la consulta a `LEFT JOIN` y añadí una prueba de
+  regresión para asegurar que los registros volvieran a aparecer
+  correctamente.
+
+Tiempo de respuesta: 47.18 s
+
+------------------------------------------------------------------------------
+EVALUACIÓN DE LA PREGUNTA 01 | PROVISIONAL
+------------------------------------------------------------------------------
+Resultado: Logrado
+
+CRITERIOS
+
+  Pertinencia: 3/4
+  Adecuación metodológica: 3/4
+  Claridad: 3/4
+  Neutralidad: 3/4
+
+RETROALIMENTACIÓN
+
+  Pertinencia: Solicita evidencia concreta sobre la corrección de errores, una
+  responsabilidad clave del puesto.
+
+SUGERENCIA
+
+  Puedes mantener esta pregunta para su objetivo y profundizar en otra
+  intervención si lo necesitas.
+
+Tiempo adicional de evaluación: 63.03 s
+
+
+==============================================================================
+CONSULTA | PREGUNTA 04
+==============================================================================
+PREGUNTA DEL ENTREVISTADOR
+
+  ¿Qué sabes de informática?
+
+------------------------------------------------------------------------------
+RESPUESTA DEL CANDIDATO | PREGUNTA 04/20
+------------------------------------------------------------------------------
+  Como recién titulado en Ingeniería en Informática del Instituto Profesional
+  Horizonte Digital, tengo bases sólidas en programación y desarrollo web.
+  Estoy familiarizado con Python, he trabajado con Flask para crear APIs y he
+  manejado bases de datos relacionales con PostgreSQL, incluyendo consultas
+  complejas y relaciones entre tablas. También tengo conocimientos básicos de
+  Git, HTML, CSS y JavaScript.
+
+Tiempo de respuesta: 19.73 s
+
+------------------------------------------------------------------------------
+EVALUACIÓN DE LA PREGUNTA 04 | PROVISIONAL
+------------------------------------------------------------------------------
+Resultado: Evaluación no disponible
+
+RETROALIMENTACIÓN
+
+  No se obtuvo una evaluación válida; la respuesta del candidato se conserva.
+
+Tiempo adicional de evaluación: 110.31 s
+
+
+==============================================================================
+SESIÓN ACTUAL
+==============================================================================
+Identificador: a6616bd6-22de-4a22-8950-6315cc6931c2
+Creada (UTC): 2026-11-02T02:20:51.525981+00:00
+Estado: cerrada
+
+AVANCE DE LA ENTREVISTA
+
+Preguntas enviadas: 6/20
+Preguntas disponibles: 14
+Respuestas completas: 6
+Incidencias técnicas: 2
+
+MEMORIA DE LA ENTREVISTA
+
+Selecciones de memoria: 0
+Resúmenes usados: 0
+
+CLASIFICACIÓN DE INTERVENCIONES
+
+Intervenciones registradas: 6
+Aclaraciones solicitadas: 0
+Entradas no evaluables: 0
+Fallos de clasificación: 0
+Fallos de contrato del clasificador: 0
+Fallos de JSON del clasificador: 0
+Fallos del proveedor del clasificador (incluye red/servidor): 0
+Otras incidencias técnicas (candidato/memoria/sesión): 0
+
+EVALUACIÓN DE PREGUNTAS
+
+Preguntas con evaluación completa: 4
+Evaluaciones parciales: 0
+Fallos técnicos del evaluador: 2
+Discrepancias de evaluación pendientes: 0
+
+REGISTRO
+
+El registro completo se guarda al finalizar esta ejecución.

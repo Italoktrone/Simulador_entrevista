@@ -2,7 +2,6 @@
 
 from dataclasses import asdict
 import json
-from pathlib import Path
 from types import SimpleNamespace
 
 import httpx

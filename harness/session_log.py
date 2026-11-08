@@ -10,6 +10,8 @@ from uuid import UUID
 from harness.json_loader import load_json
 from harness.schema_validator import validate_data
 from harness.live_context import validate_live_context_log
+from harness.intervention_log import validate_interventions
+from harness.evaluation_log import validate_evaluations
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -89,12 +91,21 @@ def validate_session_data(data: object, schema: dict, config_schema: dict) -> No
         if status == "incomplete" and (response is None or response["finish_reason"] != "length"):
             raise SessionLogError("Un intento incompleto debe conservar su respuesta cortada para diagnóstico.")
         integrity_issue |= any(issue["code"] == "profile_integrity_error" for issue in attempt["issues"])
+    try:
+        validate_interventions(data)
+        validate_evaluations(data)
+    except ValueError:
+        raise SessionLogError("La auditoría de clasificación no coincide con la política o el historial registrado.") from None
+    for event in data.get("interventions", []):
+        _check_utc(event["received_at"], "interventions.received_at")
+        _check_utc(event["finished_at"], "interventions.finished_at")
+        integrity_issue |= any(issue["code"] == "profile_integrity_error" for issue in event["issues"])
     if integrity_issue and data["source_integrity"] != "failed":
         raise SessionLogError("La incidencia de integridad no coincide con el estado del perfil registrado.")
     try:
         validate_live_context_log(data)
     except ValueError:
-        raise SessionLogError("La auditoría de contexto no coincide con la política o el historial registrado.") from None
+        raise SessionLogError("La auditoría de contexto o clasificación no coincide con la política o el historial registrado.") from None
 
 
 def _validate(data: object) -> None:

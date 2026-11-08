@@ -1,0 +1,21 @@
+/cv
+/puesto
+/iniciar
+Hola
+¿Qué título obtuviste y en qué institución estudiaste?
+En MesaFaro, ¿cuáles fueron tus aportes personales al desarrollo del sistema?
+En ese proyecto, cuéntame una ocasión en la que tuviste que corregir un error. ¿Qué hiciste tú y cuál fue el resultado?
+Respecto de ese caso, ¿cómo comprobaste que la corrección funcionaba?
+¿Qué diferencia hay entre un INNER JOIN y un LEFT JOIN?
+En un máximo de ocho líneas, muéstrame un ejemplo hipotético en Python para comprobar que un campo obligatorio no esté vacío.
+¿Has utilizado Git para controlar versiones?
+Si una prueba falla justo antes de entregar una corrección, ¿qué harías primero y cómo decidirías si la entrega puede continuar?
+En ese escenario, ¿qué información le comunicarías al desarrollador que te supervisa?
+Describe, en dos pasos, cómo revisarías una corrección antes de entregarla.
+¿Qué haces habitualmente cuando un requisito no está claro?
+¿Has utilizado Kubernetes? Si no lo has hecho, puedes indicarlo.
+Gracias
+/respuestas
+/respuesta 3
+/sesion
+/salir

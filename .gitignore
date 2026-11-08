@@ -12,3 +12,11 @@ outputs/sessions/*
 !outputs/sessions/README.md
 outputs/results/*
 !outputs/results/README.md
+# Material de trabajo de las entregas académicas.
+/outputs/informe-e2/
+/outputs/presentacion-e2/
+/outputs/api/
+/outputs/tmp/
+/reports/*
+!/reports/.gitkeep
+.ruff_cache/

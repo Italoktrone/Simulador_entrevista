@@ -64,7 +64,7 @@ def validate_live_context_log(data: dict) -> None:
     Las citas se reconstruyen desde el prefijo original del historial. Las
     comprobaciones de integridad posteriores no invalidan registros anteriores.
     """
-    if data["session_version"] == "1.0.0":
+    if "context_policy" not in data:
         return
     settings = {k: v for k, v in data["context_policy"].items() if k != "policy_version"}
     policy = LiveContextPolicy(**settings)
