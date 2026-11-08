@@ -61,6 +61,12 @@ layout_mode = 2
 text = "Reconectar"
 tooltip_text = "Comprobar el servicio de entrevistas."
 
+[node name="Candidates" type="HBoxContainer" parent="Margin/Layout"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+theme_override_constants/separation = 12
+
 [node name="Toolbar" type="HBoxContainer" parent="Margin/Layout"]
 layout_mode = 2
 theme_override_constants/separation = 12
@@ -112,17 +118,18 @@ theme_override_font_sizes/font_size = 12
 text = "CANDIDATO DE PRÁCTICA"
 
 [node name="Avatar" type="Label" parent="Margin/Layout/Body/ProfileCard/Profile"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 38
 theme_override_colors/font_color = Color(0.39, 0.87, 0.79, 1)
-text = "NV"
+text = "?"
 
 [node name="CandidateName" type="Label" parent="Margin/Layout/Body/ProfileCard/Profile"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(240, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 21
-text = "Un candidato disponible"
+text = "Elige un candidato"
 autowrap_mode = 2
 
 [node name="JobTitle" type="Label" parent="Margin/Layout/Body/ProfileCard/Profile"]
@@ -130,7 +137,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(240, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6, 0.69, 0.77, 1)
-text = "Inicia una entrevista para consultar el perfil y el puesto."
+text = "El currículum y el puesto se cargarán antes de iniciar."
 autowrap_mode = 2
 
 [node name="Fictional" type="Label" parent="Margin/Layout/Body/ProfileCard/Profile"]
@@ -148,14 +155,14 @@ unique_name_in_owner = true
 layout_mode = 2
 bbcode_enabled = false
 selection_enabled = true
-text = "El currículum aparecerá al iniciar."
+text = "Selecciona un perfil para consultar su currículum."
 
 [node name="Puesto" type="RichTextLabel" parent="Margin/Layout/Body/ProfileCard/Profile/Documents"]
 unique_name_in_owner = true
 layout_mode = 2
 bbcode_enabled = false
 selection_enabled = true
-text = "Los requisitos del cargo aparecerán al iniciar."
+text = "Los requisitos del cargo aparecerán al seleccionar."
 
 [node name="Workspace" type="VBoxContainer" parent="Margin/Layout/Body"]
 layout_mode = 2
@@ -184,6 +191,14 @@ bbcode_enabled = false
 scroll_following = true
 selection_enabled = true
 text = "Inicia una entrevista cuando estés listo. Aquí aparecerán tus preguntas y las respuestas del candidato."
+
+[node name="Sources" type="Label" parent="Margin/Layout/Body/Workspace/HistoryCard/Content"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.6, 0.69, 0.77, 1)
+autowrap_mode = 2
 
 [node name="EvaluationCard" type="PanelContainer" parent="Margin/Layout/Body/Workspace"]
 custom_minimum_size = Vector2(0, 190)

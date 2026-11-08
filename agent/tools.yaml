@@ -1,7 +1,7 @@
 version: 1.0.0
 tools:
   - name: search_documents
-    description: Recupera pasajes del CV público y del puesto aprobados con origen y huella.
+    description: Recupera pasajes del CV público del candidato elegido y del puesto, con origen y huella.
     implementation: harness.document_search:DocumentSearch.search
     endpoint: POST /tools/search_documents
     execution: deterministic-before-generation
@@ -13,10 +13,13 @@ tools:
       properties:
         query: {type: string, minLength: 1, maxLength: 4000, pattern: '\S'}
         limit: {type: integer, minimum: 1, maximum: 5, default: 3}
+        candidate_id: {type: string, pattern: '^cand-[0-9]{3}$', default: cand-001}
     output:
       collection: sources
       fields: [document_id, title, source, sha256, text]
     sources:
       - data/jobs/desarrollador_junior.json
       - data/candidates/candidato_junior.json
+      - data/candidates/candidata_calidad.json
+      - data/candidates/candidato_datos.json
     candidate_projection: public_resume

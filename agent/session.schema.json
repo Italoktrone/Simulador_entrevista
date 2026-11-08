@@ -1,0 +1,31 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "request_id": {
+      "format": "uuid",
+      "title": "Request Id",
+      "type": "string"
+    },
+    "candidate_id": {
+      "default": "cand-001",
+      "pattern": "^cand-[0-9]{3}$",
+      "title": "Candidate Id",
+      "type": "string"
+    },
+    "classify": {
+      "default": true,
+      "title": "Classify",
+      "type": "boolean"
+    },
+    "evaluate": {
+      "default": true,
+      "title": "Evaluate",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "request_id"
+  ],
+  "title": "SessionInput",
+  "type": "object"
+}

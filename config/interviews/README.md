@@ -1,5 +1,7 @@
 # Configuraciones de entrevista
 
+El catálogo actual incluye `basica.json` para `cand-001`, [basica-cand-002.json](basica-cand-002.json) y [basica-cand-003.json](basica-cand-003.json). Las tres configuraciones usan el mismo puesto, modalidad general, enfoque mixto y veinte preguntas. [candidate_catalog.py](../../harness/candidate_catalog.py) resuelve únicamente esas combinaciones explícitas y comprueba sus referencias antes de iniciar cada sesión. La consola conserva el primer escenario como predeterminado; la API permite elegir el candidato.
+
 [basica.json](basica.json) es la primera configuración del escenario, con formato `1.0.0`. Se valida mediante [interview_config.schema.json](../../schemas/interview_config.schema.json). [interview_config.py](../../harness/interview_config.py) ya carga y valida la configuración, el candidato y el puesto, y comprueba que sus referencias coincidan.
 
 ## Opciones iniciales

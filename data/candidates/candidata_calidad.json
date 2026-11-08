@@ -1,0 +1,123 @@
+{
+  "profile_version": "1.0.0",
+  "candidate_id": "cand-002",
+  "scenario_reference_date": "2026-10-20",
+  "is_fictional": true,
+  "evidence_scope": "Los antecedentes y evidencias son hechos ficticios del escenario; no representan personas ni resultados medidos por el programa.",
+  "name": "Camila Rojas Medina",
+  "target_job_id": "puesto-dev-junior-001",
+  "professional_summary": "Analista programadora titulada, con experiencia inicial en pruebas manuales y automatización de APIs con Python. Busca incorporarse al desarrollo backend junior. Maneja consultas SQL sencillas y ha utilizado Flask en un proyecto académico.",
+  "professional_status": {
+    "situation": "Su contrato de apoyo a calidad terminó en agosto de 2026 y está buscando un cargo de desarrollo junior.",
+    "last_contract_type": "Plazo fijo",
+    "reason_last_contract_ended": "Finalizó la etapa de verificación para la que fue contratada."
+  },
+  "education": [
+    {
+      "education_id": "edu-002",
+      "institution": "Centro de Formación Técnica Puente Sur",
+      "degree": "Analista Programador",
+      "start_month": "2022-03",
+      "end_month": "2024-12",
+      "graduation_month": "2024-12",
+      "status": "Titulada",
+      "final_project_id": "proj-202"
+    }
+  ],
+  "postgraduate_studies": [],
+  "professional_certifications": [],
+  "work_experience": [
+    {
+      "experience_id": "exp-002",
+      "organization": "Calidad Brújula",
+      "team_context": "Colaboraba con una encargada de calidad y dos desarrolladores, quienes revisaban sus pruebas y resolvían los defectos del backend.",
+      "authority_limits": ["No decidía despliegues ni prioridades del producto.", "No era responsable de modificar el backend de producción."],
+      "roles": [
+        {
+          "role_id": "role-201",
+          "title": "Practicante de pruebas de software",
+          "start_month": "2024-08",
+          "end_month": "2024-11",
+          "responsibilities": ["Ejecutar casos manuales.", "Preparar datos ficticios de prueba.", "Registrar pasos para reproducir defectos."],
+          "supervision": "La encargada de calidad revisaba los casos y reportes."
+        },
+        {
+          "role_id": "role-202",
+          "title": "Asistente de aseguramiento de calidad",
+          "start_month": "2025-01",
+          "end_month": "2026-08",
+          "responsibilities": ["Automatizar comprobaciones de API con Python y pytest.", "Ejecutar regresiones en un ambiente de pruebas.", "Verificar consultas SQL sencillas con apoyo del equipo."],
+          "supervision": "Los desarrolladores revisaban las pruebas y corregían el código de la aplicación.",
+          "project_ids": ["proj-201"]
+        }
+      ]
+    }
+  ],
+  "technical_knowledge": [
+    {"area": "Python y pytest", "scope": "Funciones, colecciones, fixtures y parametrización de pruebas de API."},
+    {"area": "HTTP y pruebas de APIs", "scope": "Solicitudes JSON, códigos de respuesta y casos de validación."},
+    {"area": "SQL básico", "scope": "SELECT, filtros y JOIN sencillos en bases de prueba; requiere apoyo para consultas complejas."},
+    {"area": "Flask", "scope": "Rutas y operaciones CRUD de un proyecto académico, sin experiencia profesional manteniendo servicios Flask."}
+  ],
+  "tools_used": ["Python", "pytest", "Postman", "Git", "GitHub", "SQLite", "PostgreSQL en ambiente de pruebas"],
+  "experience_limits": ["No ha administrado bases de datos ni producción.", "No ha diseñado arquitecturas distribuidas.", "Su experiencia profesional es de calidad; no equivale a experiencia completa como desarrolladora backend.", "No tiene certificaciones profesionales ni posgrados."],
+  "projects": [
+    {
+      "project_id": "proj-201",
+      "name": "TurnosBrújula",
+      "kind": "Profesional",
+      "description": "Aplicación de reserva de horas en la que participó verificando sus APIs.",
+      "experience_id": "exp-002",
+      "role_id": "role-202",
+      "start_month": "2025-01",
+      "end_month": "2026-08",
+      "technologies_used": ["Python", "pytest", "Postman", "PostgreSQL", "Git"],
+      "features": ["Consultar disponibilidad", "Reservar una hora", "Cancelar una reserva"],
+      "personal_contributions": ["Pruebas de validación de reservas", "Casos de regresión para horarios sin cupos", "Reportes reproducibles de defectos"],
+      "contribution_limits": ["No implementó el motor de reservas.", "Solo utilizó PostgreSQL en el ambiente de pruebas.", "Los defectos de la aplicación eran corregidos por los desarrolladores."]
+    },
+    {
+      "project_id": "proj-202",
+      "name": "AgendaTaller",
+      "kind": "Académico",
+      "description": "Agenda de servicios para un taller ficticio, desarrollada como proyecto de título.",
+      "education_id": "edu-002",
+      "start_month": "2024-07",
+      "end_month": "2024-11",
+      "team_size": 3,
+      "technologies_used": ["Python", "Flask", "SQLite", "HTML", "CSS", "Git"],
+      "personal_contributions": ["Rutas para registrar y consultar citas", "Validaciones de campos", "Pruebas del formulario de reserva"],
+      "outcome": "Demostración académica aprobada con datos ficticios.",
+      "contribution_limits": ["No se utilizó con clientes reales.", "No incluyó pagos ni despliegue de producción."]
+    }
+  ],
+  "achievements": [
+    {"achievement_id": "ach-201", "project_id": "proj-201", "situation_id": "S1", "description": "Dejar una regresión reproducible para reservas sin cupos.", "scenario_evidence": "El caso fallaba antes de la corrección del desarrollador y pasó después en el ambiente de pruebas."},
+    {"achievement_id": "ach-202", "project_id": "proj-202", "description": "Completar las rutas académicas de citas asignadas.", "scenario_evidence": "Demostración del registro y consulta durante la presentación del proyecto de título."}
+  ],
+  "behavioral_situations": [
+    {"situation_id": "S1", "title": "Reproducir una reserva sin cupos", "project_id": "proj-201", "context": "Una reserva se aceptaba cuando un horario ya no tenía cupos.", "actions": ["Preparó datos ficticios con el horario completo.", "Automatizó la solicitud y la respuesta esperada con pytest.", "Entregó el caso al desarrollador y verificó su corrección."], "outcome": "La regresión quedó incorporada a las pruebas; ella no corrigió el motor de reservas."},
+    {"situation_id": "S2", "title": "Priorizar antes de una demostración", "project_id": "proj-201", "context": "No alcanzaba a repetir todos los casos antes de una demostración interna.", "actions": ["Avisó a la encargada de calidad.", "Acordaron comprobar primero reserva y cancelación.", "Registró qué casos secundarios quedaban pendientes."], "outcome": "Se hicieron visibles las comprobaciones realizadas y las pendientes, sin afirmar una cobertura completa."},
+    {"situation_id": "S3", "title": "Aclarar la respuesta esperada de la API", "project_id": "proj-201", "context": "Un caso no indicaba si una reserva duplicada debía responder como conflicto o como entrada inválida.", "actions": ["Consultó al desarrollador antes de fijar la expectativa.", "Registró el código de respuesta acordado y un ejemplo."], "outcome": "La prueba se alineó con el comportamiento definido por el equipo."},
+    {"situation_id": "S4", "title": "Reducir el detalle de un reporte", "context": "La encargada observó que sus reportes incluían pasos que no ayudaban a reproducir el fallo.", "actions": ["Separó los pasos mínimos de los antecedentes complementarios.", "Pidió a un compañero que reprodujera el problema con la versión resumida."], "outcome": "El reporte resultó más fácil de seguir; sigue trabajando en sintetizar sus explicaciones."}
+  ],
+  "professional_competencies": [
+    {"name": "Resolución de problemas", "situation_ids": ["S1"]},
+    {"name": "Comunicación y aclaración de requisitos", "situation_ids": ["S3", "S4"]},
+    {"name": "Colaboración", "situation_ids": ["S1", "S2"]},
+    {"name": "Organización", "situation_ids": ["S2"], "development_note": "Necesita apoyo para priorizar cuando hay poco tiempo."}
+  ],
+  "strengths": [
+    {"description": "Preparar casos reproducibles y comprobar límites.", "situation_ids": ["S1"]},
+    {"description": "Aclarar una expectativa antes de automatizarla.", "situation_ids": ["S3"]}
+  ],
+  "improvement_areas": [
+    {"description": "Priorizar las comprobaciones esenciales con tiempo limitado.", "situation_ids": ["S2"]},
+    {"description": "Sintetizar reportes y explicaciones técnicas.", "situation_ids": ["S4"]}
+  ],
+  "work_motivation": "Quiere pasar de verificar servicios a implementar funciones de backend con revisión de código y acompañamiento técnico.",
+  "personality": {
+    "communication_traits": ["Metódica", "Respetuosa", "Detallista"],
+    "interview_behavior": ["Explica cómo comprobó un comportamiento antes de describir resultados.", "Puede extenderse en los detalles y acepta que le pidan una síntesis.", "Distingue sus aportes de los cambios realizados por los desarrolladores."]
+  }
+}

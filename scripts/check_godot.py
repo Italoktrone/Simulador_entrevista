@@ -17,6 +17,7 @@ import uvicorn
 from fastapi.responses import JSONResponse
 
 from app.main import create_app
+from harness.candidate_catalog import CANDIDATES, load_candidate_setup
 from harness.document_search import GroundedClient
 from harness.llm.client import LLMResponse
 from harness.session_log import load_session
@@ -27,7 +28,6 @@ PROJECT = ROOT / "app/godot"
 
 
 def simulated_factory(options):
-    from harness.interview_config import load_interview_setup
     from harness.prompt_builder import load_instructions
     from harness.question_evaluator import QuestionEvaluator
     from harness.runtime import InterviewRuntime
@@ -38,7 +38,13 @@ def simulated_factory(options):
 
     class Candidate:
         def generate(self, messages):
-            return LLMResponse("He utilizado Git durante el desarrollo del proyecto. [b]Texto literal[/b]",
+            name = load_candidate_setup(options.candidate_id).candidate.to_dict()["name"]
+            content = messages[0]["content"]
+            source = ""
+            if "DOCUMENTOS_PUBLICOS_RECUPERADOS_JSON:\n" in content:
+                documents = json.loads(content.split("DOCUMENTOS_PUBLICOS_RECUPERADOS_JSON:\n", 1)[1].split("\nFIN_DOCUMENTOS_PUBLICOS_RECUPERADOS_JSON", 1)[0])
+                source = f" [{documents[0]['document_id']}] [document_id: {documents[0]['document_id']}]" if documents else ""
+            return LLMResponse(f"Soy {name}. He utilizado Git durante el desarrollo del proyecto. [b]Texto literal[/b]{source}",
                                "simulado", "ollama", 0.01)
 
     @contextmanager
@@ -49,7 +55,7 @@ def simulated_factory(options):
             settings["classifier"] = HybridQuestionClassifier(LLMQuestionClassifier(SemanticClient()))
         if options.evaluate:
             settings["evaluator"] = QuestionEvaluator(EvaluationClient())
-        yield InterviewRuntime(load_interview_setup(), load_instructions(), grounded, **settings), grounded
+        yield InterviewRuntime(load_candidate_setup(options.candidate_id), load_instructions(), grounded, **settings), grounded
 
     return resources()
 
@@ -59,6 +65,7 @@ def main(argv=None):
     parser.add_argument("--godot", type=Path, help="Ruta del ejecutable de Godot 4.7.2")
     parser.add_argument("--live", action="store_true", help="Usar el modelo local de Ollama en vez de modelos simulados")
     parser.add_argument("--model", default="gemma4:e4b")
+    parser.add_argument("--candidate", choices=tuple(CANDIDATES), default="cand-001")
     parser.add_argument("--no-evaluation", action="store_true", help="En modo real, comprobar solo la conversación")
     parser.add_argument("--screenshot", action="store_true", help="Renderizar y capturar la interfaz (requiere escritorio)")
     args = parser.parse_args(argv)
@@ -68,7 +75,7 @@ def main(argv=None):
     if not executable or not Path(executable).is_file():
         parser.error("Indica --godot con la ruta del ejecutable instalado.")
     executable = str(Path(executable).resolve())
-    reports = ROOT / "reports/godot" / ("live" if args.live else "simulated")
+    reports = ROOT / "reports/godot" / ("live" if args.live else "simulated") / args.candidate
     reports.mkdir(parents=True, exist_ok=True)
     report_path = reports / "interface.json"
     if report_path.exists():
@@ -90,7 +97,8 @@ def main(argv=None):
             payload = await request.json() if request.method == "POST" else {}
             requests.setdefault(route, []).append(payload)
             response = await call_next(request)
-            if len(requests[route]) == 1 and response.status_code < 400:
+            inject = route in ("/health", "/sessions", "/run") or route.endswith("/close")
+            if inject and len(requests[route]) == 1 and response.status_code < 400:
                 if route == "/run":
                     return JSONResponse({"incompatible": True})
                 return JSONResponse({"error": {"code": "internal_error"}}, status_code=503)
@@ -113,7 +121,7 @@ def main(argv=None):
         environment["GODOT_SMOKE_NO_EVALUATION"] = "1" if args.no_evaluation else "0"
         display = ["--rendering-method", "gl_compatibility", "--windowed", "--resolution", "1280x820"] if args.screenshot else ["--headless"]
         command = [executable, *display, "--path", str(PROJECT), "--script", "res://tests/Smoke.gd",
-                   "--", f"--report={report_path.as_posix()}"]
+                   "--", f"--report={report_path.as_posix()}", f"--candidate={args.candidate}"]
         if args.live:
             command.append("--live")
         if args.screenshot:
@@ -140,10 +148,11 @@ def main(argv=None):
         return 1
     saved = reports / "api/sessions" / f"session-{report['session_id']}.json"
     session = load_session(saved)
-    if session["status"] != "closed" or len(session["attempts"]) != 1 or session["attempts"][0]["status"] != "completed":
+    if session["status"] != "closed" or session["candidate_id"] != args.candidate or len(session["attempts"]) != 1 or session["attempts"][0]["status"] != "completed":
         raise RuntimeError("El recorrido no conservó la sesión esperada.")
     if not args.live:
-        if len(application.state.service.sessions) != 1 or not all(len(bodies) == 2 and bodies[0] == bodies[1] for bodies in requests.values()):
+        mutations = [bodies for route, bodies in requests.items() if route in ("/sessions", "/run") or route.endswith("/close")]
+        if len(application.state.service.sessions) != 1 or not all(len(bodies) == 2 and bodies[0] == bodies[1] for bodies in mutations):
             raise RuntimeError("Los reintentos duplicaron una operación o cambiaron su contenido.")
         report["retry_verified"] = True
     report.update(session_saved=True, model=args.model if args.live else "simulated",

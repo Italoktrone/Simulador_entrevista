@@ -50,9 +50,17 @@ func metadata() -> void:
 	_send("metadata", "/metadata", HTTPClient.METHOD_GET, {})
 
 
-func start_session(classify: bool = true, evaluate: bool = true) -> void:
+func get_candidates() -> void:
+	_send("catalog", "/candidates", HTTPClient.METHOD_GET, {})
+
+
+func preview_candidate(candidate_id: String) -> void:
+	_send("candidate", "/candidates/" + candidate_id.uri_encode(), HTTPClient.METHOD_GET, {})
+
+
+func start_session(classify: bool = true, evaluate: bool = true, candidate_id: String = "cand-001") -> void:
 	_send("start", "/sessions", HTTPClient.METHOD_POST, {
-		"request_id": new_request_id(), "classify": classify, "evaluate": evaluate
+		"request_id": new_request_id(), "candidate_id": candidate_id, "classify": classify, "evaluate": evaluate
 	})
 
 
@@ -80,8 +88,8 @@ func get_logs() -> void:
 	_send("logs", "/logs?session_id=" + session_id, HTTPClient.METHOD_GET, {})
 
 
-func search_documents(query: String) -> void:
-	_send("search", "/tools/search_documents", HTTPClient.METHOD_POST, {"query": query, "limit": 3})
+func search_documents(query: String, candidate_id: String = "cand-001") -> void:
+	_send("search", "/tools/search_documents", HTTPClient.METHOD_POST, {"query": query, "limit": 3, "candidate_id": candidate_id})
 
 
 func retry_request() -> void:
@@ -145,8 +153,19 @@ func _valid_response(operation: String, payload: Dictionary) -> bool:
 	match operation:
 		"health":
 			return payload.get("status") is String and payload.get("api_version") is String
+		"catalog":
+			if not payload.get("candidates") is Array or payload.candidates.is_empty():
+				return false
+			var identifiers: Array = []
+			for entry in payload.candidates:
+				if not entry is Dictionary or not entry.get("candidate_id") is String or not entry.get("name") is String or entry.candidate_id in identifiers:
+					return false
+				identifiers.append(entry.candidate_id)
+			return true
+		"candidate":
+			return payload.get("candidate_id") == str(_pending.path).trim_prefix("/candidates/").uri_decode() and payload.get("resume") is Dictionary and payload.get("job") is Dictionary and payload.resume.get("candidate_id") == payload.candidate_id
 		"start":
-			return payload.get("session_id") is String and not payload.session_id.is_empty() and payload.get("status") == "open" and payload.get("resume") is Dictionary and payload.get("job") is Dictionary
+			return payload.get("session_id") is String and not payload.session_id.is_empty() and payload.get("status") == "open" and payload.get("resume") is Dictionary and payload.get("job") is Dictionary and payload.get("candidate_id") == _pending.body.candidate_id and payload.resume.get("candidate_id") == _pending.body.candidate_id
 		"run":
 			return payload.get("session_id") == session_id and payload.get("request_id") == _pending.body.request_id and payload.get("status") in ["completed", "handled", "error"] and payload.get("closed") is bool and (payload.get("reply") == null or payload.get("reply") is String) and (payload.get("evaluation") == null or payload.get("evaluation") is Dictionary)
 		"close":

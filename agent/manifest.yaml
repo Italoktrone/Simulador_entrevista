@@ -8,6 +8,7 @@ classifier_instructions: agent/classifier.md
 evaluator_instructions: agent/evaluator.md
 input_schema: agent/input.schema.json
 output_schema: agent/output.schema.json
+session_schema: agent/session.schema.json
 examples: agent/examples.json
 tools: agent/tools.yaml
 entrypoint: app.main:app
@@ -15,6 +16,8 @@ transport: http-json
 endpoints:
   health: GET /health
   metadata: GET /metadata
+  candidates: GET /candidates
+  candidate: GET /candidates/{candidate_id}
   start: POST /sessions
   run: POST /run
   session: GET /sessions/{session_id}
@@ -25,6 +28,7 @@ capabilities:
   - clasificacion-descriptiva
   - evaluacion-provisional
   - recuperacion-documental-con-fuentes
+  - seleccion-de-tres-candidatos
 limits:
   max_questions: 20
   max_question_characters: 4000

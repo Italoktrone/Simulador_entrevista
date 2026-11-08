@@ -1,5 +1,17 @@
 # Perfiles ficticios
 
+## Catálogo disponible
+
+| ID | Perfil | Experiencia diferenciada |
+| --- | --- | --- |
+| `cand-001` | [Nicolás Vera Soto](candidato_junior.json) | Desarrollo web junior, Flask y PostgreSQL. |
+| `cand-002` | [Camila Rojas Medina](candidata_calidad.json) | Pruebas manuales y automatización de APIs con Python. |
+| `cand-003` | [Diego Muñoz Leiva](candidato_datos.json) | Soporte de datos, SQL y normalización de CSV. |
+
+Los perfiles adicionales se elaboraron para la ampliación del 8 de noviembre de 2026. Todos son ficticios, comparten el puesto objetivo y la fecha del escenario, y mantienen distintos estudios, organizaciones, proyectos, situaciones y límites. La validación técnica comprueba esquema, cronología, referencias, CV público y carga aislada. No equivale a una aprobación humana del contenido ni a una validación educativa. Los CV se derivan de cada JSON sin copias manuales. La API y Godot usan el catálogo cerrado de [candidate_catalog.py](../../harness/candidate_catalog.py).
+
+## Origen del primer perfil y comprobaciones históricas
+
 El primer perfil es [candidato_junior.json](candidato_junior.json): Nicolás Vera Soto, identificado como `cand-001`, con fecha fija de referencia del escenario `2026-10-20`. El usuario aceptó la propuesta con esa única corrección de fecha.
 
 El archivo contiene el perfil interno completo. Sus antecedentes y evidencias son ficticios; no representan mediciones reales del programa. El currículum público se genera desde esta fuente mediante `CandidateProfile.to_public_resume()`, sin mantener una copia manual.

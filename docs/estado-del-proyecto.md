@@ -18,13 +18,23 @@ Las secciones fechadas y los registros de etapas describen el estado y las prueb
 
 ## Estado actual — 8 de noviembre de 2026
 
-Primera interfaz de escritorio implementada en `app/godot/project.godot` para Godot 4.7.2: inicio, CV/puesto, conversación, análisis independiente, contador, espera, reintentos y cierre con guardado. Usa el candidato actual, Nicolás Vera Soto, y el arnés existente. Las respuestas del modelo se presentan literalmente. La caché `.godot/` queda excluida de Git; los identificadores de scripts `.gd.uid` se conservan.
+La interfaz de Godot 4.7.2 incorpora selección de tres perfiles: Nicolás Vera Soto (desarrollo web), Camila Rojas Medina (calidad y pruebas de API) y Diego Muñoz Leiva (soporte de datos y SQL). El CV público y el puesto se consultan antes de crear la sesión; la selección queda bloqueada durante la entrevista. La API incorpora catálogo y vista previa, acepta `candidate_id` al iniciar y mantiene el escenario y los documentos del perfil elegido durante toda la sesión. El catálogo resuelve rutas explícitas y rechaza identificadores desconocidos. Los perfiles nuevos tienen validación técnica; la revisión humana de sus antecedentes y la aceptación del flujo ampliado siguen pendientes.
+
+Las citas documentales conocidas se presentan mediante sus títulos bajo la conversación y se retiran únicamente del diálogo visible; los textos originales siguen en el registro. Se mantienen respuesta y evaluación separadas, contador, espera, reintentos idempotentes y cierre con guardado. La caché `.godot/` queda excluida de Git y los identificadores `.gd.uid` se conservan.
+
+La ampliación añade 21 pruebas de selección y perfiles a la suite Python. Los recorridos simulados de Godot comprobaron los tres CV, selección y ausencia de proyectos ajenos, bloqueo durante la entrevista, pregunta, evaluación, reintentos y guardado del perfil elegido. Los tres candidatos completaron también una entrevista con Ollama `gemma4:e4b`, evaluación disponible y cierre validado. Las duraciones observadas fueron 86,42 s, 136,65 s y 141,18 s para el recorrido completo de cada candidato; las dos últimas incluyen captura renderizada. No son mediciones aisladas de latencia ni una validación semántica exhaustiva. Evidencias por candidato en `reports/godot/`.
+
+La suite ampliada terminó con **1905 pruebas aprobadas**, una advertencia de dependencia, Ruff y Bandit sin hallazgos y recuperación documental 6/6. El perfil original, las instrucciones, las referencias aprobadas y la rúbrica se conservan.
+
+### Hito T06: interfaz mínima publicada y comprobada
 
 Verificación de interfaz: 21 comprobaciones con la API real y modelos simulados, incluyendo pérdida de respuestas después de completar la operación y respuesta de turno incompatible. Los reintentos conservan UUID y contenido, con una sola sesión y un solo turno guardado. También funcionó una copia del proyecto sin caché del editor. Con Ollama `gemma4:e4b` se completaron 12 comprobaciones, respuesta real, evaluación de cuatro criterios y cierre validado; el recorrido con captura duró 65,42 segundos. Resultados locales en `reports/godot/simulated/interface.json` y `reports/godot/live/interface.json`; sesión real `334055c4-3ad9-4213-bee3-3035ac89670d`. Es una prueba funcional, sin ampliar las métricas de precisión del modelo.
 
 Verificación general posterior: **1884 pruebas aprobadas en 301,54 segundos**, Ruff y Bandit sin hallazgos, seis de seis casos de recuperación documental correctos. Una advertencia de obsolescencia de Starlette/HTTPX no afecta al resultado. Evidencia en `reports/quality-summary.json` y `reports/pytest.txt`.
 
-Uso y repetición en [operación y Godot](operacion.md#api-y-godot) y [README](../README.md). Esta implementación corresponde a la rama E2. La siguiente ampliación requiere los dos perfiles adicionales, selección de candidato en la API y selección de los tres NPCs en Godot. Los registros anteriores conservan el alcance de sus respectivas etapas.
+La interfaz mínima está publicada en E2 mediante el commit `d3c1646`. GitHub Actions n.º 5 aprobó Windows y Linux. Un clon remoto de esa versión con entorno Python nuevo aprobó 1882 pruebas, con dos omisiones por sesiones manuales históricas no distribuidas, Ruff y Bandit sin hallazgos, seis casos documentales y los recorridos de Godot simulado y con Ollama real. Esa validación corresponde a T06 con un candidato. Evidencia: `reports/t06-clone-validation.json`.
+
+Uso y repetición en [operación y Godot](operacion.md#api-y-godot) y [README](../README.md). La ampliación de perfiles y selección se valida por separado; los registros anteriores conservan el alcance de sus respectivas etapas.
 
 <a name="continuidad-agente"></a>
 

@@ -12,8 +12,8 @@ from threading import Lock
 
 from app.contracts import RunOutput
 from harness.document_search import DocumentSearch, GroundedClient
+from harness.candidate_catalog import CANDIDATES, load_candidate_setup
 from harness.hybrid_question_classifier import HybridQuestionClassifier
-from harness.interview_config import load_interview_setup
 from harness.llm.client import LLMError
 from harness.llm.factory import create_client
 from harness.llm_question_classifier import LLMQuestionClassifier, create_classification_client
@@ -37,7 +37,7 @@ class ServiceError(Exception):
 
 @contextmanager
 def runtime_session(options):
-    setup = load_interview_setup()
+    setup = load_candidate_setup(options.candidate_id)
     with ExitStack() as resources:
         client = resources.enter_context(create_client())
         grounded = GroundedClient(client)
@@ -107,6 +107,8 @@ class InterviewService:
     def start(self, options):
         request_id = str(options.request_id)
         signature = options.model_dump_json()
+        if options.candidate_id not in CANDIDATES:
+            raise ServiceError(404, "candidate_not_found")
         with self.lock:
             if request_id in self.starts:
                 previous, session_id = self.starts[request_id]
@@ -118,6 +120,8 @@ class InterviewService:
             resources = self.factory(options)
             try:
                 runtime, grounded = resources.__enter__()
+                if runtime.setup.candidate.candidate_id != options.candidate_id:
+                    raise ServiceError(500, "candidate_mismatch")
                 session = Session(runtime, grounded, resources)
                 identifier = runtime.session_id
                 self.log(identifier, request_id, "session_started")
@@ -149,6 +153,7 @@ class InterviewService:
         runtime = session.runtime
         data = runtime.session_dict()
         return {"session_id": runtime.session_id, "status": data["status"],
+                "candidate_id": runtime.setup.candidate.candidate_id,
                 "questions_asked": runtime.questions_asked, "max_questions": runtime.max_questions,
                 "classify": runtime.classification_enabled, "evaluate": runtime.evaluation_enabled,
                 "resume": runtime.setup.candidate.to_public_resume(), "job": runtime.setup.job_dict(),

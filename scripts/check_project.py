@@ -10,7 +10,7 @@ import subprocess  # nosec B404
 import sys
 from tempfile import TemporaryDirectory
 
-from app.contracts import RunInput, RunOutput
+from app.contracts import RunInput, RunOutput, SessionInput
 from harness.document_search import DocumentSearch
 from harness.interview_config import load_interview_setup
 from harness.json_loader import load_json
@@ -38,7 +38,7 @@ def main(argv=None):
     args = parser.parse_args(argv)
     directory = args.reports_dir.resolve()
     directory.mkdir(parents=True, exist_ok=True)
-    for name, model in (("input", RunInput), ("output", RunOutput)):
+    for name, model in (("input", RunInput), ("output", RunOutput), ("session", SessionInput)):
         expected = model.model_json_schema()
         if load_json(ROOT / f"agent/{name}.schema.json") != expected:
             print(f"Contrato desactualizado: agent/{name}.schema.json")

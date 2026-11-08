@@ -1,0 +1,115 @@
+{
+  "profile_version": "1.0.0",
+  "candidate_id": "cand-003",
+  "scenario_reference_date": "2026-10-20",
+  "is_fictional": true,
+  "evidence_scope": "Los antecedentes y evidencias son hechos ficticios del escenario; no representan personas ni resultados medidos por el programa.",
+  "name": "Diego Muñoz Leiva",
+  "target_job_id": "puesto-dev-junior-001",
+  "professional_summary": "Técnico en informática titulado, con experiencia inicial en soporte de datos y automatización de reportes con Python y SQL. Utilizó Flask y SQLite en su proyecto de título. Busca desarrollar aplicaciones web bajo supervisión.",
+  "professional_status": {
+    "situation": "Terminó su contrato de soporte en septiembre de 2026 y está buscando un puesto junior de desarrollo.",
+    "last_contract_type": "Plazo fijo",
+    "reason_last_contract_ended": "Finalizó el apoyo temporal a la normalización de reportes."
+  },
+  "education": [
+    {
+      "education_id": "edu-003",
+      "institution": "Instituto Técnico Valle Claro",
+      "degree": "Técnico de Nivel Superior en Informática",
+      "start_month": "2023-03",
+      "end_month": "2025-12",
+      "graduation_month": "2026-01",
+      "status": "Titulado",
+      "final_project_id": "proj-302"
+    }
+  ],
+  "postgraduate_studies": [],
+  "professional_certifications": [],
+  "work_experience": [
+    {
+      "experience_id": "exp-003",
+      "organization": "Servicios Ladera",
+      "team_context": "Trabajaba con una analista de operaciones y un encargado técnico que revisaba sus consultas y scripts.",
+      "authority_limits": ["No administraba la base de datos.", "No aprobaba modificaciones de datos ni despliegues.", "Sus consultas usaban una copia de lectura autorizada."],
+      "roles": [
+        {
+          "role_id": "role-301",
+          "title": "Asistente de soporte y reportes",
+          "start_month": "2025-03",
+          "end_month": "2026-09",
+          "responsibilities": ["Preparar consultas SQL para reportes internos.", "Normalizar archivos CSV con Python.", "Investigar diferencias de datos con la analista.", "Documentar el procedimiento de conciliación."],
+          "supervision": "El encargado técnico revisaba consultas y scripts antes de incorporarlos al procedimiento.",
+          "project_ids": ["proj-301"]
+        }
+      ]
+    }
+  ],
+  "technical_knowledge": [
+    {"area": "Python para datos", "scope": "Lectura de CSV, funciones, manejo de fechas y validaciones sencillas; utiliza la biblioteca estándar."},
+    {"area": "SQL y PostgreSQL", "scope": "Consultas de lectura, JOIN y agrupaciones para reportes; sin administración ni optimización avanzada."},
+    {"area": "Flask y HTTP", "scope": "Rutas y formularios de un proyecto académico; necesita apoyo con autenticación y diseño de APIs."},
+    {"area": "Git", "scope": "Commits y ramas sencillas; requiere ayuda para resolver conflictos más complejos."}
+  ],
+  "tools_used": ["Python", "csv", "PostgreSQL", "SQLite", "Flask", "Git", "GitHub"],
+  "experience_limits": ["No ha mantenido APIs de producción.", "No ha administrado bases de datos, infraestructura o servicios en la nube.", "No ha liderado equipos ni decidido arquitectura.", "No tiene certificaciones profesionales ni posgrados."],
+  "projects": [
+    {
+      "project_id": "proj-301",
+      "name": "ConciliaciónLadera",
+      "kind": "Profesional",
+      "description": "Procedimiento interno para comparar archivos CSV de operaciones con reportes de consulta.",
+      "experience_id": "exp-003",
+      "role_id": "role-301",
+      "start_month": "2025-04",
+      "end_month": "2026-09",
+      "technologies_used": ["Python", "csv", "PostgreSQL", "Git"],
+      "features": ["Leer archivos CSV", "Normalizar fechas", "Comparar identificadores", "Emitir un reporte de diferencias"],
+      "personal_contributions": ["Funciones de normalización de fechas", "Consultas de lectura para contrastar registros", "Ejemplos de prueba con datos ficticios", "Guía del procedimiento"],
+      "contribution_limits": ["No modificaba registros de producción.", "El proceso no era una API web.", "Las reglas de conciliación eran acordadas con la analista."]
+    },
+    {
+      "project_id": "proj-302",
+      "name": "BibliotecaBarrio",
+      "kind": "Académico",
+      "description": "Aplicación de préstamos de libros para una biblioteca ficticia, presentada como proyecto de título.",
+      "education_id": "edu-003",
+      "start_month": "2025-07",
+      "end_month": "2025-11",
+      "team_size": 4,
+      "technologies_used": ["Python", "Flask", "SQLite", "HTML", "CSS", "Git"],
+      "personal_contributions": ["Modelo de datos de libros y préstamos", "Consultas para préstamos pendientes", "Parte de las rutas de consulta"],
+      "outcome": "Presentación académica aprobada con datos ficticios.",
+      "contribution_limits": ["No se instaló en una biblioteca real.", "La autenticación fue básica y no equivale a un sistema de producción."]
+    }
+  ],
+  "achievements": [
+    {"achievement_id": "ach-301", "project_id": "proj-301", "situation_id": "S1", "description": "Identificar un formato de fecha que generaba diferencias falsas.", "scenario_evidence": "Los ejemplos de prueba acordados dejaron de marcar ese caso como discrepancia."},
+    {"achievement_id": "ach-302", "project_id": "proj-302", "description": "Completar las consultas de préstamos asignadas.", "scenario_evidence": "La demostración académica mostró el listado de préstamos pendientes con los datos de prueba."}
+  ],
+  "behavioral_situations": [
+    {"situation_id": "S1", "title": "Investigar fechas incompatibles", "project_id": "proj-301", "context": "Dos archivos representaban el mismo día con formatos diferentes y el reporte los mostraba como discrepancia.", "actions": ["Redujo el problema a un par de filas ficticias.", "Consultó a la analista cómo interpretar el formato.", "Ajustó la normalización y conservó ejemplos para comprobarla."], "outcome": "El caso acordado dejó de producir una diferencia falsa; no generalizó el resultado a todos los datos."},
+    {"situation_id": "S2", "title": "Aclarar la vigencia de un registro", "project_id": "proj-301", "context": "El pedido de reportar registros activos no definía cómo tratar un estado pendiente.", "actions": ["Mostró ejemplos a la analista.", "Registró la regla acordada antes de cambiar la consulta."], "outcome": "El reporte aplicó la definición validada por operaciones."},
+    {"situation_id": "S3", "title": "Pedir apoyo con un conflicto de Git", "project_id": "proj-302", "context": "Su rama y la de un compañero cambiaban una misma consulta del proyecto académico.", "actions": ["Detuvo la integración en lugar de sobrescribir cambios.", "Revisó ambas versiones con el compañero.", "Comprobaron el resultado con los casos existentes."], "outcome": "Integraron ambos cambios; todavía necesita práctica con conflictos complejos."},
+    {"situation_id": "S4", "title": "Comprobar el alcance de una petición", "context": "Le solicitaron corregir un dato que parecía equivocado en el reporte.", "actions": ["Verificó que su permiso era de lectura.", "Entregó el caso al encargado técnico sin modificar la fuente."], "outcome": "El responsable revisó el dato manteniendo la separación de permisos."}
+  ],
+  "professional_competencies": [
+    {"name": "Análisis y resolución de problemas", "situation_ids": ["S1"]},
+    {"name": "Comunicación", "situation_ids": ["S2"]},
+    {"name": "Colaboración y aprendizaje", "situation_ids": ["S3"]},
+    {"name": "Responsabilidad", "situation_ids": ["S4"]}
+  ],
+  "strengths": [
+    {"description": "Reducir una diferencia de datos a un ejemplo comprobable.", "situation_ids": ["S1"]},
+    {"description": "Aclarar las reglas y respetar su alcance de trabajo.", "situation_ids": ["S2", "S4"]}
+  ],
+  "improvement_areas": [
+    {"description": "Resolver conflictos de versiones con mayor autonomía.", "situation_ids": ["S3"]},
+    {"description": "Pedir definiciones antes de comenzar una consulta ambigua.", "situation_ids": ["S2"]}
+  ],
+  "work_motivation": "Quiere pasar de scripts y reportes a funciones de aplicaciones web, aprovechando SQL y aprendiendo diseño de APIs con supervisión.",
+  "personality": {
+    "communication_traits": ["Reflexivo", "Colaborativo", "Cuidadoso"],
+    "interview_behavior": ["Suele apoyar sus explicaciones en un ejemplo de datos.", "Reconoce cuando su experiencia es académica y cuando es laboral.", "Puede pedir un momento para ordenar una respuesta y no presume conocimientos que no tiene."]
+  }
+}

@@ -1,6 +1,6 @@
 # Simulador de entrevistas con candidato virtual
 
-Agente educativo en Python con candidato ficticio, clasificación descriptiva, evaluación provisional e historial por entrevista. Incluye una interfaz básica de escritorio en **Godot 4.7.2**, conectada al arnés Python mediante la API local.
+Agente educativo en Python con tres candidatos ficticios, clasificación descriptiva, evaluación provisional e historial por entrevista. Incluye una interfaz de escritorio en **Godot 4.7.2**, con selección de candidato y conectada al arnés Python mediante la API local.
 
 ## Inicio rápido
 
@@ -27,15 +27,21 @@ Si ya clonaste y falta `requirements-dev.txt`, comprueba `git branch --show-curr
 
 En Linux, crear el entorno con `python3.14 -m venv .venv`, usar `.venv/bin/python` y definir las mismas variables con `export`. Ollama debe estar iniciado antes de enviar preguntas. Se puede elegir otro modelo instalado mediante `OLLAMA_MODEL`. `/health` comprueba el servicio Python y declara que la disponibilidad del modelo todavía no se ha sondeado.
 
-Dejar esa terminal abierta. En Godot, **Importar** el archivo [app/godot/project.godot](app/godot/project.godot), abrir el proyecto y pulsar **F5**. Con el indicador «Servicio conectado», pulsar **Iniciar entrevista**, consultar las pestañas Currículum/Puesto y enviar una pregunta con Enter o Enviar. La respuesta y el análisis de la pregunta se muestran por separado. **Cerrar y guardar** permite finalizar e iniciar otra entrevista.
+Dejar esa terminal abierta. En Godot, **Importar** el archivo [app/godot/project.godot](app/godot/project.godot), abrir el proyecto y pulsar **F5**. Con el indicador «Servicio conectado», elegir uno de los tres nombres y consultar las pestañas Currículum/Puesto. Pulsar **Iniciar entrevista** y enviar una pregunta con Enter o Enviar. La respuesta y el análisis se muestran por separado; las fuentes consultadas aparecen debajo de la conversación. **Cerrar y guardar** permite finalizar y elegir otro candidato.
 
-Esta primera interfaz utiliza el candidato actual, Nicolás Vera Soto. La selección de tres NPCs y sus escenas queda para el siguiente incremento. El interruptor **Analizar mis preguntas**, configurable antes de iniciar, permite comprobar solo la conversación cuando se desactiva.
+| Identificador | Candidato ficticio | Experiencia principal |
+| --- | --- | --- |
+| `cand-001` | Nicolás Vera Soto | Desarrollo web junior con Python y Flask. |
+| `cand-002` | Camila Rojas Medina | Pruebas de software y automatización de APIs. |
+| `cand-003` | Diego Muñoz Leiva | Soporte de datos, consultas SQL y scripts. |
+
+Los tres postulan al mismo cargo junior, con fortalezas y límites diferentes. La selección queda fija durante cada entrevista. El interruptor **Analizar mis preguntas**, configurable antes de iniciar, permite comprobar solo la conversación cuando se desactiva. La ambientación y los personajes animados corresponden a una mejora visual posterior.
 
 Abrir [la documentación interactiva de la API](http://127.0.0.1:8000/docs). Desde otra terminal de PowerShell se puede iniciar una entrevista y enviar un turno:
 
 ```powershell
 $base = 'http://127.0.0.1:8000'
-$inicio = @{ request_id = [guid]::NewGuid().ToString(); classify = $true; evaluate = $true } | ConvertTo-Json
+$inicio = @{ request_id = [guid]::NewGuid().ToString(); candidate_id = 'cand-001'; classify = $true; evaluate = $true } | ConvertTo-Json
 $sesion = Invoke-RestMethod ($base + '/sessions') -Method Post -ContentType 'application/json' -Body $inicio
 $turno = @{ session_id = $sesion.session_id; request_id = [guid]::NewGuid().ToString(); question = '¿Qué hiciste en MesaFaro?'; use_rag = $true } | ConvertTo-Json
 $resultado = Invoke-RestMethod ($base + '/run') -Method Post -ContentType 'application/json' -Body ([Text.Encoding]::UTF8.GetBytes($turno))
@@ -53,6 +59,8 @@ Los proveedores UNAB IA y OpenAI se seleccionan en el proceso Python con sus var
 | --- | --- |
 | `GET /health` | Estado del servicio Python. |
 | `GET /metadata` | Manifiesto, capacidades, límites y herramienta declarada. |
+| `GET /candidates` | Catálogo público de los tres perfiles, sin crear sesiones ni llamar al modelo. |
+| `GET /candidates/{candidate_id}` | CV público y puesto del candidato elegido. |
 | `POST /sessions` | Crear entrevista con un `request_id` UUID. |
 | `GET /sessions/{session_id}` | CV público, puesto, estado y turnos. |
 | `POST /run` | Enviar una pregunta con sesión e identificador de solicitud. |
@@ -60,7 +68,7 @@ Los proveedores UNAB IA y OpenAI se seleccionan en el proceso Python con sus var
 | `GET /logs?session_id=...` | Consultar eventos JSONL estructurados. |
 | `POST /tools/search_documents` | Recuperar pasajes documentales con fuentes. |
 
-El [manifiesto](agent/manifest.yaml), los schemas de [entrada](agent/input.schema.json) y [salida](agent/output.schema.json), los [ejemplos válidos e inválidos](agent/examples.json) y [tools.yaml](agent/tools.yaml) definen la interfaz.
+El [manifiesto](agent/manifest.yaml), los schemas de [turno](agent/input.schema.json), [salida](agent/output.schema.json) y [creación de sesión](agent/session.schema.json), los [ejemplos válidos e inválidos](agent/examples.json) y [tools.yaml](agent/tools.yaml) definen la interfaz. `POST /sessions` acepta `candidate_id`; si se omite conserva `cand-001`. Un identificador desconocido devuelve `404 candidate_not_found`; un formato inválido devuelve 422. El catálogo usa rutas permitidas explícitas.
 
 La [herramienta documental](harness/document_search.py) selecciona pasajes del CV público y del puesto mediante búsqueda léxica. Con `use_rag` activo llegan al modelo del candidato como datos delimitados. `sources` muestra los documentos recuperados. La exactitud de las afirmaciones del modelo requiere revisión adicional.
 
@@ -79,10 +87,10 @@ Para comprobar la interfaz con el ejecutable de Godot instalado:
 ```powershell
 $godot = 'C:\ruta\Godot_v4.7.2-stable_win64_console.exe'
 .\.venv\Scripts\python.exe -B -m scripts.check_godot --godot $godot
-.\.venv\Scripts\python.exe -B -m scripts.check_godot --godot $godot --live --model gemma4:e4b
+.\.venv\Scripts\python.exe -B -m scripts.check_godot --godot $godot --candidate cand-002 --live --model gemma4:e4b
 ```
 
-El primer comando abre una API temporal y recorre los controles reales de Godot con modelos simulados: conexión, perfil, pregunta, evaluación, cierre y reintentos tras respuestas perdidas o incompatibles. Verifica que se conserve una sola sesión y un solo turno. `--live` utiliza Ollama local; requiere el modelo instalado y puede tardar varios minutos. Los resultados y las sesiones quedan en `reports/godot/`. `--screenshot` añade una captura con renderizado y requiere un escritorio. Estos comandos son independientes de las comprobaciones Python de GitHub Actions.
+El primer comando abre una API temporal y recorre los controles reales de Godot con modelos simulados: catálogo, CV de cada perfil, selección, pregunta, evaluación, cierre y reintentos tras respuestas perdidas o incompatibles. Verifica que se conserve una sola sesión y un solo turno del candidato elegido. `--candidate cand-001`, `cand-002` o `cand-003` elige el perfil del recorrido. `--live` utiliza Ollama local; requiere el modelo instalado y puede tardar varios minutos. Resultados y sesiones: `reports/godot/{simulated|live}/{candidate_id}/`. `--screenshot` añade una captura con renderizado y requiere un escritorio. Estos comandos son independientes de las comprobaciones Python de GitHub Actions.
 
 Para validar una instalación independiente del estado local:
 

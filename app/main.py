@@ -14,7 +14,7 @@ import yaml
 from app.contracts import RunInput, RunOutput, SearchInput, SessionInput
 from app.service import InterviewService, ROOT, ServiceError, runtime_session
 from harness.document_search import DocumentSearch
-from harness.interview_config import load_interview_setup
+from harness.candidate_catalog import load_candidate_setup, public_candidates, UnknownCandidateError
 
 
 def create_app(*, directory=None, factory=runtime_session, token=None):
@@ -54,7 +54,24 @@ def create_app(*, directory=None, factory=runtime_session, token=None):
     def metadata():
         return {"agent": yaml.safe_load((ROOT / "agent/manifest.yaml").read_text(encoding="utf-8")),
                 "tools": yaml.safe_load((ROOT / "agent/tools.yaml").read_text(encoding="utf-8")),
-                "session_storage": "single_process_memory", "api_version": "1.0.0"}
+                "session_storage": "single_process_memory", "api_version": "1.0.0",
+                "candidates": public_candidates()}
+
+    def candidate_setup(candidate_id):
+        try:
+            return load_candidate_setup(candidate_id)
+        except UnknownCandidateError:
+            raise ServiceError(404, "candidate_not_found") from None
+
+    @application.get("/candidates")
+    def candidates():
+        return {"candidates": public_candidates()}
+
+    @application.get("/candidates/{candidate_id}")
+    def candidate_info(candidate_id: str):
+        setup = candidate_setup(candidate_id)
+        return {"candidate_id": setup.candidate.candidate_id,
+                "resume": setup.candidate.to_public_resume(), "job": setup.job_dict()}
 
     @application.post("/sessions", status_code=201)
     def start(payload: SessionInput):
@@ -79,7 +96,7 @@ def create_app(*, directory=None, factory=runtime_session, token=None):
 
     @application.post("/tools/search_documents")
     def search_documents(payload: SearchInput):
-        setup = load_interview_setup()
+        setup = candidate_setup(payload.candidate_id)
         setup.candidate.assert_source_unchanged()
         return {"sources": DocumentSearch.from_setup(setup).search(payload.query, payload.limit)}
 

@@ -21,6 +21,9 @@ var session_closed := false
 var _pending_question := ""
 var _quit_after_close := false
 var _seen_requests: Dictionary = {}
+var candidate_buttons: Dictionary = {}
+var selected_candidate := ""
+var previewed_candidate := ""
 
 
 func _ready() -> void:
@@ -54,10 +57,57 @@ func reconnect() -> void:
 
 
 func start_interview() -> void:
-	if not connection_ready or session_active or api.busy or api.has_pending_request():
+	if not connection_ready or session_active or api.busy or api.has_pending_request() or previewed_candidate.is_empty() or previewed_candidate != selected_candidate:
 		return
 	var evaluate: bool = %Evaluate.button_pressed
-	api.start_session(evaluate, evaluate)
+	api.start_session(evaluate, evaluate, selected_candidate)
+
+
+func select_candidate(candidate_id: String) -> void:
+	if session_active or api.busy or api.has_pending_request() or not candidate_buttons.has(candidate_id):
+		return
+	selected_candidate = candidate_id
+	previewed_candidate = ""
+	history.clear()
+	question_input.clear()
+	%Sources.visible = false
+	_render_evaluation(null)
+	_counter({})
+	for identifier in candidate_buttons:
+		candidate_buttons[identifier].set_pressed_no_signal(identifier == candidate_id)
+	api.preview_candidate(candidate_id)
+
+
+func _catalog(entries: Array) -> void:
+	for button in candidate_buttons.values():
+		%Candidates.remove_child(button)
+		button.queue_free()
+	candidate_buttons.clear()
+	for entry in entries:
+		var identifier: String = entry.candidate_id
+		var button := Button.new()
+		button.text = entry.name
+		button.tooltip_text = str(entry.get("professional_summary", ""))
+		button.toggle_mode = true
+		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		button.pressed.connect(select_candidate.bind(identifier))
+		%Candidates.add_child(button)
+		candidate_buttons[identifier] = button
+	var next_id: String = selected_candidate if candidate_buttons.has(selected_candidate) else str(entries[0].candidate_id)
+	select_candidate.call_deferred(next_id)
+
+
+func _profile(payload: Dictionary) -> void:
+	var resume: Dictionary = payload.get("resume", {})
+	var job: Dictionary = payload.get("job", {})
+	%CandidateName.text = str(resume.get("name", "Candidato"))
+	var parts: PackedStringArray = str(%CandidateName.text).split(" ", false)
+	%Avatar.text = parts[0].left(1) + (parts[1].left(1) if parts.size() > 1 else "") if not parts.is_empty() else "?"
+	%JobTitle.text = str(job.get("title", "Puesto de práctica"))
+	%Currículum.text = _resume(resume)
+	%Currículum.scroll_to_line(0)
+	%Puesto.text = _job(job)
+	%Puesto.scroll_to_line(0)
 
 
 func send_question() -> void:
@@ -77,7 +127,7 @@ func close_interview() -> void:
 
 
 func _started(operation: String) -> void:
-	var messages := {"health": "Comprobando el servicio…", "start": "Preparando la entrevista…", "run": "Esperando la respuesta y su análisis. El modelo local puede tardar unos minutos…", "close": "Guardando la entrevista…"}
+	var messages := {"health": "Comprobando el servicio…", "catalog": "Cargando los candidatos…", "candidate": "Cargando el currículum y el puesto…", "start": "Preparando la entrevista…", "run": "Esperando la respuesta y su análisis. El modelo local puede tardar unos minutos…", "close": "Guardando la entrevista…"}
 	_set_notice(str(messages.get(operation, "Esperando al servicio…")))
 	_controls()
 
@@ -89,6 +139,14 @@ func _received(operation: String, payload: Dictionary) -> void:
 			%Connection.text = "Servicio conectado" if connection_ready else "Servicio incompatible"
 			%Connection.modulate = ThemeFactory.ACCENT if connection_ready else Color("f3b96c")
 			_set_notice("Listo para iniciar. La disponibilidad del modelo se comprobará al preguntar." if connection_ready else "Revisa que esté funcionando la API del proyecto.", not connection_ready)
+			if connection_ready and not session_active:
+				api.get_candidates.call_deferred()
+		"catalog":
+			_catalog(payload.candidates)
+		"candidate":
+			_profile(payload)
+			previewed_candidate = str(payload.candidate_id)
+			_set_notice("Consulta el currículum y el puesto. Pulsa Iniciar entrevista cuando estés listo.")
 		"start":
 			session_active = true
 			session_closed = false
@@ -96,12 +154,7 @@ func _received(operation: String, payload: Dictionary) -> void:
 			history.clear()
 			question_input.clear()
 			_pending_question = ""
-			var resume: Dictionary = payload.get("resume", {})
-			var job: Dictionary = payload.get("job", {})
-			%CandidateName.text = str(resume.get("name", "Candidato"))
-			%JobTitle.text = str(job.get("title", "Puesto de práctica"))
-			%Currículum.text = _resume(resume)
-			%Puesto.text = _job(job)
+			_profile(payload)
 			_counter(payload)
 			_render_evaluation(null)
 			_append("Entrevista iniciada", "Consulta el currículum y el puesto antes de formular tu primera pregunta.", ThemeFactory.MUTED)
@@ -112,7 +165,7 @@ func _received(operation: String, payload: Dictionary) -> void:
 			if not _seen_requests.has(request_id):
 				_seen_requests[request_id] = true
 				if payload.get("reply") is String:
-					_append(str(%CandidateName.text) if payload.get("status") == "completed" else "Orientación", payload.reply, ThemeFactory.INK)
+					_append(str(%CandidateName.text) if payload.get("status") == "completed" else "Orientación", _display_reply(payload.reply, payload.get("sources", [])), ThemeFactory.INK)
 				_render_evaluation(payload.get("evaluation"))
 				if payload.get("status") != "error":
 					question_input.clear()
@@ -141,6 +194,10 @@ func _failed(operation: String, code: String) -> void:
 		session_active = false
 		session_closed = true
 	_set_notice(_error_message(code), true)
+	if operation == "health" and code in ["connection_error", "transport_error"]:
+		_set_notice("Inicia la API Python del proyecto y pulsa Reconectar.", true)
+	elif operation == "catalog" and code == "http_error":
+		_set_notice("Actualiza e inicia la API de E2: esta versión debe permitir elegir candidatos.", true)
 	_controls()
 	if _quit_after_close:
 		_quit_after_close = false
@@ -156,7 +213,7 @@ func _closed() -> void:
 func _controls() -> void:
 	var pending: bool = api.has_pending_request()
 	var locked: bool = api.busy or pending
-	start_button.disabled = not connection_ready or session_active or locked
+	start_button.disabled = not connection_ready or session_active or locked or previewed_candidate.is_empty() or previewed_candidate != selected_candidate
 	start_button.text = "Nueva entrevista" if session_closed else "Iniciar entrevista"
 	close_button.disabled = not session_active or locked
 	question_input.editable = session_active and not locked
@@ -166,6 +223,28 @@ func _controls() -> void:
 	%Retry.disabled = api.busy
 	%Reconnect.disabled = api.busy or (pending and api.pending_operation() != "health")
 	%Waiting.visible = api.busy
+	for identifier in candidate_buttons:
+		var button: Button = candidate_buttons[identifier]
+		button.disabled = session_active or locked
+		var border: Color = ThemeFactory.ACCENT if identifier == selected_candidate else Color("314a60")
+		button.add_theme_stylebox_override("disabled", ThemeFactory.box(Color("142132"), border, 12))
+		button.add_theme_stylebox_override("pressed", ThemeFactory.box(Color("1b2e43"), ThemeFactory.ACCENT, 12))
+		button.add_theme_color_override("font_disabled_color", ThemeFactory.ACCENT if identifier == selected_candidate else ThemeFactory.MUTED)
+
+
+func _display_reply(text: String, sources: Array) -> String:
+	var titles: Array[String] = []
+	for source in sources:
+		if source is Dictionary and source.get("document_id") is String:
+			text = text.replace("[" + source.document_id + "]", "")
+			text = text.replace("[document_id: " + source.document_id + "]", "")
+			text = text.replace("[document_id:" + source.document_id + "]", "")
+			var title := str(source.get("title", "Documento público"))
+			if not title in titles:
+				titles.append(title)
+	%Sources.text = "Fuentes consultadas: " + " · ".join(titles)
+	%Sources.visible = not titles.is_empty()
+	return text.replace("  ", " ").replace(" .", ".").strip_edges()
 
 
 func _counter(payload: Dictionary) -> void:

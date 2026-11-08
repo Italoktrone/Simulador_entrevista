@@ -67,5 +67,36 @@
     {
       "reply": "Faltan los campos del contrato"
     }
+  ],
+  "valid_sessions": [
+    {
+      "request_id": "00000000-0000-4000-8000-000000000021",
+      "candidate_id": "cand-002",
+      "classify": true,
+      "evaluate": true
+    },
+    {
+      "request_id": "00000000-0000-4000-8000-000000000022",
+      "candidate_id": "cand-003",
+      "classify": false,
+      "evaluate": false
+    },
+    {
+      "request_id": "00000000-0000-4000-8000-000000000023"
+    }
+  ],
+  "invalid_sessions": [
+    {
+      "request_id": "not-a-uuid",
+      "candidate_id": "cand-001"
+    },
+    {
+      "request_id": "00000000-0000-4000-8000-000000000024",
+      "candidate_id": "../escape"
+    },
+    {
+      "request_id": "00000000-0000-4000-8000-000000000025",
+      "candidate_id": null
+    }
   ]
 }

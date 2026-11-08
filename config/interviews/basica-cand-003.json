@@ -1,0 +1,10 @@
+{
+  "config_version": "1.0.0",
+  "config_id": "entrevista-basica-003",
+  "candidate_id": "cand-003",
+  "job_id": "puesto-dev-junior-001",
+  "modality": "laboral_general",
+  "approach": "mixto",
+  "preferred_question_styles": ["abierta", "cerrada", "directiva"],
+  "max_questions": 20
+}

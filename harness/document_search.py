@@ -9,6 +9,7 @@ import re
 import unicodedata
 
 from harness.llm.messages import ChatMessage
+from harness.interview_config import PROJECT_ROOT
 
 
 STOP_WORDS = frozenset("a al algo como con cual cuales de del el en es esta ha la las lo los me mi para por que se su sus un una y".split())
@@ -35,9 +36,11 @@ class DocumentSearch:
     @classmethod
     def from_setup(cls, setup):
         documents = []
+        candidate_path = setup.candidate.source_path
+        source_path = candidate_path.relative_to(PROJECT_ROOT).as_posix() if candidate_path.is_relative_to(PROJECT_ROOT) else f"candidate:{setup.candidate.candidate_id}"
         sources = (
             ("job", "Puesto", "data/jobs/desarrollador_junior.json", setup.job_dict()),
-            ("resume", "CV público", "data/candidates/candidato_junior.json", setup.candidate.to_public_resume()),
+            ("resume", "CV público", source_path, setup.candidate.to_public_resume()),
         )
         for prefix, label, path, data in sources:
             for field, value in data.items():

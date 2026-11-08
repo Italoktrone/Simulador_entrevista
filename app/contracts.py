@@ -7,6 +7,7 @@ from pydantic import BaseModel, ConfigDict, Field, StringConstraints
 
 
 Question = Annotated[str, StringConstraints(strict=True, min_length=1, max_length=4000, pattern=r"\S")]
+CandidateId = Annotated[str, StringConstraints(strict=True, pattern=r"^cand-[0-9]{3}$")]
 
 
 class Contract(BaseModel):
@@ -15,6 +16,7 @@ class Contract(BaseModel):
 
 class SessionInput(Contract):
     request_id: UUID
+    candidate_id: CandidateId = "cand-001"
     classify: bool = Field(default=True, strict=True)
     evaluate: bool = Field(default=True, strict=True)
 
@@ -28,6 +30,7 @@ class RunInput(Contract):
 
 class SearchInput(Contract):
     query: Question
+    candidate_id: CandidateId = "cand-001"
     limit: int = Field(default=3, ge=1, le=5, strict=True)
 
 
