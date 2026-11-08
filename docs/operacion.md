@@ -21,17 +21,23 @@ Las secciones fechadas y los registros de etapas describen el estado y las prueb
 
 La API de `app/main.py` utiliza el controlador de `harness/runtime.py`. El [inicio rápido](../README.md#inicio-rápido) prepara el entorno, Ollama y Uvicorn. Usar un único proceso con `--workers 1`, en `127.0.0.1:8000`. Las sesiones activas se mantienen en memoria. El máximo es de cien entrevistas por proceso, incluidas las cerradas conservadas para reintentos.
 
-### Preparación de la interfaz
+### Uso de la interfaz
 
-Copiar [InterviewApi.gd](../app/godot/InterviewApi.gd) a un proyecto Godot 4 y adjuntarlo a un nodo de la escena. Ese nodo crea su propio `HTTPRequest`. Conectar las señales `received(operation, payload)` y `failed(operation, code)` a los controles.
+El proyecto [app/godot/project.godot](../app/godot/project.godot) está preparado para Godot **4.7.2** con renderizado Compatibility. Importarlo desde el administrador de proyectos y pulsar **F5**, manteniendo la API y Ollama iniciados como indica el inicio rápido. No requiere imágenes ni complementos. La pantalla usa controles nativos y el candidato configurado actualmente; la selección de tres NPCs y sus escenas sigue pendiente.
 
-1. Ejecutar `check_health()` y `metadata()` para consultar el servicio y sus capacidades.
-2. Llamar `start_session()` para crear la entrevista. La respuesta aporta el CV público, el puesto y `session_id`.
-3. Llamar `ask(texto)` al pulsar Enviar. Deshabilitar ese botón mientras `busy` sea verdadero. Una consulta a candidato, clasificador y evaluador puede tardar varios minutos.
-4. En la operación `run`, mostrar `reply`, después `evaluation` si existe y `sources` como fuentes recuperadas. `status` puede ser `completed`, `handled` o `error`. `handled` incluye aclaraciones y entradas no evaluables que no consumen una pregunta enviada al candidato.
-5. Usar `get_logs()` para la auditoría de la sesión y `close_session()` al finalizar.
+1. Al abrir, comprueba `GET /health` y muestra la conexión. Esto confirma el servicio Python; la disponibilidad del modelo se comprueba al preguntar. **Reconectar** repite esta comprobación.
+2. Elegir **Analizar mis preguntas** antes de iniciar. Activado solicita clasificación y evaluación; desactivado comprueba solo la conversación. Pulsar **Iniciar entrevista** carga el CV público, el puesto y el identificador de la sesión.
+3. Escribir una pregunta y pulsar **Enviar** o Enter. Mientras se procesa, aparecen la espera y los controles bloqueados. El candidato, el clasificador y el evaluador pueden tardar varios minutos; la espera del turno admite hasta diez minutos.
+4. La conversación muestra la respuesta u orientación. El panel independiente muestra pertinencia, adecuación metodológica, claridad y neutralidad, más la sugerencia disponible. Las evaluaciones parciales o no disponibles conservan ese estado. No se calcula una nota de entrevista. Los textos del modelo se muestran literalmente.
+5. **Cerrar y guardar** espera la confirmación de Python y habilita **Nueva entrevista**. Cerrar la ventana con una sesión abierta, sin solicitudes en curso, también solicita el guardado. Si hay una operación pendiente, se permite volver y reintentar antes de salir.
 
-El cliente conserva la petición tras un error de transporte. `retry_request()` vuelve a enviar el mismo UUID y contenido. El servidor devuelve el resultado ya calculado durante la vida de ese proceso. Un UUID reutilizado con otros datos devuelve `409 request_conflict`. Otra petición simultánea de la misma sesión devuelve `409 session_busy` y permite reintentar cuando termine el turno activo.
+[Main.tscn](../app/godot/Main.tscn) define la pantalla; [Main.gd](../app/godot/Main.gd) controla la sesión y presenta los resultados. [InterviewApi.gd](../app/godot/InterviewApi.gd) crea su propio `HTTPRequest` y emite `request_started`, `received` y `failed`. Conserva las operaciones `metadata()`, `get_logs()` y `search_documents()` para ampliar la interfaz. La recuperación documental ya se utiliza en cada pregunta con `use_rag=true`; sus fuentes se conservan en el resultado de la API.
+
+El cliente conserva la petición tras un error de transporte, un fallo de servidor o una respuesta incompatible. **Reintentar** llama a `retry_request()` con el mismo UUID y contenido y mantiene bloqueados los envíos nuevos hasta resolverla. El servidor devuelve el resultado ya calculado durante la vida de ese proceso. Un UUID reutilizado con otros datos devuelve `409 request_conflict`. Otra petición simultánea de la misma sesión devuelve `409 session_busy` y permite reintentar cuando termine el turno activo.
+
+`scripts.check_godot` comprueba ese recorrido con una API temporal real y modelos simulados, incluyendo la pérdida de la primera respuesta de inicio/cierre y una respuesta de turno incompatible después de que Python ya lo haya calculado. Comprueba los reintentos con idéntico contenido y la persistencia de una sola sesión y un solo turno. `--live --model gemma4:e4b` realiza la entrevista con Ollama; `--no-evaluation` permite limitar ese modo a la conversación. `--screenshot` captura el renderizado cuando hay escritorio. Los comandos completos están en [Verificación reproducible](../README.md#verificación-reproducible). Las evidencias son locales en `reports/godot/`, excluidas de Git.
+
+Godot genera su caché de importación en `app/godot/.godot/`, ignorada por Git. Se puede borrar con Godot cerrado y se reconstruirá al abrir. Los archivos `.gd.uid` sí se conservan para mantener las referencias a scripts.
 
 Al alcanzar veinte preguntas o cerrar voluntariamente, la sesión se valida y se guarda en `outputs/api/sessions/`. Los eventos quedan en `outputs/api/logs/` en JSONL con fecha UTC, `session_id` y `run_id`. Incluyen huella de pregunta, estado y documentos recuperados. Los textos de preguntas y respuestas están en el registro y la consulta de esa sesión. Un reinicio o cierre abrupto pierde el estado activo y requiere iniciar otra entrevista. Los logs escritos siguen disponibles con su UUID. El cierre normal guarda las sesiones abiertas.
 
@@ -39,7 +45,7 @@ Al alcanzar veinte preguntas o cerrar voluntariamente, la sesión se valida y se
 
 La API lee variables del proceso. Para Ollama usar `LLM_PROVIDER=ollama` y `OLLAMA_MODEL` con un modelo instalado. Para UNAB IA usar `LLM_PROVIDER=unab`, `LLM_ALLOW_EXTERNAL_API=true`, `UNAB_API_KEY`, `UNAB_MODEL` y opcionalmente `UNAB_MAX_OUTPUT_TOKENS`. OpenAI utiliza sus variables descritas en la sección de conexión externa. El archivo privado del selector de consola no se carga automáticamente al iniciar Uvicorn.
 
-`INTERVIEW_API_TOKEN` exige `Authorization: Bearer ...`. En el nodo Godot se asigna `token` durante la ejecución. Las claves de los proveedores se configuran en Python. Esta versión prepara la integración de escritorio local. Una exportación web requiere además una política explícita de orígenes autorizados y HTTPS cuando se publique.
+`INTERVIEW_API_TOKEN` exige `Authorization: Bearer ...`. Godot lee esa misma variable y, opcionalmente, `INTERVIEW_API_URL` para sustituir `http://127.0.0.1:8000`. Abrir Godot desde la terminal que define esas variables para que las herede. También se puede configurar `base_url` en el nodo Api. Las claves de los proveedores se configuran en Python. Esta versión prepara la integración de escritorio local. Una exportación web requiere además una política explícita de orígenes autorizados y HTTPS cuando se publique.
 
 ### Herramienta y recuperación documental
 

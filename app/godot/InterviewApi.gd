@@ -4,6 +4,7 @@ extends Node
 
 signal received(operation: String, payload: Dictionary)
 signal failed(operation: String, code: String)
+signal request_started(operation: String)
 
 @export var base_url: String = "http://127.0.0.1:8000"
 @export var timeout_seconds: float = 600.0
@@ -18,7 +19,19 @@ func _ready() -> void:
 	_http = HTTPRequest.new()
 	_http.timeout = timeout_seconds
 	add_child(_http)
+	_http.body_size_limit = 2097152
 	_http.request_completed.connect(_completed)
+	if OS.has_environment("INTERVIEW_API_URL"):
+		base_url = OS.get_environment("INTERVIEW_API_URL")
+	token = OS.get_environment("INTERVIEW_API_TOKEN")
+
+
+func has_pending_request() -> bool:
+	return not _pending.is_empty()
+
+
+func pending_operation() -> String:
+	return str(_pending.get("operation", ""))
 
 
 func new_request_id() -> String:
@@ -91,6 +104,8 @@ func _dispatch() -> void:
 	if not token.is_empty():
 		headers.append("Authorization: Bearer " + token)
 	busy = true
+	_http.timeout = timeout_seconds if _pending.operation == "run" else 10.0
+	request_started.emit(str(_pending.operation))
 	var body := "" if _pending.method == HTTPClient.METHOD_GET else JSON.stringify(_pending.body)
 	var error := _http.request(base_url.trim_suffix("/") + _pending.path, headers, _pending.method, body)
 	if error != OK:
@@ -109,12 +124,31 @@ func _completed(result: int, response_code: int, _headers: PackedStringArray, bo
 		failed.emit(operation, "invalid_json")
 		return
 	if response_code >= 400:
-		var code: String = decoded.get("error", {}).get("code", "http_error")
+		var detail: Variant = decoded.get("error", {})
+		var code := "http_error"
+		if detail is Dictionary:
+			code = str(detail.get("code", code))
 		if code != "session_busy" and response_code < 500:
 			_pending = {}
 		failed.emit(operation, code)
+		return
+	if not _valid_response(operation, decoded):
+		failed.emit(operation, "invalid_response")
 		return
 	_pending = {}
 	if operation == "start":
 		session_id = decoded.session_id
 	received.emit(operation, decoded)
+
+
+func _valid_response(operation: String, payload: Dictionary) -> bool:
+	match operation:
+		"health":
+			return payload.get("status") is String and payload.get("api_version") is String
+		"start":
+			return payload.get("session_id") is String and not payload.session_id.is_empty() and payload.get("status") == "open" and payload.get("resume") is Dictionary and payload.get("job") is Dictionary
+		"run":
+			return payload.get("session_id") == session_id and payload.get("request_id") == _pending.body.request_id and payload.get("status") in ["completed", "handled", "error"] and payload.get("closed") is bool and (payload.get("reply") == null or payload.get("reply") is String) and (payload.get("evaluation") == null or payload.get("evaluation") is Dictionary)
+		"close":
+			return payload.get("session_id") == session_id and payload.get("status") == "closed"
+	return true

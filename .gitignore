@@ -20,3 +20,5 @@ outputs/results/*
 /reports/*
 !/reports/.gitkeep
 .ruff_cache/
+# Caché de importación y del editor de Godot; los .uid sí se versionan.
+.godot/

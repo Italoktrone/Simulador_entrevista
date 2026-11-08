@@ -6,12 +6,25 @@ Las secciones fechadas y los registros de etapas describen el estado y las prueb
 
 ## Contenido
 
+- [Estado actual — 8 de noviembre de 2026](#estado-actual)
 - [Continuidad del proyecto — 2 de noviembre de 2026](#continuidad-agente)
 - [Estado de las nueve etapas del agente candidato](#estado-etapas)
 - [Alcance y planificación](#planificacion)
 - [Registro de decisiones](#decisiones)
 - [Registro de cambios](#changelog)
 - [Bitácora de desarrollo](#bitacora-desarrollo)
+
+<a name="estado-actual"></a>
+
+## Estado actual — 8 de noviembre de 2026
+
+Primera interfaz de escritorio implementada en `app/godot/project.godot` para Godot 4.7.2: inicio, CV/puesto, conversación, análisis independiente, contador, espera, reintentos y cierre con guardado. Usa el candidato actual, Nicolás Vera Soto, y el arnés existente. Las respuestas del modelo se presentan literalmente. La caché `.godot/` queda excluida de Git; los identificadores de scripts `.gd.uid` se conservan.
+
+Verificación de interfaz: 21 comprobaciones con la API real y modelos simulados, incluyendo pérdida de respuestas después de completar la operación y respuesta de turno incompatible. Los reintentos conservan UUID y contenido, con una sola sesión y un solo turno guardado. También funcionó una copia del proyecto sin caché del editor. Con Ollama `gemma4:e4b` se completaron 12 comprobaciones, respuesta real, evaluación de cuatro criterios y cierre validado; el recorrido con captura duró 65,42 segundos. Resultados locales en `reports/godot/simulated/interface.json` y `reports/godot/live/interface.json`; sesión real `334055c4-3ad9-4213-bee3-3035ac89670d`. Es una prueba funcional, sin ampliar las métricas de precisión del modelo.
+
+Verificación general posterior: **1884 pruebas aprobadas en 301,54 segundos**, Ruff y Bandit sin hallazgos, seis de seis casos de recuperación documental correctos. Una advertencia de obsolescencia de Starlette/HTTPX no afecta al resultado. Evidencia en `reports/quality-summary.json` y `reports/pytest.txt`.
+
+Uso y repetición en [operación y Godot](operacion.md#api-y-godot) y [README](../README.md). Esta implementación corresponde a la rama E2. La siguiente ampliación requiere los dos perfiles adicionales, selección de candidato en la API y selección de los tres NPCs en Godot. Los registros anteriores conservan el alcance de sus respectivas etapas.
 
 <a name="continuidad-agente"></a>
 
