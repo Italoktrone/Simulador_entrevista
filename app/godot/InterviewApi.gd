@@ -125,7 +125,7 @@ func _completed(result: int, response_code: int, _headers: PackedStringArray, bo
 	busy = false
 	var operation: String = _pending.operation
 	if result != HTTPRequest.RESULT_SUCCESS:
-		failed.emit(operation, "transport_error")
+		failed.emit(operation, "timeout_error" if result == HTTPRequest.RESULT_TIMEOUT else "transport_error")
 		return
 	var decoded: Variant = JSON.parse_string(body.get_string_from_utf8())
 	if not decoded is Dictionary:

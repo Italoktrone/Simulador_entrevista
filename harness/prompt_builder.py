@@ -181,6 +181,12 @@ def build_messages(
         "interview_configuration": setup.config_dict(),
     }
     scenario["project_fact_references"] = _project_fact_references(scenario["candidate_profile"])
+    scenario["situations_without_project"] = [
+        {"situation_id": situation["situation_id"], "project_id": None,
+         "project_name": None, "organization": None}
+        for situation in scenario["candidate_profile"]["behavioral_situations"]
+        if "project_id" not in situation
+    ]
     scenario["project_chronology"] = _project_chronology(scenario["candidate_profile"])
     scenario["temporal_facts"] = build_temporal_facts(scenario["candidate_profile"])
     scenario["literal_name_references"] = _literal_name_references(

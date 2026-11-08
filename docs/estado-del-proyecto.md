@@ -24,7 +24,17 @@ Las citas documentales conocidas se presentan mediante sus títulos bajo la conv
 
 La ampliación añade 21 pruebas de selección y perfiles a la suite Python. Los recorridos simulados de Godot comprobaron los tres CV, selección y ausencia de proyectos ajenos, bloqueo durante la entrevista, pregunta, evaluación, reintentos y guardado del perfil elegido. Los tres candidatos completaron también una entrevista con Ollama `gemma4:e4b`, evaluación disponible y cierre validado. Las duraciones observadas fueron 86,42 s, 136,65 s y 141,18 s para el recorrido completo de cada candidato; las dos últimas incluyen captura renderizada. No son mediciones aisladas de latencia ni una validación semántica exhaustiva. Evidencias por candidato en `reports/godot/`.
 
-La suite ampliada terminó con **1905 pruebas aprobadas**, una advertencia de dependencia, Ruff y Bandit sin hallazgos y recuperación documental 6/6. El perfil original, las instrucciones, las referencias aprobadas y la rúbrica se conservan.
+La validación anterior de la ampliación terminó con **1905 pruebas aprobadas**, una advertencia de dependencia, Ruff y Bandit sin hallazgos y recuperación documental 6/6. Ese resultado corresponde a las instrucciones 1.0.11.
+
+### Verificación de fallos, aislamiento y reproducción
+
+T12 añade escenarios reproducibles de proveedor inaccesible, timeout y evaluación no disponible. Se comprueban desde los controles de Godot, con API aislada y modelos simulados; el proveedor inaccesible además usa una conexión TCP real a un puerto sin servidor. El timeout conserva UUID y contenido al reintentar, sin añadir otra pregunta. Un error confirmado del modelo consume un intento, conserva el borrador y permite un nuevo envío. La indisponibilidad del análisis conserva la respuesta y permite continuar.
+
+Los tres perfiles superaron también veinte envíos desde Godot, guardado automático por límite y rechazo del envío 21 tanto en pantalla como en la API. El fallo del evaluador en el turno 20 conserva las veinte respuestas. Es aceptación técnica con modelos simulados, no una medición semántica de conversaciones largas con Ollama.
+
+Las instrucciones 1.0.13 hacen explícito que las situaciones sin `project_id` carecen de proyecto y empresa documentados, distinguen ayuda recibida de ayuda prestada y conservan el tipo proyecto/organización. La validación de citas impide publicar rutas internas o IDs no recuperados, preservando la salida original rechazada en el JSON de sesión. Los perfiles, las demostraciones y la rúbrica no se modifican. `scripts.check_npc_isolation` conserva primeras respuestas reales y sesiones independientes o con continuidad para cotejo; completar las llamadas no implica aprobación semántica automática.
+
+T17 dispone de `scripts.check_clean_install --published`: clona origin/E2, crea un entorno nuevo, instala sin caché de pip, comprueba dependencias y repite calidad y Godot. Registra el commit y conserva evidencias fuera del clon; el entorno temporal se elimina al terminar. Los comandos y límites de cada modo se agrupan en el README. El cierre en Notion debe referirse al resultado de ejecución y a su versión publicada.
 
 ### Hito T06: interfaz mínima publicada y comprobada
 
@@ -99,7 +109,7 @@ Raíz: `C:\Users\franc\Downloads\Ejemplo_de_proyecto`. Python del proyecto: `.ve
 - Perfil aprobado: `data/candidates/candidato_junior.json`, Nicolás Vera Soto, `cand-001`. Fecha ficticia del escenario **2026-10-20**, independiente de la fecha real.
 - Puesto: `data/jobs/desarrollador_junior.json`, Aplicaciones Nexo, Desarrollador de Software Junior.
 - Configuración: `config/interviews/basica.json`. Máximo **20 preguntas enviadas**, incluyendo fallos.
-- Reglas del candidato: `agent/agent.md`, versión **1.0.11**. No modificar antecedentes aprobados para acomodar respuestas.
+- Reglas del candidato: `agent/agent.md`, versión **1.0.13**. No modificar antecedentes aprobados para acomodar respuestas.
 - Historial completo guardado en sesiones JSON locales; las respuestas completas alimentan la conversación, los intentos fallidos no. Resumen extractivo opcional en local, con auditoría y registro original conservado.
 - Documentación histórica: `docs/estado-del-proyecto.md#estado-etapas`, `docs/validacion-del-candidato.md#validacion-final`. Su validación de 738 pruebas y veinte preguntas corresponde a esa versión; hubo ampliaciones posteriores.
 

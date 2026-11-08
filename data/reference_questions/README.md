@@ -1,5 +1,7 @@
 # Preguntas de referencia
 
+[`aislamiento_npcs.json`](aislamiento_npcs.json) conserva trece preguntas conocidas e idénticas para los tres candidatos y tres pasos de continuidad. Sus expectativas son referencias de desarrollo, no una evaluación humana independiente. Se ejecuta mediante `scripts.check_npc_isolation` con Ollama real, API ASGI y RAG; conserva primeras salidas y sesiones, sin clasificar ni puntuar al entrevistador. Véase la [verificación reproducible](../../README.md#verificación-reproducible).
+
 El conjunto adicional [consistencia_ampliada.json](consistencia_ampliada.json) reúne seis casos y diez preguntas: cronología, tecnologías/aportes, ambigüedad, contradicciones, repetición y protección de instrucciones. Utiliza el mismo esquema y ejecutor. El [bloque 8.3](../../docs/validacion-del-candidato.md#consistencia-ampliada) documenta comando, criterios, ejecución real y observaciones. Entre ambos conjuntos hay diez casos y quince preguntas; la revisión humana final está pendiente.
 
 [consistencia_basica.json](consistencia_basica.json) contiene cuatro casos de consistencia factual del candidato y cinco preguntas. Incluye fuentes de hechos, notas para revisión humana y el requisito de una sesión nueva por caso. El caso de continuidad conserva sus dos pasos en la misma sesión.

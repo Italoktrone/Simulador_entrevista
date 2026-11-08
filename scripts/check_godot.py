@@ -27,7 +27,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PROJECT = ROOT / "app/godot"
 
 
-def simulated_factory(options):
+def simulated_factory(options, *, scenario="smoke", offline_url=None):
     from harness.prompt_builder import load_instructions
     from harness.question_evaluator import QuestionEvaluator
     from harness.runtime import InterviewRuntime
@@ -35,9 +35,22 @@ def simulated_factory(options):
     from harness.llm_question_classifier import LLMQuestionClassifier
     from tests.evaluation_fixtures import EvaluationClient
     from tests.integration.test_pre_response_classification import SemanticClient
+    from harness.llm.client import LLMConnectionError
+    from harness.llm.config import OllamaSettings
+    from harness.llm.ollama_client import OllamaClient
 
     class Candidate:
+        calls = 0
+
         def generate(self, messages):
+            self.calls += 1
+            if self.calls == 1 and scenario == "ollama_unavailable":
+                # Conexión TCP real a un puerto reservado sin servidor escuchando.
+                with OllamaClient(OllamaSettings(base_url=offline_url, connection_retries=0,
+                                                connect_timeout_seconds=1.0)) as unavailable:
+                    return unavailable.generate(messages)
+            if self.calls == 1 and scenario == "timeout":
+                sleep(2.0)
             name = load_candidate_setup(options.candidate_id).candidate.to_dict()["name"]
             content = messages[0]["content"]
             source = ""
@@ -47,6 +60,16 @@ def simulated_factory(options):
             return LLMResponse(f"Soy {name}. He utilizado Git durante el desarrollo del proyecto. [b]Texto literal[/b]{source}",
                                "simulado", "ollama", 0.01)
 
+    class Evaluation(EvaluationClient):
+        calls = 0
+
+        def generate(self, messages):
+            self.calls += 1
+            if ((scenario == "evaluation_unavailable" and self.calls == 1)
+                    or (scenario == "limit" and self.calls == 20)):
+                raise LLMConnectionError("Fallo de evaluación provocado para la verificación.")
+            return super().generate(messages)
+
     @contextmanager
     def resources():
         grounded = GroundedClient(Candidate())
@@ -54,7 +77,7 @@ def simulated_factory(options):
         if options.classify or options.evaluate:
             settings["classifier"] = HybridQuestionClassifier(LLMQuestionClassifier(SemanticClient()))
         if options.evaluate:
-            settings["evaluator"] = QuestionEvaluator(EvaluationClient())
+            settings["evaluator"] = QuestionEvaluator(Evaluation())
         yield InterviewRuntime(load_candidate_setup(options.candidate_id), load_instructions(), grounded, **settings), grounded
 
     return resources()
@@ -68,7 +91,11 @@ def main(argv=None):
     parser.add_argument("--candidate", choices=tuple(CANDIDATES), default="cand-001")
     parser.add_argument("--no-evaluation", action="store_true", help="En modo real, comprobar solo la conversación")
     parser.add_argument("--screenshot", action="store_true", help="Renderizar y capturar la interfaz (requiere escritorio)")
+    parser.add_argument("--scenario", choices=("smoke", "ollama_unavailable", "timeout", "evaluation_unavailable", "limit"),
+                        default="smoke", help="Provocar fallos o comprobar veinte turnos con modelos simulados")
     args = parser.parse_args(argv)
+    if args.live and args.scenario != "smoke":
+        parser.error("Los escenarios provocados son aislados y utilizan modelos simulados.")
     if args.no_evaluation and not args.live:
         parser.error("--no-evaluation se utiliza junto con --live.")
     executable = args.godot or os.environ.get("GODOT_BIN") or shutil.which("godot") or shutil.which("godot4")
@@ -76,6 +103,8 @@ def main(argv=None):
         parser.error("Indica --godot con la ruta del ejecutable instalado.")
     executable = str(Path(executable).resolve())
     reports = ROOT / "reports/godot" / ("live" if args.live else "simulated") / args.candidate
+    if args.scenario != "smoke":
+        reports = ROOT / "reports/godot/verification" / args.scenario / args.candidate
     reports.mkdir(parents=True, exist_ok=True)
     report_path = reports / "interface.json"
     if report_path.exists():
@@ -83,11 +112,16 @@ def main(argv=None):
 
     # Los dos modos usan una API aislada y guardan sus sesiones en reports/.
     api_token = secrets.token_urlsafe(32)
+    # Reservar un puerto sin listen evita tocar el Ollama que usa el usuario.
+    offline_socket = socket.socket()
+    offline_socket.bind(("127.0.0.1", 0))
+    offline_url = f"http://127.0.0.1:{offline_socket.getsockname()[1]}"
     if args.live:
         os.environ.update(LLM_PROVIDER="ollama", LLM_ALLOW_EXTERNAL_API="false", OLLAMA_MODEL=args.model)
         application = create_app(directory=reports / "api", token=api_token)
     else:
-        application = create_app(directory=reports / "api", factory=simulated_factory, token=api_token)
+        application = create_app(directory=reports / "api", token=api_token,
+                                 factory=lambda options: simulated_factory(options, scenario=args.scenario, offline_url=offline_url))
     requests = {}
     if not args.live:
         @application.middleware("http")
@@ -97,7 +131,7 @@ def main(argv=None):
             payload = await request.json() if request.method == "POST" else {}
             requests.setdefault(route, []).append(payload)
             response = await call_next(request)
-            inject = route in ("/health", "/sessions", "/run") or route.endswith("/close")
+            inject = args.scenario == "smoke" and (route in ("/health", "/sessions", "/run") or route.endswith("/close"))
             if inject and len(requests[route]) == 1 and response.status_code < 400:
                 if route == "/run":
                     return JSONResponse({"incompatible": True})
@@ -120,8 +154,9 @@ def main(argv=None):
                            INTERVIEW_API_TOKEN=api_token, PYTHONDONTWRITEBYTECODE="1")
         environment["GODOT_SMOKE_NO_EVALUATION"] = "1" if args.no_evaluation else "0"
         display = ["--rendering-method", "gl_compatibility", "--windowed", "--resolution", "1280x820"] if args.screenshot else ["--headless"]
-        command = [executable, *display, "--path", str(PROJECT), "--script", "res://tests/Smoke.gd",
-                   "--", f"--report={report_path.as_posix()}", f"--candidate={args.candidate}"]
+        script = "res://tests/Smoke.gd" if args.scenario == "smoke" else "res://tests/Verification.gd"
+        command = [executable, *display, "--path", str(PROJECT), "--script", script,
+                   "--", f"--report={report_path.as_posix()}", f"--candidate={args.candidate}", f"--scenario={args.scenario}"]
         if args.live:
             command.append("--live")
         if args.screenshot:
@@ -140,6 +175,7 @@ def main(argv=None):
         finally:
             server.should_exit = True
             worker.join(timeout=30)
+            offline_socket.close()
         if result.returncode or not report_path.is_file():
             print(result.stdout + result.stderr)
             return result.returncode or 1
@@ -148,15 +184,33 @@ def main(argv=None):
         return 1
     saved = reports / "api/sessions" / f"session-{report['session_id']}.json"
     session = load_session(saved)
-    if session["status"] != "closed" or session["candidate_id"] != args.candidate or len(session["attempts"]) != 1 or session["attempts"][0]["status"] != "completed":
+    expected_attempts = {"smoke": 1, "timeout": 1, "ollama_unavailable": 2, "evaluation_unavailable": 2, "limit": 20}[args.scenario]
+    if (session["status"] != "closed" or session["candidate_id"] != args.candidate
+            or len(session["attempts"]) != expected_attempts or session["attempts"][-1]["status"] != "completed"):
         raise RuntimeError("El recorrido no conservó la sesión esperada.")
-    if not args.live:
+    if not args.live and args.scenario == "smoke":
         mutations = [bodies for route, bodies in requests.items() if route in ("/sessions", "/run") or route.endswith("/close")]
         if len(application.state.service.sessions) != 1 or not all(len(bodies) == 2 and bodies[0] == bodies[1] for bodies in mutations):
             raise RuntimeError("Los reintentos duplicaron una operación o cambiaron su contenido.")
         report["retry_verified"] = True
+    if args.scenario == "timeout":
+        bodies = requests["/run"]
+        if len(bodies) != 2 or bodies[0] != bodies[1]:
+            raise RuntimeError("El reintento tras timeout cambió o duplicó la pregunta.")
+        report["retry_verified"] = True
+    if args.scenario == "ollama_unavailable":
+        if session["attempts"][0]["status"] != "error" or not any(i["code"] in {"connection_error", "timeout"} for i in session["attempts"][0]["issues"]):
+            raise RuntimeError("No se registró el proveedor local inaccesible.")
+    if args.scenario in ("evaluation_unavailable", "limit"):
+        index = 0 if args.scenario == "evaluation_unavailable" else -1
+        if session["evaluations"][index]["status"] != "no_disponible" or not session["attempts"][index]["response"]:
+            raise RuntimeError("El fallo del evaluador perdió la respuesta.")
+    if args.scenario == "limit" and (len(requests["/run"]) != 21 or session["close_reason"] != "question_limit"):
+        raise RuntimeError("No se comprobó el rechazo del envío 21.")
+    if not args.live:
+        report["http_requests"] = requests
     report.update(session_saved=True, model=args.model if args.live else "simulated",
-                  godot=executable, session_file=str(saved), elapsed_seconds=round(monotonic() - started, 2))
+                  godot=executable, scenario=args.scenario, session_file=str(saved), elapsed_seconds=round(monotonic() - started, 2))
     report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"Godot: recorrido completo, sesión guardada. Evidencia: {report_path}")
     return 0

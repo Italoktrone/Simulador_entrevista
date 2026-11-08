@@ -50,6 +50,7 @@ def test_embeds_full_authorized_facts_without_a_duplicate_cv(setup):
         "candidate_profile", "job_description", "interview_configuration",
         "literal_name_references",
         "project_fact_references",
+        "situations_without_project",
         "project_chronology",
         "temporal_facts",
     }
@@ -76,6 +77,20 @@ def test_project_references_keep_only_explicit_relations_and_original_facts(setu
     assert [s["situation_id"] for s in references[0]["documented_situations"]] == ["S1"]
     assert references[1]["documented_situations"] == []
     assert scenario["candidate_profile"] == candidate
+
+
+def test_unlinked_situations_cannot_inherit_a_project_from_history(setup):
+    history = [{"role": "user", "content": "Hablemos de MesaFaro."},
+               {"role": "assistant", "content": "Mi mala estimación fue en MesaFaro."}]
+    content = build_messages(setup, "¿Y la documentación?", instructions=load_instructions(), history=history)[0]["content"]
+    scenario = json.loads(content.split(SCENARIO_DATA_MARKER, 1)[1].split(SCENARIO_END_MARKER, 1)[0])
+    assert scenario["situations_without_project"] == [
+        {"situation_id": sid, "project_id": None, "project_name": None, "organization": None}
+        for sid in ("S2", "S3", "S4")
+    ]
+    assert scenario["project_fact_references"][0]["documented_situations"][0]["situation_id"] == "S1"
+    assert len(scenario["project_fact_references"][0]["documented_situations"]) == 1
+    assert scenario["candidate_profile"] == setup.candidate.to_dict()
 
 
 def test_literal_references_cover_names_and_resolve_to_exact_original_fields(setup):

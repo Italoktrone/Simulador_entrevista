@@ -14,6 +14,7 @@ from harness.summary_context import prepare_summary_context
 from harness.hybrid_question_classifier import HybridQuestionClassifier
 from harness.intervention_log import classification_configuration, select_classification_context
 from harness.response_policy import ResponsePolicyDecision, decide_response
+from harness.response_validator import ResponseCitationError
 
 
 class InterviewFinishedError(RuntimeError):
@@ -263,6 +264,8 @@ class InterviewRuntime:
             try:
                 response = self._client.generate(messages)
             except BaseException as error:
+                if isinstance(error, ResponseCitationError):
+                    response = error.response
                 generation_issue = describe_issue(error)
                 raise
             finally:

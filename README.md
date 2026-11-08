@@ -92,13 +92,31 @@ $godot = 'C:\ruta\Godot_v4.7.2-stable_win64_console.exe'
 
 El primer comando abre una API temporal y recorre los controles reales de Godot con modelos simulados: catálogo, CV de cada perfil, selección, pregunta, evaluación, cierre y reintentos tras respuestas perdidas o incompatibles. Verifica que se conserve una sola sesión y un solo turno del candidato elegido. `--candidate cand-001`, `cand-002` o `cand-003` elige el perfil del recorrido. `--live` utiliza Ollama local; requiere el modelo instalado y puede tardar varios minutos. Resultados y sesiones: `reports/godot/{simulated|live}/{candidate_id}/`. `--screenshot` añade una captura con renderizado y requiere un escritorio. Estos comandos son independientes de las comprobaciones Python de GitHub Actions.
 
+`--scenario ollama_unavailable`, `timeout` y `evaluation_unavailable` provocan fallos aislados y comprueban los mensajes, la conservación de datos y la recuperación. `--scenario limit` recorre veinte envíos, provoca un fallo de evaluación en el último y comprueba el rechazo del siguiente. Usan modelos simulados; el primer escenario además intenta una conexión TCP real a un puerto sin Ollama. No detienen el servicio del usuario. Sus resultados quedan en `reports/godot/verification/`.
+
+Para repetir las preguntas conocidas de aislamiento con Ollama real:
+
+```powershell
+.\.venv\Scripts\python.exe -B -m scripts.check_npc_isolation --model gemma4:e4b --questions P03 P08 P09 P12 --with-history
+```
+
+Conserva la primera salida, las fuentes y las sesiones; no repite generaciones para mejorar un resultado. La revisión de precisión y autoría se hace contra cada perfil. La validación de citas rechaza rutas internas e identificadores que no estén entre los documentos recuperados, conservando el texto original rechazado en la sesión para auditoría. No sustituye el cotejo semántico.
+
 Para validar una instalación independiente del estado local:
 
 ```powershell
 .\.venv\Scripts\python.exe -B -m scripts.check_clean_install
 ```
 
-Exporta los archivos vigentes registrados y nuevos, instala dependencias en otro entorno y repite las comprobaciones. Excluye claves, `.venv`, logs y artefactos locales. Incluye cambios pendientes de commit. La validación de un clon remoto corresponde al workflow después de publicar esos cambios.
+Exporta los archivos vigentes registrados y nuevos, instala dependencias en otro entorno y repite las comprobaciones. Excluye claves, `.venv`, logs y artefactos locales. Esta exportación incluye cambios pendientes de commit; para comprobar únicamente código publicado se utiliza el modo siguiente.
+
+Para comprobar específicamente la versión publicada de E2 desde un clon remoto y un entorno nuevo, añadir `--published`:
+
+```powershell
+.\.venv\Scripts\python.exe -B -m scripts.check_clean_install --published --branch E2 --godot $godot --with-live-godot --model gemma4:e4b
+```
+
+Repite la instalación sin caché de pip, la suite técnica y, por cada candidato, el recorrido normal, los tres fallos, veinte preguntas y una conversación con Ollama real. Conserva el commit clonado y los resultados en `reports/published-install/`, con un resumen en `reports/clean-install.json`. El clon y su entorno temporal se eliminan al terminar. Omitir `--with-live-godot` permite comprobar solo modelos simulados; omitir `--godot` limita la revisión a Python. El workflow de GitHub verifica Python en Windows y Linux; estas comprobaciones locales añaden Godot y Ollama.
 
 ## Mapa del proyecto
 

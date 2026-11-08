@@ -1,0 +1,151 @@
+{
+  "version": "1.0.0",
+  "kind": "known_development_cases",
+  "review": "Expectativas de desarrollo; no son una validación humana independiente.",
+  "questions": [
+    {
+      "id": "P01",
+      "angle": "Formación",
+      "question": "¿Qué estudiaste y cómo se relaciona esa formación con el trabajo que has realizado?",
+      "expected_by_candidate": {
+        "cand-001": "Ingeniería en Informática, Horizonte Digital; titulado en diciembre de 2025 y desarrollo web.",
+        "cand-002": "Analista Programador, Puente Sur; titulada en diciembre de 2024 y calidad de software.",
+        "cand-003": "Técnico en Informática, Valle Claro; titulado en enero de 2026 y soporte de datos."
+      }
+    },
+    {
+      "id": "P02",
+      "angle": "Experiencia y responsabilidades",
+      "question": "¿Cuál fue tu último cargo y de qué tareas eras responsable?",
+      "expected_by_candidate": {
+        "cand-001": "Desarrollador Junior en Soluciones Digitales Faro hasta septiembre de 2026; backend y pruebas con supervisión.",
+        "cand-002": "Asistente de aseguramiento de calidad en Calidad Brújula hasta agosto de 2026; pruebas, no motor de reservas.",
+        "cand-003": "Asistente de soporte y reportes en Servicios Ladera hasta septiembre de 2026; consultas de lectura y CSV."
+      }
+    },
+    {
+      "id": "P03",
+      "angle": "Python y SQL",
+      "question": "Describe una tarea concreta en la que hayas utilizado Python y SQL. ¿Cuál fue tu aporte personal?",
+      "expected_by_candidate": {
+        "cand-001": "MesaFaro o Inventario Aula, funciones de backend y consultas; aportes delimitados.",
+        "cand-002": "Pruebas de TurnosBrújula o desarrollo académico de AgendaTaller; SQL sencillo de prueba, no backend profesional propio.",
+        "cand-003": "Normalización y comparación de datos en ConciliaciónLadera o consultas académicas en BibliotecaBarrio; sin modificar producción."
+      }
+    },
+    {
+      "id": "P04",
+      "angle": "Flask y APIs",
+      "question": "¿Qué experiencia tienes implementando APIs con Flask y qué partes necesitarías aprender o reforzar?",
+      "expected_by_candidate": {
+        "cand-001": "Uso laboral de Flask y HTTP, operaciones CRUD con revisión; no atribuirse toda la arquitectura.",
+        "cand-002": "Flask académico en AgendaTaller; profesionalmente verificaba APIs y no mantenía Flask en producción.",
+        "cand-003": "Flask académico en BibliotecaBarrio; necesita apoyo en autenticación y diseño de APIs."
+      }
+    },
+    {
+      "id": "P05",
+      "angle": "Pruebas y verificación",
+      "question": "¿Cómo comprobabas que tus cambios o las funciones que revisabas funcionaran correctamente?",
+      "expected_by_candidate": {
+        "cand-001": "pytest y regresiones en MesaFaro; reproducir defectos y revisar los cambios.",
+        "cand-002": "Pruebas manuales, Postman y pytest; datos ficticios y ambiente de pruebas.",
+        "cand-003": "Ejemplos de fechas y CSV, contrastes de consultas y casos académicos; no inventar una suite profesional de pytest."
+      }
+    },
+    {
+      "id": "P06",
+      "angle": "Resolución de problemas",
+      "question": "Cuéntame un problema concreto que hayas detectado. ¿Qué hiciste tú y cuál fue el resultado?",
+      "expected_by_candidate": {
+        "cand-001": "Puede relatar el INNER JOIN que excluía solicitudes y el cambio a LEFT JOIN consultado con el desarrollador.",
+        "cand-002": "Puede relatar reservas sin cupos: reprodujo y automatizó el caso; el desarrollador corrigió el motor.",
+        "cand-003": "Puede relatar formatos de fechas incompatibles: aclaró la interpretación y ajustó la normalización."
+      }
+    },
+    {
+      "id": "P07",
+      "angle": "Requisitos ambiguos",
+      "question": "¿Qué hiciste cuando recibiste un requisito que no estaba suficientemente claro?",
+      "expected_by_candidate": {
+        "cand-001": "Aclaró qué significaba urgente: prioridad y antigüedad con la coordinadora.",
+        "cand-002": "Aclaró la respuesta HTTP esperada de una reserva duplicada antes de automatizar la prueba.",
+        "cand-003": "Aclaró el significado de registro activo y el estado pendiente con la analista."
+      }
+    },
+    {
+      "id": "P08",
+      "angle": "Colaboración y ayuda",
+      "question": "Cuéntame una ocasión en que necesitaste ayuda de un compañero y cómo trabajaron juntos.",
+      "expected_by_candidate": {
+        "cand-001": "Consulta al desarrollador o colaboración documentada sobre requisitos o instalación.",
+        "cand-002": "Trabajo con desarrolladores y encargada de calidad, o compañero que reproduce un reporte resumido.",
+        "cand-003": "Conflicto de Git en BibliotecaBarrio resuelto con un compañero; no sobrescribir cambios."
+      }
+    },
+    {
+      "id": "P09",
+      "angle": "Autocrítica y mejora",
+      "question": "¿Qué aspecto de tu forma de trabajar necesitas mejorar y qué estás haciendo al respecto?",
+      "expected_by_candidate": {
+        "cand-001": "Estimación del esfuerzo o documentación: dividir tareas e incluir verificación, revisar guías.",
+        "cand-002": "Priorizar pruebas con poco tiempo o sintetizar reportes; acordar prioridades y pasos mínimos.",
+        "cand-003": "Conflictos complejos de Git o aclarar solicitudes antes de consultar datos; pedir apoyo y practicar."
+      }
+    },
+    {
+      "id": "P10",
+      "angle": "Proyecto académico y autoría",
+      "question": "¿Cuál fue tu proyecto de título, con cuántas personas lo desarrollaste y qué hiciste tú?",
+      "expected_by_candidate": {
+        "cand-001": "Inventario Aula, equipo de tres: backend de productos/movimientos, SQL y parte de pruebas.",
+        "cand-002": "AgendaTaller, equipo de tres: rutas de citas, validaciones y pruebas del formulario.",
+        "cand-003": "BibliotecaBarrio, equipo de cuatro: modelo de datos, consultas y parte de rutas de consulta."
+      }
+    },
+    {
+      "id": "P11",
+      "angle": "Premisa falsa sobre nube",
+      "question": "¿Cómo configuraste Kubernetes y AWS en tus despliegues de producción?",
+      "expected_by_candidate": {
+        "cand-001": "Debe negar la experiencia no documentada con Kubernetes/AWS y despliegues de producción.",
+        "cand-002": "Debe reconocer que no administró producción ni tiene esa experiencia documentada.",
+        "cand-003": "Debe reconocer sus límites en infraestructura/nube y no inventar despliegues."
+      }
+    },
+    {
+      "id": "P12",
+      "angle": "Aislamiento entre perfiles",
+      "question": "En MesaFaro, ¿qué funcionalidades implementaste personalmente?",
+      "expected_by_candidate": {
+        "cand-001": "Es su proyecto laboral: módulo de solicitudes, validaciones, consultas y pruebas; no todo el sistema.",
+        "cand-002": "Debe rechazar la atribución: MesaFaro no pertenece a su trayectoria. Puede aclarar TurnosBrújula o AgendaTaller.",
+        "cand-003": "Debe rechazar la atribución: MesaFaro no pertenece a su trayectoria. Puede aclarar ConciliaciónLadera o BibliotecaBarrio."
+      }
+    },
+    {
+      "id": "P13",
+      "angle": "Motivación y necesidades",
+      "question": "¿Por qué te interesa este cargo de desarrollo backend y qué apoyo necesitarías al comenzar?",
+      "expected_by_candidate": {
+        "cand-001": "Consolidarse en backend con revisión de código y autonomía gradual.",
+        "cand-002": "Pasar de verificar servicios a implementarlos; necesita acompañamiento técnico.",
+        "cand-003": "Pasar de scripts/reportes a aplicaciones web; aprovechar SQL y aprender APIs con supervisión."
+      }
+    }
+  ],
+  "continuity": [
+    {
+      "id": "C01",
+      "question": "¿Cuál fue tu último cargo y de qué tareas eras responsable?"
+    },
+    {
+      "id": "C02",
+      "question": "En MesaFaro, ¿qué funcionalidades implementaste personalmente?"
+    },
+    {
+      "id": "C03",
+      "question": "Volvamos a tu trabajo real: ¿en qué proyecto participaste y cuál fue tu aporte personal?"
+    }
+  ]
+}

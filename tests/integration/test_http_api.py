@@ -37,7 +37,8 @@ class Model:
         self.requests.append(deepcopy(messages))
         if self.failure:
             raise LLMTimeoutError("DETALLE_PRIVADO")
-        return LLMResponse("Respuesta documentada [resume.projects].", "modelo-ficticio", "ollama", 0.01)
+        citation = " [resume.projects]" if "DOCUMENTOS_PUBLICOS_RECUPERADOS_JSON" in messages[0]["content"] else ""
+        return LLMResponse(f"Respuesta documentada{citation}.", "modelo-ficticio", "ollama", 0.01)
 
 
 @pytest.fixture
@@ -290,3 +291,25 @@ def test_manifest_paths_and_schemas_match_runtime():
         assert (ROOT / manifest[field]).is_file()
     for name, model in (("input", RunInput), ("output", RunOutput)):
         assert json.loads((ROOT / f"agent/{name}.schema.json").read_text(encoding="utf-8")) == model.model_json_schema()
+
+
+def test_invalid_citation_is_not_published_but_original_is_saved_and_retry_is_idempotent(api, monkeypatch):
+    client, _, model, directory = api
+    calls = []
+    raw = "Utilicé Python [data/candidates/candidato_junior.json#/work_experience/9]."
+
+    def invalid(messages):
+        calls.append(messages)
+        return LLMResponse(raw, "simulado", "ollama", 0.1)
+
+    monkeypatch.setattr(model, "generate", invalid)
+    identifier, _ = start(client)
+    payload = question(identifier)
+    result = client.post("/run", json=payload).json()
+    assert result["status"] == "error" and result["reply"] is None
+    assert client.post("/run", json=payload).json() == result and len(calls) == 1
+    assert client.post(f"/sessions/{identifier}/close").status_code == 200
+    saved = load_session(directory / "sessions" / f"session-{identifier}.json")
+    assert saved["attempts"][0]["response"]["text"] == raw
+    assert saved["attempts"][0]["status"] == "error"
+    assert saved["attempts"][0]["issues"][0]["code"] == "invalid_response"
